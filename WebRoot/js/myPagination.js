@@ -14,5 +14,5 @@ function initPagination(url, currentPage, totalPages) {
 			}
 		}
 	}
-	$("#pagintor").bootstrapPaginator(options);// $("#pagintor") Bootstrap 是2.X 使用div元素，3.X使用ul元素
+	$("#pagintor").bootstrapPaginator(options);// $("#pagintor")Bootstrap是2.X 使用div元素，3.X使用ul元素
 }
