@@ -21,94 +21,102 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
 /**
- *Created by pxc on 2017年3月6日 上午9:43:59
+ * Created by pxc on 2017年3月6日 上午9:43:59
  * 
  */
 @Controller
 public class NotifyController {
-	
+
 	@Autowired
 	private NotifyService notifyService;
-	
+
 	/**
 	 * 查询所有通知公告
+	 * 
 	 * @param model
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("findAllNotifies")
-	public String findAllNotifies(Model model,HttpServletRequest request){
-		
+	public String findAllNotifies(Model model, HttpServletRequest request) {
+
 		List<Notify> notifies = notifyService.findAllNotifies();
-		
+
 		model.addAttribute("notifies", notifies);
 		User user = (User) request.getSession().getAttribute("currentUser");
-		if(user.getRoleId() == 3){
+		if (user.getRoleId() == 3) {
 			return "notifyList";
-		}
-		else{
+		} else {
 			return "dormManager/notifyList";
 		}
-		
+
 	}
-	
+
 	/**
 	 * 查询当前用户所有通知公告
+	 * 
 	 * @param model
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("findAllNotifiesForUser")
-	public String findAllNotifiesForUser(Model model,HttpServletRequest request,Notify notify,Integer startPage,Integer pageSize){
-		if(null == startPage){
+	public String findAllNotifiesForUser(Model model,
+			HttpServletRequest request, Notify notify, Integer startPage,
+			Integer pageSize) {
+		if (null == startPage) {
 			startPage = 1;
 		}
-		if(null == pageSize){
-			pageSize = 10;
+		if (null == pageSize) {
+			pageSize = 2;
 		}
 		User user = (User) request.getSession().getAttribute("currentUser");
-		if(null == notify){
+		if (null == notify) {
 			notify = new Notify();
 		}
 		notify.setPublisherId(user.getUserId());
-		Page<Notify> pageInfo = notifyService.findAllNotifiesForUser(notify,startPage,pageSize);
-		List<Notify> result = pageInfo.getResult();
+		Page<Notify> page = notifyService.findAllNotifiesForUser(notify,
+				startPage, pageSize);
+		List<Notify> result = page.getResult();
 		model.addAttribute("notifies", result);
-		
-		return "dormManager/notifyTable";	
+		model.addAttribute("currentPage", page.getPageNum());
+		model.addAttribute("totalPages", page.getPages());
+      
+		return "dormManager/notifyTable";
 	}
-	
+
 	/**
 	 * 添加通知公告
+	 * 
 	 * @param notify
 	 * @param httpSession
 	 * @return
 	 */
 	@RequestMapping("addNotify")
-	public @ResponseBody Map<String,Object> addNotify(Notify notify,HttpSession httpSession){
-		
-		Map<String,Object> map = new HashMap<String, Object>();
-		User user = (User)httpSession.getAttribute("currentUser");
+	public @ResponseBody Map<String, Object> addNotify(Notify notify,
+			HttpSession httpSession) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		User user = (User) httpSession.getAttribute("currentUser");
 		notify.setPublisherId(user.getUserId());
 		notify.setType(NotifyType.tzgg.name());
-		if(notifyService.addNotify(notify) > 0){
+		if (notifyService.addNotify(notify) > 0) {
 			map.put("result", "true");
 			map.put("msg", "添加成功");
-		}
-		else{
+		} else {
 			map.put("result", "false");
 			map.put("msg", "添加失败");
-		}			
-		return map;		
+		}
+		return map;
 	}
-	
+
 	/**
 	 * 跳转至添加页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("goToAddNotifyPage")
-	public String goToAddNotifyPage(){
-		return "dormManager/addNotify";	
+	public String goToAddNotifyPage() {
+		return "dormManager/addNotify";
 	}
-	
+
 }

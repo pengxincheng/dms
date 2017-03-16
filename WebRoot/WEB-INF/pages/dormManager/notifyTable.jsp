@@ -255,9 +255,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group">
                                 <div class="hidden-xs pull-left" style="margin-left: 12px" >
                                     <div class="space-4"></div>
-                                    总记录数：100条，每页10条，共15页。
+                                    总记录数：100条，每页10条，共15页123
                                 </div>
-                                <ul class="pagination pull-right" id="">
+                                <ul class="pagination pull-right" id="pagintor">
                             	</ul>
                             </div>
                         </form>
@@ -292,12 +292,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--THS script-->
 <script src="assets/js/ths.js"></script>
 
+<!--分页的js-->
 <script src="js/myPagination.js"></script>
+<script src="js/bootstrap-paginator.js"></script>
+
 
 <!-- 自己写的JS，请放在这里 -->
 <script type="text/javascript">
 
     jQuery(function ($) {
+
+  		initPagination('findAllNotifiesForUser.do',${currentPage},${totalPages});
         //为工具条添加点击事件
         $(".page-toolbar>button").on(ace.click_event,function (e) {
             if($(this).data("ths-href"))
@@ -348,21 +353,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     });
     
-//分页设置代码
-    /* var options = {
-    currentPage: pageIndex,//当前页数
-    totalPages: 100,//总页数 注意不是总条数
-    numberOfPages:5,
-	bootstrapMajorVersion:3,
-	pageUrl: function(type, page, current){
-            if (page==current) {
-                return "javascript:void(0)";
-            } else {
-                return "/Articles?pageSize=15&pageIndex="+page;
-            }
-        }
-}
-$("#pagintor").bootstrapPaginator(options);// $("#pagintor") Bootstrap 是2.X 使用div元素，3.X使用ul元素 */
 </script>
 </body>
 </html>
