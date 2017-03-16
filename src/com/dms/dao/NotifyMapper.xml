@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.dao.NotifyMapper" >
+  <resultMap id="NotifyMap" type="com.dms.entity.Notify" >
+    <id column="notify_id" property="notifyId" jdbcType="INTEGER" />
+    <result column="notify_title" property="notifyTitle" jdbcType="VARCHAR" />
+    <result column="notify_content" property="notifyContent" jdbcType="VARCHAR" />
+    <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
+    <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <association property="user" resultMap="com.dms.dao.UserMapper.userMap"></association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    notify_id, notify_title, notify_content, publisher_id, publish_time, status,type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="NotifyMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_notify
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </select>
+  
+  
+  <select id="selectAllNotifiesForUser" resultMap="NotifyMap" parameterType="com.dms.entity.Notify">
+  	select n.notify_id, n.notify_title, n.notify_content, n.publisher_id, n.publish_time, n.status,n.type, u.user_id, u.name
+    from tab_notify n,tab_user u 
+    where n.publisher_id=u.user_id and n.publisher_id = #{publisherId} 
+    <if test="notifyTitle != null">  
+        and notify_title = #{notifyTitle}  
+    </if>  
+    <if test="notifyContent != null"> 
+        and notify_content = #{notifyContent}  
+    </if>  
+    order by n.publish_time desc
+  </select>
+  
+  <select id="selectAllNotifies" resultMap="NotifyMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from tab_notify order by publish_time desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_notify
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dms.entity.Notify" >
+    insert into tab_notify (notify_title, notify_content, 
+      publisher_id, publish_time, status,type
+      )
+    values (#{notifyTitle,jdbcType=VARCHAR}, #{notifyContent,jdbcType=VARCHAR}, 
+      #{publisherId,jdbcType=INTEGER}, #{publishTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR},#{type}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.entity.Notify" >
+    insert into tab_notify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="notifyId != null" >
+        notify_id,
+      </if>
+      <if test="notifyTitle != null" >
+        notify_title,
+      </if>
+      <if test="notifyContent != null" >
+        notify_content,
+      </if>
+      <if test="publisherId != null" >
+        publisher_id,
+      </if>
+      <if test="publishTime != null" >
+        publish_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="notifyId != null" >
+        #{notifyId,jdbcType=INTEGER},
+      </if>
+      <if test="notifyTitle != null" >
+        #{notifyTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyContent != null" >
+        #{notifyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherId != null" >
+        #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.Notify" >
+    update tab_notify
+    <set >
+      <if test="notifyTitle != null" >
+        notify_title = #{notifyTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="notifyContent != null" >
+        notify_content = #{notifyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="publisherId != null" >
+        publisher_id = #{publisherId,jdbcType=INTEGER},
+      </if>
+      <if test="publishTime != null" >
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.entity.Notify" >
+    update tab_notify
+    set notify_title = #{notifyTitle,jdbcType=VARCHAR},
+      notify_content = #{notifyContent,jdbcType=VARCHAR},
+      publisher_id = #{publisherId,jdbcType=INTEGER},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR}
+    where notify_id = #{notifyId,jdbcType=INTEGER}
+  </update>
+</mapper>

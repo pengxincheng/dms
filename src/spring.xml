@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+      
+	  http://www.springframework.org/schema/beans 
+	  http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	  
+	  http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-4.0.xsd
+ 	  
+	  http://www.springframework.org/schema/aop 
+	  http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	  
+	  http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        
+      ">
+
+
+
+	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 -->
+	<mvc:annotation-driven />
+
+	<!-- 配置C3P0连接池,目的：管理数据库连接 -->
+	<bean id="comboPooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/dms?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="user" value="root" />
+		<property name="password" value="pxc1994" />
+	</bean>
+
+
+	<!-- 配置SqlSessionFactoryBean，目的：加载mybaits配置文件和映射文件，即替代原Mybatis工具类的作用 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis.xml" />
+		<property name="dataSource" ref="comboPooledDataSource" />
+		<!--配置扫描式加载SQL映射文件,记得去掉mybatis-config配置 -->
+		<property name="mapperLocations" value="classpath:com/dms/dao/*.xml" />
+	</bean>
+
+	<!-- 配置Mybatis的事务管理器，即因为Mybatis底层用的是JDBC事务管事器，所以在这里依然配置JDBC事务管理器 -->
+	<bean id="dataSourceTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="comboPooledDataSource" />
+	</bean>
+
+	<!-- 配置事务通知，即让哪些方法需要事务支持 -->
+	<tx:advice id="tx" transaction-manager="dataSourceTransactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置事务切面，即让哪些包下的类需要事务 --><!-- 一般写在service层 -->
+	<aop:config>
+		<aop:pointcut id="pointcut" expression="execution(* com.dms.service.*.*(..))" />
+		<aop:advisor advice-ref="tx" pointcut-ref="pointcut" />
+	</aop:config>
+	
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="com.dms"></context:component-scan>
+
+	<!-- 配置 转换器，对于在basePackage设置的包（包括子包）下的接口类， 如果接口类的全类名在Mapper.xml文件中和定义过命名空间一致， 
+		将被转换成spring的BEAN，在调用 的地方通过@Autowired方式将可以注入接口实例 -->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- <property name="sqlSessionFactoryBean" ref="sqlSessionFactoryBean" 
+			/> -->
+		<property name="basePackage" value="com.dms.dao" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+	   <property name="prefix" value="/WEB-INF/pages/"/>  
+	   <property name="suffix" value=".jsp"></property>  
+	</bean>
+
+	<!-- 1）导入jackson-core-asl-1.9.11.jar和jackson-mapper-asl-1.9.11.jar 2）在业务方法的返回值和权限之间使用@ResponseBody注解表示返回值对象需要转成JSON文本 
+		3）在spring.xml配置文件中编写如下代码： -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<!-- spring mvc 能够访问静态内容 begin -->
+	<mvc:resources location="/assets/" mapping="/assets/**" />
+	<mvc:resources location="/components/" mapping="/components/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	
+
+<!-- 登录拦截器 --> 
+<!-- <mvc:interceptors>   
+  <mvc:interceptor>   
+    <mvc:mapping path="/**"/>  拦截范围（路径）；例如：后台目录 
+    <mvc:mapping path="/*.jsp"/>  
+    <mvc:exclude-mapping path="/index.jsp"/>
+    <mvc:exclude-mapping path="/login.jsp"/>   不被拦截范围（路径）；例如：后台登录页面
+    <mvc:exclude-mapping path="/checkLogin.action"/>  
+    <mvc:exclude-mapping path="/findAllBooks.action"/>
+    <mvc:exclude-mapping path="/checkRegister.action"/>
+    <mvc:exclude-mapping path="/register.action"/>
+     <bean class="com.dms.filter.CheckLoginInceptor"></bean>   
+  </mvc:interceptor>   
+</mvc:interceptors>   -->
+</beans>

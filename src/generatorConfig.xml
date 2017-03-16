@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+<!--
+	<properties resource="conn.properties" />
+	  -->
+	  
+	 <classPathEntry location="D:\mysql-connector-java-5.1.30.jar"/>
+	<!-- 指定运行环境是mybatis3的版本 -->
+	<context id="testTables" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+		<!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true" />
+			 <!-- 是否生成注释代时间戳 -->
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!-- jdbc 连接信息 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/dms?useUnicode=true&amp;characterEncoding=UTF-8" userId="root" password="pxc1994">
+		</jdbcConnection>
+		
+        <!-- targetPackage指定模型在生成在哪个包 ,targetProject指定项目的src,-->        
+		<javaModelGenerator targetPackage="com.dms.entity"
+			targetProject="dms/src">
+			<!-- 去除字段前后空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 指定dao类生成在哪个包 -->
+		<sqlMapGenerator targetPackage="com.dms.dao"
+			targetProject="dms/src" />
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.dms.dao" targetProject="dms/src" />
+
+		<table tableName="tab_notify" domainObjectName="Notify" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+    		enableSelectByExample="false" selectByExampleQueryId="false"/>
+	
+	</context>
+</generatorConfiguration>
