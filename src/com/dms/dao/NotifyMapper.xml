@@ -26,13 +26,18 @@
   	select n.notify_id, n.notify_title, n.notify_content, n.publisher_id, n.publish_time, n.status,n.type, u.user_id, u.name
     from tab_notify n,tab_user u 
     where n.publisher_id=u.user_id and n.publisher_id = #{publisherId} 
-    <if test="notifyTitle != null">  
+    
+    <if test="notifyTitle != null and notifyTitle !=''">  
         and notify_title = #{notifyTitle}  
     </if>  
-    <if test="notifyContent != null"> 
+    <if test="notifyContent != null and notifyContent !=''"> 
         and notify_content = #{notifyContent}  
     </if>  
+     <if test="type != null and type !=''"> 
+        and type = #{type}  
+    </if>  
     order by n.publish_time desc
+
   </select>
   
   <select id="selectAllNotifies" resultMap="NotifyMap">

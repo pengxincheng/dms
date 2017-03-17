@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- page plugin css -->
     <link rel="stylesheet" href="components/_mod/jquery-ui/jquery-ui.css" />
+    
 
     <!-- ace styles -->
     <link rel="stylesheet" href="assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style"/>
@@ -68,83 +69,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="space-4"></div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
-
+                        <form class="form-horizontal" role="form" id="searchForm" name="searchForm" action="findAllNotifiesForUser.do" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="txtName">
-                                    姓名
+                                <label class="col-sm-1 control-label no-padding-right" for="notifyTitle">
+                                    	标题
                                 </label>
                                 <div class="col-sm-3">
-                                    <span class="input-icon width-100">
-                                        <input type="text" class="form-control"
-                                               data-validation-engine="validate[required]" placeholder="4个汉字以内"
-                                               id="txtName"/>
-                                        <i class="ace-icon fa fa-user"> </i>
-                                   </span>
-
-                                </div>
-                                <label class="col-sm-1 control-label no-padding-right hidden-xs">性别</label>
-                                <div class="col-sm-3 hidden-xs">
-                                    <div class="control-group">
-                                        <div class="radio-inline">
-                                            <label>
-                                                <input name="gender" type="radio" class="ace" value="male" checked>
-                                                <span class="lbl"> 男</span>
-                                            </label>
-                                        </div>
-
-                                        <div class="radio-inline">
-                                            <label>
-                                                <input name="gender" type="radio" class="ace" value="female">
-                                                <span class="lbl"> 女</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <label class="col-sm-1 control-label no-padding-right hidden-xs"
+									<input type="text" class="form-control" placeholder="标题" id="notifyTitle" name="notifyTitle" />
+								</div>  
+								
+								<label class="col-sm-1 control-label no-padding-right"
                                        for="form-field-select-1">
-                                    职位
+                                    	类型
                                 </label>
-                                <div class="col-sm-3 hidden-xs">
-                                    <select class="form-control" id="form-field-select-1">
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="type" name="type">
                                         <option value="">-请选择-</option>
-                                        <option value="1">科员</option>
-                                        <option value="2">科长</option>
-                                        <option value="3">处长</option>
-                                        <option value="4">局长</option>
+                                        <option value="tzgg">通知公告</option>
+                                        <option value="swzl">失物招领</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right hidden-xs"
-                                       for="form-field-221">部门</label>
-                                <div class="col-sm-6 col-lg-3 col-md-6 hidden-xs">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="" id="form-field-221"
-                                               readonly="readonly"/>
-                                    <span class="input-group-btn">
-                                    <button type="button" class="btn btn-white btn-default">
-                                        <i class="ace-icon fa fa-search"></i>
-                                        选择
-                                    </button>
-                                        <button type="button" class="btn btn-white btn-default">
-                                            <i class="ace-icon fa fa-remove"></i>
-                                        </button>
-                                    </span>
-                                    </div>
-                                </div>
+                                </div> 
+                              
                                 <div class="col-sm-5 col-lg-8 col-md-5 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
-                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch">
+                                    <button type="submit" class="btn btn-info btn-default-ths" id="btnSearch">
                                         <i class="ace-icon fa fa-search"></i>
-                                        搜索
-                                    </button>
-                                    <button type="button" class="btn btn-purple btn-default-ths" id="btnSearchAdv">
-                                        <i class="ace-icon fa fa-search-plus"></i>
-                                        高级搜索
-                                    </button>
-                                </div>
+                                       	 搜索
+                                    </button>                                    
+                                </div>                                                
+                            </div>
+                            </form>
+                            <div class="form-group">                    
+                              
+                                
                             </div>
                             <hr class="no-margin">
                             <div class="page-toolbar align-right list-toolbar">
@@ -159,43 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <button type="button" class="btn btn-xs btn-purple btn-xs-ths" id="btnExport">
                                     <i class="ace-icon fa fa-file-excel-o"></i>
                                     导出
-                                </button>
-                                <div class="btn-group">
-                                    <button data-toggle="dropdown"
-                                            class="btn btn-xs btn-info btn-xs-ths dropdown-toggle"
-                                            aria-expanded="false">
-                                        <i class="ace-icon fa fa-wrench"></i>
-                                        操作
-                                        <i class="ace-icon fa fa-angle-down icon-on-right"></i>
-                                    </button>
-
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li>
-                                            <a href="goToAddNotifyPage.do">
-                                                <i class="ace-icon fa fa-plus"></i>
-                                                添加
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#"><i class="ace-icon fa fa-trash-o"></i>
-                                                删除</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#"><i class="ace-icon fa fa-remove align-left"></i>
-                                                取消发布</a>
-                                        </li>
-
-                                        <li class="divider"></li>
-
-                                        <li>
-                                            <a href="#"><i class="ace-icon fa fa-check"></i>
-                                                提交</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
+                                </button>                            
                             </div>
                             <table id="simple-table" class="table  table-bordered table-hover">
                                 <thead>
@@ -259,8 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                                 <ul class="pagination pull-right" id="pagintor">
                             	</ul>
-                            </div>
-                        </form>
+                            </div>                     
                     </div>
                 </div>
             </div>
@@ -281,16 +201,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     if ('ontouchstart' in document.documentElement) document.write("<script src='components/_mod/jquery.mobile.custom/jquery.mobile.custom.js'>" + "<" + "/script>");
 </script>
 <script src="components/bootstrap/dist/js/bootstrap.js"></script>
+<!--表单验证jquery.validationEngine-->
+<script src="components/_mod/jQuery-Validation-Engine/jquery.validationEngine-zh_CN.js" type="text/javascript"
+        charset="utf-8"></script>
+<script src="components/_mod/jQuery-Validation-Engine/jquery.validationEngine.js" type="text/javascript"
+        charset="utf-8"></script>
+<!--日期控件-->
+<script src="components/My97DatePicker/WdatePicker.js"></script>
 
 <!-- page specific plugin scripts -->
 <script src="components/jquery-ui/jquery-ui.js"></script>
 <script src="components/jqueryui-touch-punch/jquery.ui.touch-punch.js"></script>
+
 
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
 
 <!--THS script-->
 <script src="assets/js/ths.js"></script>
+
+
 
 <!--分页的js-->
 <script src="js/myPagination.js"></script>
