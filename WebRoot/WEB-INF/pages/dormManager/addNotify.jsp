@@ -73,7 +73,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="col-sm-3">
                                     <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="标题" id="notifyTitle" name="notifyTitle"/>
                                 </div>                                            
-                            </div>  
+                            </div>
+                            
+							<div class="form-group">
+							<label class="col-sm-1 control-label no-padding-right"
+									for="type">类型</label>
+								<div class="col-sm-3">
+									<select class="form-control" id="type" name="type">
+										<option value="tzgg">通知公告</option>
+										<option value="swzl">失物招领</option>
+									</select>
+								</div>
+							</div>
 							<div class="form-group">
                                 <label class="col-sm-1 control-label no-padding-right">内容</label>
                                 <div class="col-sm-11">

@@ -98,7 +98,6 @@ public class NotifyController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		User user = (User) httpSession.getAttribute("currentUser");
 		notify.setPublisherId(user.getUserId());
-		notify.setType(NotifyType.tzgg.name());
 		if (notifyService.addNotify(notify) > 0) {
 			map.put("result", "true");
 			map.put("msg", "添加成功");

@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </select>
                                 </div> 
                               
-                                <div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                <div class="col-sm-4 col-lg-8 col-md-4 align-center">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="submit" class="btn btn-info btn-default-ths" id="btnSearch">
                                         <i class="ace-icon fa fa-search"></i>
@@ -173,13 +173,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</c:forEach>
                                 </tbody>
                             </table>
-                            <div class="form-group">
-                                <div class="hidden-xs pull-left" style="margin-left: 12px" >
-                                    <div class="space-4"></div>
-                                    总记录数：100条，每页10条，共15页123
-                                </div>
-                                <ul class="pagination pull-right" id="pagintor">
-                            	</ul>
+                            <div class="form-group">                        
+                                <div class="pagination pull-right">
+	                                <ul class="pagination pull-right" id="pagintor">                             
+	                            	</ul>
+                            	</div>
                             </div>                     
                     </div>
                 </div>
