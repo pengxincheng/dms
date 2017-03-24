@@ -142,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <tr>
                                     <td class="center">
                                         <label class="pos-rel">
-                                            <input type="checkbox" class="ace"/>
+                                            <input type="checkbox" class="ace" id="notifyId" name="notifyId" value="${notify.notifyId}"/>
                                             <span class="lbl"></span>
                                         </label>
                                     </td>
@@ -162,12 +162,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </td>
                                     
                                     <td class="hidden-xs align-center col-op-ths">
-                                        <button type="button" class="btn btn-sm btn-info btn-white btn-op-ths" title="编辑">
+                                        <a type="button" class="btn btn-sm btn-info btn-white btn-op-ths" title="编辑" href="getNotifyDetail.do?notifyId=${notify.notifyId}">
                                             <i class="ace-icon fa fa-edit"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-danger btn-white btn-op-ths"  title="删除">
+                                        </a>
+                                        <a type="button" class="btn btn-sm btn-danger btn-white btn-op-ths"  title="删除" href="delNotify.do?notifyId=${notify.notifyId}">
                                             <i class="ace-icon fa fa-trash-o"></i>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>                              
 								</c:forEach>

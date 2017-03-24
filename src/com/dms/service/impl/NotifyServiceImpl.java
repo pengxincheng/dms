@@ -44,4 +44,24 @@ public class NotifyServiceImpl implements NotifyService {
 		return notifyMapper.insert(notify);
 	}
 
+	@Override
+	public int delNotifyById(Integer notifyId) {
+		
+		return notifyMapper.deleteByPrimaryKey(notifyId);
+	}
+
+	@Override
+	public Notify getNotifyDetail(Integer notifyId) {
+		
+		return notifyMapper.selectByPrimaryKey(notifyId);
+	}
+
+	@Override
+	public int editNotify(Notify notify) {
+		
+		return notifyMapper.updateByPrimaryKeySelective(notify);
+	}
+	
+	
+
 }

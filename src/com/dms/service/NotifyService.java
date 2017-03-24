@@ -29,5 +29,26 @@ public interface NotifyService {
 	 * @return
 	 */
 	int addNotify(Notify notify);
+	
+	/**
+	 * 删除通知公告
+	 * @param notifyId
+	 * @return
+	 */
+	int delNotifyById(Integer notifyId);
+	
+	/**
+	 * 通知公告详细
+	 * @param notifyId
+	 * @return
+	 */
+	Notify getNotifyDetail(Integer notifyId);
+	
+	/**
+	 * 修改通知公告
+	 * @param notify
+	 * @return
+	 */
+	int editNotify(Notify notify);
 
 }

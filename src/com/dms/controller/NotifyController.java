@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dms.entity.Notify;
 import com.dms.entity.User;
 import com.dms.enums.NotifyType;
@@ -116,6 +117,62 @@ public class NotifyController {
 	@RequestMapping("goToAddNotifyPage")
 	public String goToAddNotifyPage() {
 		return "dormManager/addNotify";
+	}
+	
+	
+	/**
+	 * 通过id删除一个通知公告
+	 * @param notifyId
+	 * @return
+	 */
+	@RequestMapping("delNotify")
+	public String delNotify(Integer notifyId){
+		notifyService.delNotifyById(notifyId);
+		return "redirect:/findAllNotifiesForUser.do";
+		
+	}
+	
+	@RequestMapping("batchDelNotify")
+	public String batchDelNotify(Integer[] notifyId){
+		return null;
+		
+	}
+	
+	/**
+	 * 查看通知公告明细
+	 * @param notifyId
+	 * @return
+	 */
+	@RequestMapping("getNotifyDetail")
+	public String getNotifyDetail(Integer notifyId,Model model){
+		
+		Notify notify = notifyService.getNotifyDetail(notifyId);
+		model.addAttribute("notify", notify);
+		return "dormManager/editNotify";
+		
+	}
+	
+	/**
+	 * 修改通知公告
+	 * @param notify
+	 * @return
+	 */
+	@RequestMapping("editNotify")
+	public @ResponseBody JSONObject editNotify(Notify notify){
+		
+		JSONObject content = new JSONObject();
+		
+		if(notifyService.editNotify(notify) > 0){
+			content.put("msg", "操作成功！");
+			content.put("result", true);
+		}
+		else{
+			content.put("msg", "操作失败！");
+			content.put("result", false);
+		}
+		
+		return content;
+		
 	}
 
 }

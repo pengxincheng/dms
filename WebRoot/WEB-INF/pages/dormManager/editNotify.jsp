@@ -71,7 +71,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="form-group">
                                  <label class="col-sm-1 control-label no-padding-right" for="form-field-8">标题</label>
                                 <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="标题" id="notifyTitle" name="notifyTitle"/>
+                                	<input type="hidden" name="notifyId" id="notifyId" value="${notify.notifyId}" />
+                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="标题" id="notifyTitle" name="notifyTitle" value="${notify.notifyTitle}"/>
                                 </div>                                            
                             </div>
                             
@@ -80,8 +81,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									for="type">类型</label>
 								<div class="col-sm-3">
 									<select class="form-control" id="type" name="type">
-										<option value="tzgg">通知公告</option>
-										<option value="swzl">失物招领</option>
+										<option ${notify.type eq 'tzgg'?'selected':''} value="tzgg">通知公告</option>
+										<option ${notify.type eq 'swzl'?'selected':''} value="swzl">失物招领</option>
 									</select>
 								</div>
 							</div>
@@ -89,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <label class="col-sm-1 control-label no-padding-right">内容</label>
                                 <div class="col-sm-11">
                                     <div id="my-editor" class="wysiwyg-editor">
-                                        <!-- custom html data -->
+                                        <!-- custom html data -->${notify.notifyContent}
                                     </div>
                                 </div>
                             </div>							
@@ -177,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
             if ($('#addNotify').validationEngine('validate')) {
-                submitAddNotifyForm();
+                submitEditNotifyForm();
             }
         });
         $("#btnReturn").on(ace.click_event, function () {

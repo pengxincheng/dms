@@ -119,6 +119,9 @@
       <if test="status != null" >
         status = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
     </set>
     where notify_id = #{notifyId,jdbcType=INTEGER}
   </update>
