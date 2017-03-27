@@ -50,5 +50,17 @@ public interface NotifyService {
 	 * @return
 	 */
 	int editNotify(Notify notify);
+	
+	/**
+	 * 前6条通知公告
+	 * @return
+	 */
+	List<Notify> getTop6Tzgg();
+	
+	/**
+	 * 前10条失物招领
+	 * @return
+	 */
+	List<Notify> getTop10Swzl();
 
 }

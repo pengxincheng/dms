@@ -39,17 +39,13 @@ public class NotifyController {
 	 * @return
 	 */
 	@RequestMapping("findAllNotifies")
-	public String findAllNotifies(Model model, HttpServletRequest request) {
+	public String findAllNotifies(Model model) {
 
-		List<Notify> notifies = notifyService.findAllNotifies();
+		List<Notify> notifies = notifyService.getTop10Swzl();
+		notifies.addAll(notifyService.getTop6Tzgg());
 
 		model.addAttribute("notifies", notifies);
-		User user = (User) request.getSession().getAttribute("currentUser");
-		if (user.getRoleId() == 3) {
-			return "notifyList";
-		} else {
-			return "dormManager/notifyList";
-		}
+		return "notifyList";
 
 	}
 
@@ -141,15 +137,23 @@ public class NotifyController {
 	/**
 	 * 查看通知公告明细
 	 * @param notifyId
+	 * @param isForShow
 	 * @return
 	 */
 	@RequestMapping("getNotifyDetail")
-	public String getNotifyDetail(Integer notifyId,Model model){
-		
+	public String getNotifyDetail(Integer notifyId,Boolean isForShow,Model model){
+		//isForShow = false;
+		if(null == isForShow){
+			isForShow = false;
+		}
 		Notify notify = notifyService.getNotifyDetail(notifyId);
 		model.addAttribute("notify", notify);
-		return "dormManager/editNotify";
-		
+		if(isForShow){
+			return "notifyDetail";
+		}
+		else{
+			return "dormManager/editNotify";
+		}	
 	}
 	
 	/**

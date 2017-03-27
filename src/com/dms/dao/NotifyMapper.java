@@ -51,4 +51,18 @@ public interface NotifyMapper {
      * @return
      */
     List<Notify> selectAllNotifiesForUser(Notify notify);
+    
+    /**
+     * 查询前六条通知公告
+     * @return
+     */
+    List<Notify> selectTop6Tzgg();
+    
+    /**
+     * 查询前10条失物招领
+     * @return
+     */
+    List<Notify> selectTop10Swzl();
+    
+    
 }

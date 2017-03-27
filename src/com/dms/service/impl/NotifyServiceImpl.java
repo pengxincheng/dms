@@ -61,6 +61,18 @@ public class NotifyServiceImpl implements NotifyService {
 		
 		return notifyMapper.updateByPrimaryKeySelective(notify);
 	}
+
+	@Override
+	public List<Notify> getTop6Tzgg() {
+		
+		return notifyMapper.selectTop6Tzgg();
+	}
+
+	@Override
+	public List<Notify> getTop10Swzl() {
+		// TODO Auto-generated method stub
+		return notifyMapper.selectTop10Swzl();
+	}
 	
 	
 

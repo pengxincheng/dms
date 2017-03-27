@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                	<c:if test="${notify.type eq 'tzgg'}">
                                                 <p class="alert alert-info">
                                                     <i class="ace-icon fa bigger-130 fa-volume-down">
-                                                    	<a href="#" title=" ${notify.notifyContent}"> ${notify.notifyTitle}</a>
+                                                    	<a href="getNotifyDetail.do?notifyId=${notify.notifyId }&isForShow=true" title="">${notify.notifyTitle}</a>
                                                     </i>
                                                 </p>
                                                 </c:if>
@@ -131,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     	<c:if test="${notify.type eq 'swzl'}">
                                                         <li>
                                                             <i class="ace-icon fa fa-caret-right dark"></i>
-                                                            <a href="#" title=" ${notify.notifyContent}"> ${notify.notifyTitle}</a>
+                                                            <a href="getNotifyDetail.do?notifyId=${notify.notifyId}&isForShow=true" title="">${notify.notifyTitle}</a>
                                                         </li>
                                                         </c:if>
                                                         </c:forEach>
