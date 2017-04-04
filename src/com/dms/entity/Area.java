@@ -1,9 +1,15 @@
 package com.dms.entity;
 
-public class Area {
-    private Integer id;   //宿舍区id
+import java.util.Date;
 
-    private String areaname;  //宿舍区名称
+public class Area {
+    private Integer id;   //区id
+
+    private String areaName; //区名称
+
+    private Date buildTime;   //完工时间
+
+    private String describe;  //描述
 
     public Integer getId() {
         return id;
@@ -13,11 +19,27 @@ public class Area {
         this.id = id;
     }
 
-    public String getAreaname() {
-        return areaname;
+    public String getAreaName() {
+        return areaName;
     }
 
-    public void setAreaname(String areaname) {
-        this.areaname = areaname == null ? null : areaname.trim();
+    public void setAreaName(String areaName) {
+        this.areaName = areaName == null ? null : areaName.trim();
+    }
+
+    public Date getBuildTime() {
+        return buildTime;
+    }
+
+    public void setBuildTime(Date buildTime) {
+        this.buildTime = buildTime;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe == null ? null : describe.trim();
     }
 }

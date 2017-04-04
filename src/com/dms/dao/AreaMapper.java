@@ -1,5 +1,7 @@
 package com.dms.dao;
 
+import java.util.List;
+
 import com.dms.entity.Area;
 
 public interface AreaMapper {
@@ -39,4 +41,9 @@ public interface AreaMapper {
      * @return
      */
     int updateByPrimaryKey(Area record);
+    /**
+     * 查询所有宿舍区
+     * @return
+     */
+    List<Area> selectAllAreas(Area area);
 }

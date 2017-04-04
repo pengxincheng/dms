@@ -28,7 +28,6 @@ function submitAddNotifyForm(){
 
 //修改通知公告
 function submitEditNotifyForm(){
-	alert($("#type").val());
 	$.ajax({
 		url : 'editNotify.do',// 跳转到 action	
 		data : {

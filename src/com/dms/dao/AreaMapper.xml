@@ -1,58 +1,96 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dms.dao.AreaMapper" >
-  <resultMap id="BaseResultMap" type="com.dms.entity.Area" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="areaName" property="areaname" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dms.dao.AreaMapper">
+  <resultMap id="AreaMap" type="com.dms.entity.Area">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="build_time" jdbcType="DATE" property="buildTime" />
+    <result column="area_describe" jdbcType="VARCHAR" property="describe" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    id, areaName
+  <sql id="Base_Column_List">
+    id, area_name, build_time, area_describe
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="AreaMap">
     select 
     <include refid="Base_Column_List" />
     from tab_area
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  
+  <select id="selectAllAreas" resultMap="AreaMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from tab_area 
+  	where 1=1
+  	<if test="areaName != null and areaName !=''">  
+        and area_name like CONCAT('%',#{areaName},'%')
+    </if> 
+    order by build_time desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tab_area
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dms.entity.Area" >
-    insert into tab_area (id, areaName)
-    values (#{id,jdbcType=INTEGER}, #{areaname,jdbcType=VARCHAR})
+  
+  <insert id="insert" parameterType="com.dms.entity.Area">
+    insert into tab_area (id, area_name, build_time, 
+      area_describe)
+    values (#{id,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR}, #{buildTime,jdbcType=DATE}, 
+      #{describe,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.dms.entity.Area" >
+  
+  <insert id="insertSelective" parameterType="com.dms.entity.Area">
     insert into tab_area
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="areaname != null" >
-        areaName,
+      <if test="areaName != null">
+        area_name,
+      </if>
+      <if test="buildTime != null">
+        build_time,
+      </if>
+      <if test="describe != null">
+        area_describe,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="areaname != null" >
-        #{areaname,jdbcType=VARCHAR},
+      <if test="areaName != null">
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildTime != null">
+        #{buildTime,jdbcType=DATE},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.Area" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.Area">
     update tab_area
-    <set >
-      <if test="areaname != null" >
-        areaName = #{areaname,jdbcType=VARCHAR},
+    <set>
+      <if test="areaName != null">
+        area_name = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="buildTime != null">
+        build_time = #{buildTime,jdbcType=DATE},
+      </if>
+      <if test="describe != null">
+        area_describe = #{describe,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dms.entity.Area" >
+  <update id="updateByPrimaryKey" parameterType="com.dms.entity.Area">
     update tab_area
-    set areaName = #{areaname,jdbcType=VARCHAR}
+    set area_name = #{areaName,jdbcType=VARCHAR},
+      build_time = #{buildTime,jdbcType=DATE},
+      area_describe = #{describe,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-</mapper>
+  </mapper>

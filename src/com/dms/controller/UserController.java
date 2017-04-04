@@ -28,7 +28,7 @@ public class UserController {
 		if(null != currentUser){
 			request.getSession().setAttribute("currentUser", currentUser);
 		}
-		return "index";
+		return "redirect:/index.jsp";
 		
 	}
 
