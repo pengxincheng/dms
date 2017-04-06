@@ -70,7 +70,7 @@ public class AreaController {
 		Area area = areaService.getAreaById(id);
 		model.addAttribute("area", area);
 		
-		return "admin/editArea";
+		return "admin/area/editArea";
 	}
 	@RequestMapping("delArea")
 	public String delArea(Integer id){
@@ -84,13 +84,13 @@ public class AreaController {
 	 */
 	@RequestMapping("goToListPage")
 	public String goToListPage() {
-		return "admin/areaList";
+		return "admin/area/areaList";
 
 	}
 	
 	@RequestMapping("goToAddPage")
 	public String goToAddPage(){
-		return "admin/addArea";
+		return "admin/area/addArea";
 	}
 
 }

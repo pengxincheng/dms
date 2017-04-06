@@ -103,7 +103,7 @@ public class BuildingController {
 		model.addAttribute("areas", areas);
 		model.addAttribute("users", users);
 		model.addAttribute("building", building);
-		return "admin/editBuilding";
+		return "admin/building/editBuilding";
 	}
 	/**
 	 * 跳转到列表页
@@ -111,7 +111,7 @@ public class BuildingController {
 	 */
 	@RequestMapping("goToBuildingList")
 	public String goToListPage(){
-		return "admin/buildingList";
+		return "admin/building/buildingList";
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public class BuildingController {
 		model.addAttribute("users", users);
 		
 		
-		return "admin/addBuilding";
+		return "admin/building/addBuilding";
 	}
 	
 }

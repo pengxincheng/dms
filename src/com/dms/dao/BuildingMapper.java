@@ -5,6 +5,7 @@ import java.util.List;
 import com.dms.entity.Building;
 
 public interface BuildingMapper {
+
 	/**
 	 * 删除
 	 * @param buildingId

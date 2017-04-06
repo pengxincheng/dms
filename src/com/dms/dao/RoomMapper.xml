@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.dao.RoomMapper" >
+  <resultMap id="BaseResultMap" type="com.dms.entity.Room" >
+    <id column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="introduct" property="introduct" jdbcType="VARCHAR" />
+    <result column="totalNum" property="totalnum" jdbcType="INTEGER" />
+    <result column="currentNum" property="currentnum" jdbcType="INTEGER" />
+    <result column="isFiled" property="isfiled" jdbcType="VARCHAR" />
+    <result column="room_sn" property="roomSn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    room_id, area_id, building_id, type, introduct, totalNum, currentNum, isFiled, room_sn
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_room
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_room
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dms.entity.Room" >
+    insert into tab_room (room_id, area_id, building_id, 
+      type, introduct, totalNum, 
+      currentNum, isFiled, room_sn
+      )
+    values (#{roomId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{buildingId,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{introduct,jdbcType=VARCHAR}, #{totalnum,jdbcType=INTEGER}, 
+      #{currentnum,jdbcType=INTEGER}, #{isfiled,jdbcType=VARCHAR}, #{roomSn,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.entity.Room" >
+    insert into tab_room
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="buildingId != null" >
+        building_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="introduct != null" >
+        introduct,
+      </if>
+      <if test="totalnum != null" >
+        totalNum,
+      </if>
+      <if test="currentnum != null" >
+        currentNum,
+      </if>
+      <if test="isfiled != null" >
+        isFiled,
+      </if>
+      <if test="roomSn != null" >
+        room_sn,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="buildingId != null" >
+        #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="introduct != null" >
+        #{introduct,jdbcType=VARCHAR},
+      </if>
+      <if test="totalnum != null" >
+        #{totalnum,jdbcType=INTEGER},
+      </if>
+      <if test="currentnum != null" >
+        #{currentnum,jdbcType=INTEGER},
+      </if>
+      <if test="isfiled != null" >
+        #{isfiled,jdbcType=VARCHAR},
+      </if>
+      <if test="roomSn != null" >
+        #{roomSn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.Room" >
+    update tab_room
+    <set >
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="buildingId != null" >
+        building_id = #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="introduct != null" >
+        introduct = #{introduct,jdbcType=VARCHAR},
+      </if>
+      <if test="totalnum != null" >
+        totalNum = #{totalnum,jdbcType=INTEGER},
+      </if>
+      <if test="currentnum != null" >
+        currentNum = #{currentnum,jdbcType=INTEGER},
+      </if>
+      <if test="isfiled != null" >
+        isFiled = #{isfiled,jdbcType=VARCHAR},
+      </if>
+      <if test="roomSn != null" >
+        room_sn = #{roomSn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.entity.Room" >
+    update tab_room
+    set area_id = #{areaId,jdbcType=INTEGER},
+      building_id = #{buildingId,jdbcType=INTEGER},
+      type = #{type,jdbcType=VARCHAR},
+      introduct = #{introduct,jdbcType=VARCHAR},
+      totalNum = #{totalnum,jdbcType=INTEGER},
+      currentNum = #{currentnum,jdbcType=INTEGER},
+      isFiled = #{isfiled,jdbcType=VARCHAR},
+      room_sn = #{roomSn,jdbcType=VARCHAR}
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </update>
+</mapper>
