@@ -1,5 +1,7 @@
 package com.dms.service;
 
+import java.util.List;
+
 import com.dms.entity.User;
 
 /**
@@ -22,5 +24,10 @@ public interface UserService {
 	 * @return
 	 */
 	public User checkLogin(String username,String password);
-
+	/**
+	 * 获取所有用户
+	 * @param user
+	 * @return
+	 */
+	public List<User> getAllUsers(User user);
 }

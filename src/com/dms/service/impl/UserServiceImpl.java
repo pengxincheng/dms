@@ -1,5 +1,7 @@
 package com.dms.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,12 @@ public class UserServiceImpl implements UserService {
 		
 		password = PasswordUtil.EncoderByMd5(password);
 		return (User) userMapper.selectForLogin(username, password);
+	}
+
+	@Override
+	public List<User> getAllUsers(User user) {
+		
+		return userMapper.selectAllUsers(user);
 	}
 
 }

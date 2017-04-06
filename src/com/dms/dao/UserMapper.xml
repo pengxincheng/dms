@@ -25,6 +25,15 @@
     from tab_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  	
+  <select id="selectAllUsers" resultMap="userMap" parameterType="com.dms.entity.User">
+  	select <include refid="Base_Column_List" />
+  	from tab_user 
+  	where 1=1 
+  	<if test="roleId != null and roleId !=''">  
+        and role_id = #{roleId,jdbcType=INTEGER}
+    </if> 	
+  </select>
     
   <select id="selectForLogin" resultMap="userMap" parameterType="java.lang.String">
   		 select 

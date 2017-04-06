@@ -34,7 +34,7 @@
 			targetProject="dms/src" />
 		<javaClientGenerator type="XMLMAPPER" targetPackage="com.dms.dao" targetProject="dms/src" />
 
-		<table tableName="tab_Area" domainObjectName="Area" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+		<table tableName="tab_building" domainObjectName="Building" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
     		enableSelectByExample="false" selectByExampleQueryId="false"/>
 	
 	</context>

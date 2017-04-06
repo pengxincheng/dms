@@ -15,7 +15,7 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer userId);
     
-    List<User> selectByCondition(User user);
+    List<User> selectAllUsers(User user);
     
     User selectForLogin(@Param("username") String username,@Param("password") String password);
 

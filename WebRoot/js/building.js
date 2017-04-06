@@ -1,21 +1,21 @@
 function initTable() {
 	
 			$.ajax({
-				url : 'findAllAreas.do',// 跳转到 action
+				url : 'getBuildingList.do',// 跳转到 action
 				
 				  data : { 
-					  		"areaName" : $("#areaName").val() 			  		
+					  		"buildingName" : $("#buildingName").val(),
+					  		"area.areaName" : $("#areaId").val() 
 				  		},			 
 				traditional : true,
 				type : "post",
 				cache : false,
 				dataType : "json",
 				success : function(data) {
-					if(data.length > 0){
-						$('#example tbody').html("");
+					if(data.length > 0){	
 						$('#example').DataTable(
 								{
-									destroy: true,   //是否允许破坏表
+									destroy: true,   //是否允许破坏表,重新建
 									pageLength : 10,// 每页显示多少条记录
 									searching : false,
 									lengthChange : true,
@@ -28,7 +28,7 @@ function initTable() {
 											{
 
 												"sClass" : "align-center",
-												"data" : "id",
+												"data" : "buildingId",
 												"render" : function(data,type, full, meta) {
 													return '<label class="pos-rel"><input type="checkbox" class="ace" class="ace"  value="'
 															+ data
@@ -37,15 +37,35 @@ function initTable() {
 
 											},
 											{
-												"data" : "areaName",
+												"data" : "buildingName",
 												"class" : "align-center"
 											},
 											{
-												"data" : "buildTime",
+												"data" : "area.areaName",
 												"class" : "align-center"
 											},
 											{
-												"data" : "describe",
+												"data" : "user.name",
+												"class" : "align-center"
+											},
+											{
+												"data" : "totalStuNum",
+												"class" : "align-center"
+											},
+											{
+												"data" : "currentStuNum",
+												"class" : "align-center"
+											},
+											{
+												"data" : "startTime",
+												"class" : "align-center"
+											},
+											{
+												"data" : "endTime",
+												"class" : "align-center"
+											},
+											{
+												"data" : "introduct",
 												"class" : "align-center"
 											},
 											{
@@ -63,27 +83,18 @@ function initTable() {
 											},
 											{
 												// 定义操作列,######以下是重点########
-												"targets" : 4,// 操作按钮目标列
+												"targets" : 9,// 操作按钮目标列
 												"data" : null,
 												"render" : function(data,
 														type, row) {
-													var id = row.id;
-													var html = " <a type='button' class='btn btn-sm btn-info btn-white btn-op-ths' title='编辑' href='getAreaDetail.do?id="
+													var id = row.buildingId;
+													var html = " <a type='button' class='btn btn-sm btn-info btn-white btn-op-ths' title='编辑' href='getBuildingDetail.do?buildingId="
 															+ id
 															+ "'><i class='ace-icon fa fa-edit'></i></a>"
-													html += "<button type='button' class='btn btn-sm btn-danger btn-white btn-op-ths'  title='删除' onclick='delArea("+ id+ ")'><i class='ace-icon fa fa-trash-o'></i></button>"
+													html += "<button type='button' class='btn btn-sm btn-danger btn-white btn-op-ths'  title='删除' onclick='delBuilding("+ id+ ")'><i class='ace-icon fa fa-trash-o'></i></button>"
 													return html;
 												}
 											} ],
-
-									/*
-									 * scrollX:500, fixedColumns: {
-									 * leftColumns: 2 },
-									 */
-									/*
-									 * "order": [[ 3, 'asc' ], [ 4, 'desc'
-									 * ]],
-									 */
 									language : {
 										paginate : {
 											next : "下一页",
@@ -106,9 +117,9 @@ function initTable() {
 				}
 			});
 }
-function delArea(id){
+function delBuilding(id){
 	if(confirm("确定删除吗？")){
-		location.href = "delArea.do?id="+id;
+		location.href = "delBuilding.do?buildingId="+id;
 		alert("操作成功！");
 	 }
 }

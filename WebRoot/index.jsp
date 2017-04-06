@@ -358,7 +358,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <b class="arrow"></b>
                     </li>
                     <li class="">
-                        <a href="#">
+                        <a href="goToBuildingList.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		宿舍管理
                         </a>

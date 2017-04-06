@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.dao.BuildingMapper" >
+  <resultMap id="BuildingMap" type="com.dms.entity.Building" >
+    <id column="building_id" property="buildingId" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="DATE" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="total_stu_num" property="totalStuNum" jdbcType="INTEGER" />
+    <result column="current_stu_num" property="currentStuNum" jdbcType="INTEGER" />
+    <result column="is_full" property="isFull" jdbcType="VARCHAR" />
+    <result column="building_name" property="buildingName" jdbcType="VARCHAR" />
+    <result column="introduct" property="introduct" jdbcType="VARCHAR" />
+    <association property="user" resultMap="com.dms.dao.UserMapper.userMap"/>
+    <association property="area" resultMap="com.dms.dao.AreaMapper.AreaMap"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    building_id, area_id, start_time, end_time, user_id, total_stu_num, current_stu_num, 
+    is_full, building_name, introduct
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BuildingMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_building
+    where building_id = #{buildingId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAllBuildings" resultMap="BuildingMap">
+  	select 
+    b.building_id,  b.area_id,  b.start_time,  b.end_time, b.user_id, b.total_stu_num, b.current_stu_num, b.is_full, b.building_name, b.introduct,a.area_name,u.name
+    from tab_building b, tab_area a,tab_user u
+    where b.area_id = a.id and b.user_id = u.user_id
+    <if test="area.areaName != null and area.areaName !=''">  
+        and a.area_name like CONCAT('%',#{area.areaName},'%')
+    </if> 
+    <if test="areaId != null and areaId !=''">  
+        and b.area_id = #{areaId}
+    </if> 
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_building
+    where building_id = #{buildingId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dms.entity.Building" >
+    insert into tab_building (building_id, area_id, start_time, 
+      end_time, user_id, total_stu_num, 
+      current_stu_num, is_full, building_name, 
+      introduct)
+    values (#{buildingId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, 
+      #{endTime,jdbcType=DATE}, #{userId,jdbcType=INTEGER}, #{totalStuNum,jdbcType=INTEGER}, 
+      #{currentStuNum,jdbcType=INTEGER}, #{isFull,jdbcType=VARCHAR}, #{buildingName,jdbcType=VARCHAR}, 
+      #{introduct,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.entity.Building" >
+    insert into tab_building
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="buildingId != null" >
+        building_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="totalStuNum != null" >
+        total_stu_num,
+      </if>
+      <if test="currentStuNum != null" >
+        current_stu_num,
+      </if>
+      <if test="isFull != null" >
+        is_full,
+      </if>
+      <if test="buildingName != null" >
+        building_name,
+      </if>
+      <if test="introduct != null" >
+        introduct,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="buildingId != null" >
+        #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="totalStuNum != null" >
+        #{totalStuNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentStuNum != null" >
+        #{currentStuNum,jdbcType=INTEGER},
+      </if>
+      <if test="isFull != null" >
+        #{isFull,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingName != null" >
+        #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduct != null" >
+        #{introduct,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.Building" >
+    update tab_building
+    <set >
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="totalStuNum != null" >
+        total_stu_num = #{totalStuNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentStuNum != null" >
+        current_stu_num = #{currentStuNum,jdbcType=INTEGER},
+      </if>
+      <if test="isFull != null" >
+        is_full = #{isFull,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingName != null" >
+        building_name = #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduct != null" >
+        introduct = #{introduct,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where building_id = #{buildingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.entity.Building" >
+    update tab_building
+    set area_id = #{areaId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE},
+      user_id = #{userId,jdbcType=INTEGER},
+      total_stu_num = #{totalStuNum,jdbcType=INTEGER},
+      current_stu_num = #{currentStuNum,jdbcType=INTEGER},
+      is_full = #{isFull,jdbcType=VARCHAR},
+      building_name = #{buildingName,jdbcType=VARCHAR},
+      introduct = #{introduct,jdbcType=VARCHAR}
+    where building_id = #{buildingId,jdbcType=INTEGER}
+  </update>
+</mapper>
