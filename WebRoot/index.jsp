@@ -360,15 +360,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li class="">
                         <a href="goToBuildingList.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
-                           		宿舍管理
+                           		楼宇管理
                         </a>
 
                         <b class="arrow"></b>
                     </li>                 
                      <li class="">
-                        <a href="#">
+                        <a href="goToRoomList.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
-                           		学生管理
+                           		宿舍管理
                         </a>
 
                         <b class="arrow"></b>

@@ -26,17 +26,18 @@
     where building_id = #{buildingId,jdbcType=INTEGER}
   </select>
   
-  <select id="selectAllBuildings" resultMap="BuildingMap">
+  <select id="selectAllBuildings" resultMap="BuildingMap" parameterType="com.dms.entity.Building">
   	select 
     b.building_id,  b.area_id,  b.start_time,  b.end_time, b.user_id, b.total_stu_num, b.current_stu_num, b.is_full, b.building_name, b.introduct,a.area_name,u.name
     from tab_building b, tab_area a,tab_user u
     where b.area_id = a.id and b.user_id = u.user_id
-    <if test="area.areaName != null and area.areaName !=''">  
+    <!-- <if test="area.areaName != null and area.areaName !=''">  
         and a.area_name like CONCAT('%',#{area.areaName},'%')
-    </if> 
+    </if>  -->
     <if test="areaId != null and areaId !=''">  
         and b.area_id = #{areaId}
     </if> 
+    
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

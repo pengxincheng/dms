@@ -1,5 +1,7 @@
 package com.dms.dao;
 
+import java.util.List;
+
 import com.dms.entity.Room;
 
 public interface RoomMapper {
@@ -14,4 +16,6 @@ public interface RoomMapper {
     int updateByPrimaryKeySelective(Room record);
 
     int updateByPrimaryKey(Room record);
+    
+    List<Room> selectAllRooms(Room room);
 }
