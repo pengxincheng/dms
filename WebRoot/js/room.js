@@ -100,7 +100,7 @@ function initTable() {
 												"data" : null,
 												"render" : function(data,
 														type, row) {
-													var id = row.id;
+													var id = row.roomId;
 													var html = " <a type='button' class='btn btn-sm btn-info btn-white btn-op-ths' title='编辑' href='getRoomDetail.do?roomId="
 															+ id
 															+ "'><i class='ace-icon fa fa-edit'></i></a>"
@@ -146,7 +146,7 @@ function delRoom(id){
 	 }
 }
 
-function getBuildingByAreaId(){
+function getBuildingByAreaId(buildingId){
 	$("#buildingId").html("");
 	$.ajax({
 		url : 'getBuildingList.do',// 跳转到 action  
@@ -155,12 +155,23 @@ function getBuildingByAreaId(){
 		},
 		type : "post",
 		cache : false,
+		async: false,
 		dataType : "json",
 		success : function(data) {
 			var temp = "<option value='' selected='selected'>-请选择-</option>";
 			 $.each(data,function(i,n){
-                 temp += "<option value='"+n.buildingId+"'>"+n.buildingName+"</option>";
-              });
+				 if(buildingId){
+					 if(buildingId == n.buildingId){
+						 temp += "<option selected='selected' value='"+n.buildingId+"'>"+n.buildingName+"</option>"						 
+					 }
+					 else{
+						 temp += "<option value='"+n.buildingId+"'>"+n.buildingName+"</option>";
+					 }
+				 }
+				 else{
+					 temp += "<option value='"+n.buildingId+"'>"+n.buildingName+"</option>";
+				 }
+			});
 			 $("#buildingId").append(temp);
 		},
 		error : function() {

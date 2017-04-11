@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -67,20 +68,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="space-4"></div>
                 <div class="row">
                     <div class=" col-xs-12">
-                        <form class="form-horizontal" role="form" id="addRoom" name="addRoom" action="editRoom.do" method="post">
+                        <form class="form-horizontal" role="form" id="editRoom" name="editRoom" action="editRoom.do" method="post">
+                            <input type="hidden" value="${room.roomId}" name="roomId" id="roomId"/>
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="form-field-8">名称</label>
+                                <label class="col-sm-1 control-label no-padding-right" for="roomSn">宿舍名称</label>
                                 <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="roomName" name="roomName" value="${room.roomName}"/>
-                                </div>                                            
-                            </div>
-                            <input type="hidden" value="${room.id }" name="id" id="id" />
-							<div class="form-group">
-                               <label class="col-sm-1 control-label no-padding-right" for="form-field-8">说明</label>
-                                <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="说明" id="describe" name="describe" value="${room.describe}"/>
+                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="roomSn" name="roomSn" value="${room.roomSn }"/>
                                 </div> 
-                            </div>							
+                                 
+                                <label class="col-sm-1 control-label no-padding-right" for="type">宿舍类型</label>
+                                <div class="col-sm-3">
+                                   <select class="form-control" id="type" name="type" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option ${room.type eq '4' ? 'selected':''} value="4">四人间</option>
+                                        <option ${room.type eq '6' ? 'selected':''} value="6">六人间</option>
+                                    </select>
+                                </div> 
+                            </div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label no-padding-right" for="areaId">所属宿舍区</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="areaId" name="areaId" data-validation-engine="validate[required]" onchange="getBuildingByAreaId()">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <c:forEach var="area" items="${areas }">
+                                        	<option ${area.id eq room.areaId ? 'selected':''} value="${area.id}">${area.areaName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+		
+                               <label class="col-sm-1 control-label no-padding-right" for="userId">所属楼宇</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="buildingId" name="buildingId" data-validation-engine="validate[required]">
+                                       <option value="" selected="selected">-请选择-</option>
+                                    </select>
+                                </div> 
+                            </div>	
+                            <div class="form-group">
+                            	 <label class="col-sm-1 control-label no-padding-right" for="form-field-8">说明</label>
+	                             <div class="col-sm-11">
+	                                 <textarea class="form-control" id="introduct" name="introduct" placeholder="说明" style="width: 356px; height: 66px;">${room.introduct}</textarea>
+	                             </div>
+                            </div>						
                         </form>
 						<div class="align-right">
 								
@@ -138,6 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 自己写的JS，请放在这里 -->
 <script type="text/javascript">
+	getBuildingByAreaId(${room.buildingId});
     jQuery(function ($) {
         //日期控件使用示例，详细文档请参考http://www.my97.net/dp/demo/index.htm
         $("#divBirthday").on(ace.click_event, function () {
@@ -148,7 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#my-editor').ace_wysiwyg().prev().addClass('wysiwyg-style1');
 
         //表单验证组件初始化，详细文档请参考http://code.ciaoca.com/jquery/validation-engine/ 或官网文档http://posabsolute.github.io/jQuery-Validation-Engine/
-        $("#addRoom").validationEngine({
+        $("#editRoom").validationEngine({
             scrollOffset: 98,//必须设置，因为Toolbar position为Fixed
             promptPosition: 'bottomLeft',
             autoHidePrompt: true
@@ -164,9 +193,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSave").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addRoom').validationEngine('validate')) {
+            if ($('#editRoom').validationEngine('validate')) {
             	alert("操作成功");
-                $('#addRoom').submit();
+                $('#editRoom').submit();
             }
         });
         $("#btnReturn").on(ace.click_event, function () {

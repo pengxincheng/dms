@@ -184,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSubmit").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addNotify').validationEngine('validate')) {
+            if ($('#editBuilding').validationEngine('validate')) {
                 //submit
             }
         });

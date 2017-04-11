@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dms.Util.JsonDateValueProcessor;
+import com.dms.dao.RoomMapper;
 import com.dms.entity.Area;
 import com.dms.entity.Building;
 import com.dms.entity.Room;
@@ -62,6 +63,41 @@ public class RoomController {
 		return "redirect:/goToRoomList.do";
 		
 	}
+	/**
+	 * 查询宿舍详情，修改是使用
+	 * @param roomId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("getRoomDetail")
+	public String getRoomDetail(Integer roomId,Model model){
+		
+		Room room = roomService.getRoomById(roomId);
+		model.addAttribute("room", room);
+		
+		Area area = new Area();
+		List<Area> areas = areaService.findAllAreas(area);
+		
+		model.addAttribute("areas", areas);
+		return "admin/room/editRoom";
+		
+	}
+	/**
+	 * 更新宿舍
+	 * @param room
+	 * @return
+	 */
+	@RequestMapping("editRoom")
+	public String editRoom(Room room){
+		roomService.updateRoom(room);
+		return "redirect:/goToRoomList.do";
+	}
+	
+	@RequestMapping("delRoom")
+	public String delRoom(Integer roomId){
+		roomService.delRoomById(roomId);
+		return "redirect:/goToRoomList.do";
+	}
 	
 	/**
 	 * 跳转到列表页
@@ -85,5 +121,7 @@ public class RoomController {
 		model.addAttribute("areas", areas);
 		return "admin/room/addRoom";
 	}
+	
+	
 	
 }

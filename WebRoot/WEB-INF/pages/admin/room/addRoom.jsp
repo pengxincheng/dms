@@ -175,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#my-editor').ace_wysiwyg().prev().addClass('wysiwyg-style1');
 
         //表单验证组件初始化，详细文档请参考http://code.ciaoca.com/jquery/validation-engine/ 或官网文档http://posabsolute.github.io/jQuery-Validation-Engine/
-        $("#addArea").validationEngine({
+        $("#addRoom").validationEngine({
             scrollOffset: 98,//必须设置，因为Toolbar position为Fixed
             promptPosition: 'bottomLeft',
             autoHidePrompt: true
@@ -184,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSubmit").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addNotify').validationEngine('validate')) {
+            if ($('#addRoom').validationEngine('validate')) {
                 //submit
             }
         });
