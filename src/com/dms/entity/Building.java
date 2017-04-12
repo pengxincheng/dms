@@ -11,7 +11,7 @@ public class Building {
 
     private Date endTime;//房屋到期时间
 
-    private Integer userId;//宿舍管理员id
+    private String managerName;//宿舍管理员id
 
     private Integer totalStuNum;//可住总人数
 
@@ -23,8 +23,6 @@ public class Building {
 
     private String introduct;  //说明
     
-    private User user;
-    
     private Area area;
     
     public Area getArea() {
@@ -35,13 +33,7 @@ public class Building {
 		this.area = area;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
 
 	public Integer getBuildingId() {
         return buildingId;
@@ -75,15 +67,15 @@ public class Building {
         this.endTime = endTime;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
+    public String getManagerName() {
+		return managerName;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
 
-    public Integer getTotalStuNum() {
+	public Integer getTotalStuNum() {
         return totalStuNum;
     }
 

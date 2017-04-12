@@ -14,10 +14,15 @@
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="stu_img" property="stuImg" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="is_alloted" property="isAlloted" jdbcType="VARCHAR" />
+    <association property="room" resultMap="com.dms.dao.RoomMapper.RoomMap"/>
   </resultMap>
   <sql id="Base_Column_List" >
     user_id, stu_no, name, gender, age, stu_grade, stu_class, dorm_id, role_id, username, 
-    password, stu_img
+    password, stu_img, area_id, building_id, room_id, is_alloted
   </sql>
   <select id="selectByPrimaryKey" resultMap="userMap" parameterType="java.lang.Integer" >
     select 
@@ -25,21 +30,25 @@
     from tab_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  	
-  <select id="selectAllUsers" resultMap="userMap" parameterType="com.dms.entity.User">
-  	select <include refid="Base_Column_List" />
-  	from tab_user 
-  	where 1=1 
-  	<if test="roleId != null and roleId !=''">  
-        and role_id = #{roleId,jdbcType=INTEGER}
-    </if> 	
-  </select>
-    
+  
   <select id="selectForLogin" resultMap="userMap" parameterType="java.lang.String">
-  		 select 
+  	select 
     <include refid="Base_Column_List" />
     from tab_user
     where username = #{username} and password= #{password}
+  </select>
+  
+  <select id="selectAllUsers" resultMap="userMap" parameterType="com.dms.entity.User">
+  	select u.user_id, u.stu_no, u.name, u.gender, u.age, u.stu_grade, u.stu_class, u.dorm_id, u.role_id, u.username, 
+           u.password, u.stu_img, u.area_id, u.building_id, u.room_id, u.is_alloted,r.room_sn,a.area_name
+    from tab_user u,tab_room r,tab_building b,tab_area a
+	where  u.room_id = r.room_id  and r.building_id = b.building_id and b.area_id = a.id
+    <if test="name != null and name !=''">  
+        and name like CONCAT('%',#{name},'%')
+    </if> 
+    <if test="roleId != null and roleId !=''">  
+        and role_id = #{roleId}
+    </if> 
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -50,13 +59,15 @@
     insert into tab_user (user_id, stu_no, name, 
       gender, age, stu_grade, 
       stu_class, dorm_id, role_id, 
-      username, password, stu_img
-      )
+      username, password, stu_img, 
+      area_id, building_id, room_id, 
+      is_alloted)
     values (#{userId,jdbcType=INTEGER}, #{stuNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{stuGrade,jdbcType=VARCHAR}, 
       #{stuClass,jdbcType=VARCHAR}, #{dormId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, 
-      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{stuImg,jdbcType=VARCHAR}
-      )
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{stuImg,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=INTEGER}, #{buildingId,jdbcType=INTEGER}, #{roomId,jdbcType=INTEGER}, 
+      #{isAlloted,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.dms.entity.User" >
     insert into tab_user
@@ -97,6 +108,18 @@
       <if test="stuImg != null" >
         stu_img,
       </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="buildingId != null" >
+        building_id,
+      </if>
+      <if test="roomId != null" >
+        room_id,
+      </if>
+      <if test="isAlloted != null" >
+        is_alloted,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -134,6 +157,18 @@
       </if>
       <if test="stuImg != null" >
         #{stuImg,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="buildingId != null" >
+        #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="isAlloted != null" >
+        #{isAlloted,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -173,6 +208,18 @@
       <if test="stuImg != null" >
         stu_img = #{stuImg,jdbcType=VARCHAR},
       </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="buildingId != null" >
+        building_id = #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="roomId != null" >
+        room_id = #{roomId,jdbcType=INTEGER},
+      </if>
+      <if test="isAlloted != null" >
+        is_alloted = #{isAlloted,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -188,7 +235,11 @@
       role_id = #{roleId,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      stu_img = #{stuImg,jdbcType=VARCHAR}
+      stu_img = #{stuImg,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=INTEGER},
+      building_id = #{buildingId,jdbcType=INTEGER},
+      room_id = #{roomId,jdbcType=INTEGER},
+      is_alloted = #{isAlloted,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

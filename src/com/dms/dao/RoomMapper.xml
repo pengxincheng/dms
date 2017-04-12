@@ -11,7 +11,6 @@
     <result column="currentNum" property="currentnum" jdbcType="INTEGER" />
     <result column="isFiled" property="isfiled" jdbcType="VARCHAR" />
     <result column="room_sn" property="roomSn" jdbcType="VARCHAR" />
-    <association property="area" resultMap="com.dms.dao.AreaMapper.AreaMap"/>
     <association property="building" resultMap="com.dms.dao.BuildingMapper.BuildingMap"/>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -25,9 +24,9 @@
   </select>
   
   <select id="selectAllRooms" resultMap="RoomMap" parameterType="com.dms.entity.Room">
-  	select r.room_id, r.area_id, r.building_id, r.type, r.introduct, r.totalNum, r.currentNum, r.isFiled, r.room_sn,a.area_name,b.building_name,b.user_id
+  	select r.room_id, r.area_id, r.building_id, r.type, r.introduct, r.totalNum, r.currentNum, r.isFiled, r.room_sn,a.area_name,b.building_name,b.manager_name
 	from tab_room r,tab_area a,tab_building b
-	where r.area_id = a.id and r.building_id = b.building_id
+	where r.building_id = b.building_id and b.area_id = a.id
   	<if test="roomSn != null and roomSn !=''">  
         and room_sn like CONCAT('%',#{roomSn},'%')
     </if> 

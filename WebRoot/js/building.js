@@ -45,7 +45,7 @@ function initTable() {
 												"class" : "align-center"
 											},
 											{
-												"data" : "user.name",
+												"data" : "managerName",
 												"class" : "align-center"
 											},
 											{

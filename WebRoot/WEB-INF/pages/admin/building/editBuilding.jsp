@@ -91,12 +91,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </select>
                                 </div>
 		
-                               <label class="col-sm-1 control-label no-padding-right" for="userId">宿舍管理员</label>
+                               <label class="col-sm-1 control-label no-padding-right" for="managerName">宿舍管理员</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" id="userId" name="userId" data-validation-engine="validate[required]">
+                                    <select class="form-control" id="managerName" name="managerName" data-validation-engine="validate[required]">
                                        <option value="" selected="selected">-请选择-</option>
                                         <c:forEach var="user" items="${users}">
-                                        	<option ${user.userId eq building.userId ? 'selected':''} value="${user.userId}">${user.name}</option>
+                                        	<option ${user.name eq building.managerName ? 'selected':''} value="${user.name}">${user.name}</option>
                                         </c:forEach>
                                     </select>
                                 </div> 

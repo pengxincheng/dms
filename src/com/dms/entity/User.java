@@ -24,8 +24,26 @@ public class User {
     private String password;
 
     private String stuImg;
+    
+    private String areaId;
+    
+    private String buildingId;
+    
+    private String roomId;
+    
+    private String isAlloted;  //是否分配宿舍 0 已分配   1未分配
+    
+    private Room room;
+    
+	public Room getRoom() {
+		return room;
+	}
 
-    public Integer getUserId() {
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public Integer getUserId() {
         return userId;
     }
 
@@ -120,4 +138,38 @@ public class User {
     public void setStuImg(String stuImg) {
         this.stuImg = stuImg == null ? null : stuImg.trim();
     }
+
+	public String getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(String areaId) {
+		this.areaId = areaId;
+	}
+
+	public String getBuildingId() {
+		return buildingId;
+	}
+
+	public void setBuildingId(String buildingId) {
+		this.buildingId = buildingId;
+	}
+
+	public String getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
+	}
+
+	public String getIsAlloted() {
+		return isAlloted;
+	}
+
+	public void setIsAlloted(String isAlloted) {
+		this.isAlloted = isAlloted;
+	}
+    
+    
 }

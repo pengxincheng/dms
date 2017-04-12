@@ -1,10 +1,11 @@
 function initTable() {
 	
 			$.ajax({
-				url : 'getAllRooms.do',// 跳转到 action
+				url : 'getAllStus.do',// 跳转到 action
 				
 				  data : { 
-					  		"roomSn" : $("#roomSn").val() 			  		
+					  		"name" : $("#name").val(),
+					  		"roleId" : 3
 				  		},			 
 				traditional : true,
 				type : "post",
@@ -28,7 +29,7 @@ function initTable() {
 											{
 
 												"sClass" : "align-center",
-												"data" : "roomId",
+												"data" : "userId",
 												"render" : function(data,type, full, meta) {
 													return '<label class="pos-rel"><input type="checkbox" class="ace" class="ace"  value="'
 															+ data
@@ -37,50 +38,31 @@ function initTable() {
 
 											},
 											{
-												"data" : "roomSn",
+												"data" : "name",
 												"class" : "align-center"
 											},
 											{
-												"data" : "building.area.areaName",
+												"data" : "stuNo",
 												"class" : "align-center"
 											},
 											{
-												"data" : "building.buildingName",
+												"data" : "stuClass",
 												"class" : "align-center"
 											},
 											{
-												"data" : "type",
+												"data" : "gender",
 												"class" : "align-center",
-												render: function (data, type, row, meta) {
-													       
-													if(data == '4'){
-														data = '四人间';
-													}
-													else{
-													    data = '六人间';
-													}
-													    return data;
-												}
+												
 											},
 											{
-												"data" : "isfiled",
+												"data" : "age",
 												"class" : "align-center",
-												 render: function (data, type, row, meta) {
-												       
-													 if(data == '0'){
-														 data = '已住满';
-													 }
-													 else{
-														 data = '未住满';
-													 }
-												        return data;
-												    }
-													
 											},
 											{
-												"data" : "introduct",
-												"class" : "align-center"
+												"data" : "room.roomSn",
+												"class" : "align-center",
 											},
+											
 											{
 												"data" : null,
 												"class" : "hidden-xs align-center col-op-ths"
@@ -100,11 +82,11 @@ function initTable() {
 												"data" : null,
 												"render" : function(data,
 														type, row) {
-													var id = row.roomId;
-													var html = " <a type='button' class='btn btn-sm btn-info btn-white btn-op-ths' title='编辑' href='getRoomDetail.do?roomId="
+													var id = row.userId;
+													var html = " <a type='button' class='btn btn-sm btn-info btn-white btn-op-ths' title='编辑' href='getStuDetail.do?userId="
 															+ id
 															+ "'><i class='ace-icon fa fa-edit'></i></a>"
-													html += "<button type='button' class='btn btn-sm btn-danger btn-white btn-op-ths'  title='删除' onclick='delRoom("+ id+ ")'><i class='ace-icon fa fa-trash-o'></i></button>"
+													html += "<button type='button' class='btn btn-sm btn-danger btn-white btn-op-ths'  title='删除' onclick='delStu("+ id+ ")'><i class='ace-icon fa fa-trash-o'></i></button>"
 													return html;
 												}
 											} ],
@@ -139,9 +121,9 @@ function initTable() {
 				}
 			});
 }
-function delRoom(id){
+function delStu(id){
 	if(confirm("确定删除吗？")){
-		location.href = "delRoom.do?roomId="+id;
+		location.href = "delStu.do?userId="+id;
 		alert("操作成功！");
 	 }
 }

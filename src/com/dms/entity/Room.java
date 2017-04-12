@@ -19,18 +19,8 @@ public class Room {
 
 	private String roomSn;
 
-	private Area area;
-
 	private Building building;
 	
-	public Area getArea() {
-		return area;
-	}
-
-	public void setArea(Area area) {
-		this.area = area;
-	}
-
 	public Building getBuilding() {
 		return building;
 	}

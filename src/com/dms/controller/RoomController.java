@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,7 @@ public class RoomController {
 		JsonConfig jsonConfig = new JsonConfig();
 		//将list转为jsonArray, 不转换Date对象
 		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor("yyyy-MM-dd"));
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		JSONArray array = JSONArray.fromObject(rooms, jsonConfig);
 		return array;
 			

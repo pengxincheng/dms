@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-82">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>新增楼栋</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>修改宿舍区</li>
                 </ul><!-- /.breadcrumb -->
 
             </div>
@@ -68,43 +68,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="space-4"></div>
                 <div class="row">
                     <div class=" col-xs-12">
-                        <form class="form-horizontal" role="form" id="addBuilding" name="addBuilding" action="addBuilding.do" method="post">
+                        <form class="form-horizontal" role="form" id="editStu" name="editStu" action="editStu.do" method="post">
+                            <input type="hidden" value="${stu.stuId}" name="stuId" id="stuId"/>
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="buildingName">楼栋名称</label>
+                                <label class="col-sm-1 control-label no-padding-right" for="stuSn">宿舍名称</label>
                                 <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="buildingName" name="buildingName"/>
+                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="stuSn" name="stuSn" value="${stu.stuSn }"/>
                                 </div> 
                                  
-                                <label class="col-sm-1 control-label no-padding-right" for="totalStuNum">可住人数</label>
+                                <label class="col-sm-1 control-label no-padding-right" for="type">宿舍类型</label>
                                 <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="可住人数" id="totalStuNum" name="totalStuNum"/>
+                                   <select class="form-control" id="type" name="type" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option ${stu.type eq '4' ? 'selected':''} value="4">四人间</option>
+                                        <option ${stu.type eq '6' ? 'selected':''} value="6">六人间</option>
+                                    </select>
                                 </div> 
                             </div>
 							<div class="form-group">
 								<label class="col-sm-1 control-label no-padding-right" for="areaId">所属宿舍区</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" id="areaId" name="areaId" data-validation-engine="validate[required]">
+                                    <select class="form-control" id="areaId" name="areaId" data-validation-engine="validate[required]" onchange="getBuildingByAreaId()">
                                         <option value="" selected="selected">-请选择-</option>
                                         <c:forEach var="area" items="${areas }">
-                                        	<option value="${area.id}">${area.areaName}</option>
+                                        	<option ${area.id eq stu.areaId ? 'selected':''} value="${area.id}">${area.areaName}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
 		
-                               <label class="col-sm-1 control-label no-padding-right" for="managerName">宿舍管理员</label>
+                               <label class="col-sm-1 control-label no-padding-right" for="userId">所属楼宇</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" id="managerName" name="managerName" data-validation-engine="validate[required]">
+                                    <select class="form-control" id="buildingId" name="buildingId" data-validation-engine="validate[required]">
                                        <option value="" selected="selected">-请选择-</option>
-                                        <c:forEach var="user" items="${users}">
-                                        	<option value="${user.name}">${user.name}</option>
-                                        </c:forEach>
                                     </select>
                                 </div> 
                             </div>	
                             <div class="form-group">
                             	 <label class="col-sm-1 control-label no-padding-right" for="form-field-8">说明</label>
 	                             <div class="col-sm-11">
-	                                 <textarea class="form-control" id="introduct" name="introduct" placeholder="说明" style="width: 356px; height: 66px;"></textarea>
+	                                 <textarea class="form-control" id="introduct" name="introduct" placeholder="说明" style="width: 356px; height: 66px;">${stu.introduct}</textarea>
 	                             </div>
                             </div>						
                         </form>
@@ -158,12 +160,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
 <script src="assets/js/ace-elements.js"></script>
-<script src="js/building.js"></script>
+<script src="js/stu.js"></script>
 
 
 
 <!-- 自己写的JS，请放在这里 -->
 <script type="text/javascript">
+	getBuildingByAreaId(${stu.buildingId});
     jQuery(function ($) {
         //日期控件使用示例，详细文档请参考http://www.my97.net/dp/demo/index.htm
         $("#divBirthday").on(ace.click_event, function () {
@@ -174,7 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#my-editor').ace_wysiwyg().prev().addClass('wysiwyg-style1');
 
         //表单验证组件初始化，详细文档请参考http://code.ciaoca.com/jquery/validation-engine/ 或官网文档http://posabsolute.github.io/jQuery-Validation-Engine/
-        $("#addBuilding").validationEngine({
+        $("#editStu").validationEngine({
             scrollOffset: 98,//必须设置，因为Toolbar position为Fixed
             promptPosition: 'bottomLeft',
             autoHidePrompt: true
@@ -190,9 +193,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSave").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addBuilding').validationEngine('validate')) {
+            if ($('#editStu').validationEngine('validate')) {
             	alert("操作成功");
-                $('#addBuilding').submit();
+                $('#editStu').submit();
             }
         });
         $("#btnReturn").on(ace.click_event, function () {
