@@ -30,4 +30,17 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> getAllUsers(User user);
+	/**
+	 * 获取所有未分配宿舍的学生
+	 * @param user
+	 * @return
+	 */
+	List<User> getAllStusNotAlloted(User user);
+	
+	int addStu(User user);
+	
+	int delStu(Integer userId);
+	
+	int updateStu(User user);
+	
 }

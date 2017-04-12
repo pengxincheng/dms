@@ -69,46 +69,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <div class=" col-xs-12">
                         <form class="form-horizontal" role="form" id="editStu" name="editStu" action="editStu.do" method="post">
-                            <input type="hidden" value="${stu.stuId}" name="stuId" id="stuId"/>
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="stuSn">宿舍名称</label>
+                                <label class="col-sm-1 control-label no-padding-right" for="name">姓名</label>
                                 <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="stuSn" name="stuSn" value="${stu.stuSn }"/>
+                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="name" name="name" value="${user.name }"/>
                                 </div> 
-                                 
-                                <label class="col-sm-1 control-label no-padding-right" for="type">宿舍类型</label>
+                                
+                                <label class="col-sm-1 control-label no-padding-right" for="stuNo">学号</label>
                                 <div class="col-sm-3">
-                                   <select class="form-control" id="type" name="type" data-validation-engine="validate[required]">
-                                        <option value="" selected="selected">-请选择-</option>
-                                        <option ${stu.type eq '4' ? 'selected':''} value="4">四人间</option>
-                                        <option ${stu.type eq '6' ? 'selected':''} value="6">六人间</option>
-                                    </select>
+                                    <input type="text" data-validation-engine="validate[required,custom[number]]" class="form-control" placeholder="名称" id="stuNo" name="stuNo" value="${user.stuNo }"/>
                                 </div> 
                             </div>
 							<div class="form-group">
-								<label class="col-sm-1 control-label no-padding-right" for="areaId">所属宿舍区</label>
+								<label class="col-sm-1 control-label no-padding-right" for="stuGrade">年级</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" id="areaId" name="areaId" data-validation-engine="validate[required]" onchange="getBuildingByAreaId()">
+                                    <select class="form-control" id="stuGrade" name="stuClass" data-validation-engine="validate[required]">
                                         <option value="" selected="selected">-请选择-</option>
-                                        <c:forEach var="area" items="${areas }">
-                                        	<option ${area.id eq stu.areaId ? 'selected':''} value="${area.id}">${area.areaName}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-		
-                               <label class="col-sm-1 control-label no-padding-right" for="userId">所属楼宇</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="buildingId" name="buildingId" data-validation-engine="validate[required]">
-                                       <option value="" selected="selected">-请选择-</option>
+                                        <option ${user.stuGrade eq '2013级' ? 'selected':''} value="2013级">2013级</option>
+                                        <option ${user.stuGrade eq '2014级' ? 'selected':''} value="2014级">2014级</option>
+                                        <option ${user.stuGrade eq '2015级' ? 'selected':''} value="2015级">2015级</option>
+                                        <option ${user.stuGrade eq '2016级' ? 'selected':''} value="2016级">2016级</option>
                                     </select>
                                 </div> 
+                                
+                                <label class="col-sm-1 control-label no-padding-right" for="stuClass">班级</label>
+                                <div class="col-sm-3">
+                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="stuClass" name="stuClass" value="${user.stuClass }"/>
+                                </div>
+                                
                             </div>	
                             <div class="form-group">
-                            	 <label class="col-sm-1 control-label no-padding-right" for="form-field-8">说明</label>
-	                             <div class="col-sm-11">
-	                                 <textarea class="form-control" id="introduct" name="introduct" placeholder="说明" style="width: 356px; height: 66px;">${stu.introduct}</textarea>
-	                             </div>
-                            </div>						
+                            	<label class="col-sm-1 control-label no-padding-right" for="age">年龄</label>
+                                <div class="col-sm-3">
+                                    <input type="text" data-validation-engine="validate[required,custom[number]]" class="form-control" placeholder="名称" id="age" name="age" value="${user.age}"/>
+                                </div>
+                                
+                                <label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
+                                <div class="col-sm-3">
+                                   <select class="form-control" id="gender" name="gender" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option ${user.gender eq '男' ? 'selected':''} value="男">男</option>
+                                        <option ${user.gender eq '女' ? 'selected':''} value="女">女</option>
+                                    </select>
+                                </div>   
+                            </div>	
+                            <input type="hidden" name="userId" id="userId" value="${user.userId }"/>					
                         </form>
 						<div class="align-right">
 								
@@ -166,7 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 自己写的JS，请放在这里 -->
 <script type="text/javascript">
-	getBuildingByAreaId(${stu.buildingId});
+	
     jQuery(function ($) {
         //日期控件使用示例，详细文档请参考http://www.my97.net/dp/demo/index.htm
         $("#divBirthday").on(ace.click_event, function () {

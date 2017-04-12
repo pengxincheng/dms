@@ -42,6 +42,33 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectAllUsers(user);
 	}
 
+	@Override
+	public List<User> getAllStusNotAlloted(User user) {
+		
+		return userMapper.selectAllStusNotAlloted(user);
+	}
+
+	@Override
+	public int addStu(User user) {
+		
+		user.setIsAlloted("0");
+		user.setPassword("ICy5YqxZB1uWSwcVLSNLcA==");  //初始密码123
+		user.setRoleId(3);
+		user.setUsername(user.getStuNo());
+		return userMapper.insertSelective(user);
+	}
+
+	@Override
+	public int delStu(Integer userId) {
+		
+		return userMapper.deleteByPrimaryKey(userId);
+	}
+
+	@Override
+	public int updateStu(User user) {
+		return userMapper.updateByPrimaryKeySelective(user);
+	}
+
 	
 
 }

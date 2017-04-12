@@ -14,7 +14,11 @@ public interface UserMapper {
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer userId);
-    
+    /**
+     * 查询所有已分配宿舍的学生
+     * @param user
+     * @return
+     */
     List<User> selectAllUsers(User user);
     
     User selectForLogin(@Param("username") String username,@Param("password") String password);
@@ -22,4 +26,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    /**
+     * 查询所有未分配宿舍的学生
+     * @param user
+     * @return
+     */
+    List<User> selectAllStusNotAlloted(User user);
 }

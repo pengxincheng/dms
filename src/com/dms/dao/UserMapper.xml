@@ -20,6 +20,25 @@
     <result column="is_alloted" property="isAlloted" jdbcType="VARCHAR" />
     <association property="room" resultMap="com.dms.dao.RoomMapper.RoomMap"/>
   </resultMap>
+  <resultMap id="userMap1" type="com.dms.entity.User" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="stu_no" property="stuNo" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="stu_grade" property="stuGrade" jdbcType="VARCHAR" />
+    <result column="stu_class" property="stuClass" jdbcType="VARCHAR" />
+    <result column="dorm_id" property="dormId" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="stu_img" property="stuImg" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
+    <result column="room_id" property="roomId" jdbcType="INTEGER" />
+    <result column="is_alloted" property="isAlloted" jdbcType="VARCHAR" />
+  </resultMap>
+  
   <sql id="Base_Column_List" >
     user_id, stu_no, name, gender, age, stu_grade, stu_class, dorm_id, role_id, username, 
     password, stu_img, area_id, building_id, room_id, is_alloted
@@ -48,6 +67,25 @@
     </if> 
     <if test="roleId != null and roleId !=''">  
         and role_id = #{roleId}
+    </if>
+    <if test="isAlloted != null and isAlloted !=''">  
+        and is_alloted = #{isAlloted}
+    </if> 
+  </select>
+  
+  <select id="selectAllStusNotAlloted" resultMap="userMap1" parameterType="com.dms.entity.User">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from tab_user 
+  	where 1=1
+  	<if test="name != null and name !=''">  
+        and name like CONCAT('%',#{name},'%')
+    </if> 
+  	<if test="roleId != null and roleId !=''">  
+     	and role_id = #{roleId}
+    </if>
+    <if test="isAlloted != null and isAlloted !=''">  
+        and is_alloted = #{isAlloted}
     </if> 
   </select>
   

@@ -77,7 +77,7 @@ public class NotifyController {
 		model.addAttribute("notifies", result);
 		model.addAttribute("currentPage", page.getPageNum());
 		model.addAttribute("totalPages", page.getPages());
-      
+
 		return "dormManager/notifyTable";
 	}
 
@@ -89,8 +89,8 @@ public class NotifyController {
 	 * @return
 	 */
 	@RequestMapping("addNotify")
-	public @ResponseBody Map<String, Object> addNotify(Notify notify,
-			HttpSession httpSession) {
+	@ResponseBody
+	public Map<String, Object> addNotify(Notify notify, HttpSession httpSession) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		User user = (User) httpSession.getAttribute("currentUser");
@@ -114,69 +114,70 @@ public class NotifyController {
 	public String goToAddNotifyPage() {
 		return "dormManager/addNotify";
 	}
-	
-	
+
 	/**
 	 * 通过id删除一个通知公告
+	 * 
 	 * @param notifyId
 	 * @return
 	 */
 	@RequestMapping("delNotify")
-	public String delNotify(Integer notifyId){
+	public String delNotify(Integer notifyId) {
 		notifyService.delNotifyById(notifyId);
 		return "redirect:/findAllNotifiesForUser.do";
-		
+
 	}
-	
+
 	@RequestMapping("batchDelNotify")
-	public String batchDelNotify(Integer[] notifyId){
+	public String batchDelNotify(Integer[] notifyId) {
 		return null;
-		
+
 	}
-	
+
 	/**
 	 * 查看通知公告明细
+	 * 
 	 * @param notifyId
 	 * @param isForShow
 	 * @return
 	 */
 	@RequestMapping("getNotifyDetail")
-	public String getNotifyDetail(Integer notifyId,Boolean isForShow,Model model){
-		//isForShow = false;
-		if(null == isForShow){
+	public String getNotifyDetail(Integer notifyId, Boolean isForShow,
+			Model model) {
+		// isForShow = false;
+		if (null == isForShow) {
 			isForShow = false;
 		}
 		Notify notify = notifyService.getNotifyDetail(notifyId);
 		model.addAttribute("notify", notify);
-		if(isForShow){
+		if (isForShow) {
 			return "notifyDetail";
-		}
-		else{
+		} else {
 			return "dormManager/editNotify";
-		}	
+		}
 	}
-	
+
 	/**
 	 * 修改通知公告
+	 * 
 	 * @param notify
 	 * @return
 	 */
 	@RequestMapping("editNotify")
-	public @ResponseBody JSONObject editNotify(Notify notify){
-		
+	public @ResponseBody JSONObject editNotify(Notify notify) {
+
 		JSONObject content = new JSONObject();
-		
-		if(notifyService.editNotify(notify) > 0){
+
+		if (notifyService.editNotify(notify) > 0) {
 			content.put("msg", "操作成功！");
 			content.put("result", true);
-		}
-		else{
+		} else {
 			content.put("msg", "操作失败！");
 			content.put("result", false);
 		}
-		
+
 		return content;
-		
+
 	}
 
 }

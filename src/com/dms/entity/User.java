@@ -31,7 +31,7 @@ public class User {
     
     private String roomId;
     
-    private String isAlloted;  //是否分配宿舍 0 已分配   1未分配
+    private String isAlloted;  //是否分配宿舍 0 未分配    1已分配
     
     private Room room;
     

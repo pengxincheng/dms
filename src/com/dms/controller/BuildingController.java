@@ -23,7 +23,7 @@ import com.dms.service.BuildingService;
 import com.dms.service.UserService;
 
 /**
- *Created by pxc on 2017年4月5日 上午9:23:32
+ * Created by pxc on 2017年4月5日 上午9:23:32
  * 
  */
 @Controller
@@ -35,105 +35,117 @@ public class BuildingController {
 	private UserService userService;
 	@Autowired
 	private AreaService areaService;
-	
+
 	/**
 	 * 获取楼栋列表
+	 * 
 	 * @param building
 	 * @return
 	 */
 	@RequestMapping("getBuildingList")
-	public @ResponseBody JSONArray getBuildingList(Building building){
-		
+	@ResponseBody
+	public JSONArray getBuildingList(Building building) {
+
 		List<Building> buildings = buildingService.findAllBuildings(building);
 		JsonConfig jsonConfig = new JsonConfig();
-		//将list转为jsonArray, 不转换Date对象
-		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor("yyyy-MM-dd"));
+		// 将list转为jsonArray, 不转换Date对象
+		jsonConfig.registerJsonValueProcessor(Date.class,
+				new JsonDateValueProcessor("yyyy-MM-dd"));
 		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 		JSONArray array = JSONArray.fromObject(buildings, jsonConfig);
 		return array;
 	}
+
 	/**
 	 * 新增
+	 * 
 	 * @param building
 	 * @return
 	 */
 	@RequestMapping("addBuilding")
-	public String addBuilding(Building building){
+	public String addBuilding(Building building) {
 		buildingService.addBuilding(building);
 		return "redirect:/goToBuildingList.do";
 	}
+
 	/**
 	 * 修改
+	 * 
 	 * @param building
 	 * @return
 	 */
 	@RequestMapping("updateBuilding")
-	public String updateBuilding(Building building){
+	public String updateBuilding(Building building) {
 		buildingService.updateBuilding(building);
 		return "redirect:/goToBuildingList.do";
-	} 
+	}
+
 	/**
 	 * 删除
+	 * 
 	 * @param buildingId
 	 * @return
 	 */
 	@RequestMapping("delBuilding")
-	public String delBuilding(Integer buildingId){
-		
+	public String delBuilding(Integer buildingId) {
+
 		buildingService.delBuildingById(buildingId);
 		return "redirect:/goToBuildingList.do";
 	}
-	
+
 	/**
 	 * 获取详细
+	 * 
 	 * @param buildingId
 	 * @return
 	 */
 	@RequestMapping("getBuildingDetail")
-	public String getBuildingDetail(Integer buildingId,Model model){
-		
+	public String getBuildingDetail(Integer buildingId, Model model) {
+
 		Building building = buildingService.getBuildingById(buildingId);
-		
+
 		Area area = new Area();
 		List<Area> areas = areaService.findAllAreas(area);
-		
+
 		User user = new User();
 		user.setRoleId(2);
 		List<User> users = userService.getAllUsers(user);
-		
+
 		model.addAttribute("areas", areas);
 		model.addAttribute("users", users);
 		model.addAttribute("building", building);
 		return "admin/building/editBuilding";
 	}
+
 	/**
 	 * 跳转到列表页
+	 * 
 	 * @return
 	 */
 	@RequestMapping("goToBuildingList")
-	public String goToListPage(){
+	public String goToListPage() {
 		return "admin/building/buildingList";
 	}
-	
+
 	/**
 	 * 跳转到添加页
+	 * 
 	 * @return
 	 */
 	@RequestMapping("goToBuildingAddPage")
-	public String goToBuildingAddPage(Model model){
-		
+	public String goToBuildingAddPage(Model model) {
+
 		Area area = new Area();
 		List<Area> areas = areaService.findAllAreas(area);
-		
+
 		User user = new User();
 		user.setRoleId(2);
 		List<User> users = userService.getAllUsers(user);
-		
+
 		model.addAttribute("areas", areas);
 		model.addAttribute("users", users);
-		
-		
+
 		return "admin/building/addBuilding";
 	}
-	
+
 }

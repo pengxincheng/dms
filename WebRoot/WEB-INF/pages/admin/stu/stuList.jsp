@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- page plugin css -->
 
     <!-- ace styles -->
-    <link rel="stylesheet" href="assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style"/>
+   <link rel="stylesheet" href="assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style"/>
 
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="assets/css/ace-part2.css" class="ace-main-stylesheet"/>
@@ -63,7 +63,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="main-content-inner padding-page-content">
             <div class="page-content">
-                <div class="space-4"></div>
+                <div class="" style="padding-bottom: 20px;">
+                	 <ul class="nav nav-tabs" id="myTab2">
+                          <li class="active">
+                               <a data-toggle="tab" href="#weifen">未分配宿舍</a>
+                          </li>
+
+                          <li class="">
+                               <a data-toggle="tab" href="#yifen">已分配宿舍</a>
+                          </li>
+                      </ul>
+                </div>
+              <div id="tapContent" class="tab-content">
+                <div id="yifen" class="tab-pane fade">
                 <div class="row">
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
@@ -78,6 +90,79 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
+                                        <i class="ace-icon fa fa-search"></i>
+                                        搜索
+                                	</button>
+                            </div>
+
+                            </div>
+                            
+                           
+                            <hr class="no-margin">
+                          <!--   <div class="page-toolbar align-right list-toolbar">
+                                <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddStu">
+                                    <i class="ace-icon fa fa-plus"></i>
+                                    添加
+                                </button>
+                                <button type="button" class="btn btn-xs btn-danger btn-xs-ths" id="btnDelete">
+                                    <i class="ace-icon fa fa-trash-o"></i>
+                                    删除
+                                </button>
+                                <button type="button" class="btn btn-xs btn-purple btn-xs-ths" id="btnExport">
+                                    <i class="ace-icon fa fa-file-excel-o"></i>
+                                    导出
+                                </button>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- div.table-responsive -->
+
+                                    <!-- div.dataTables_borderWrap table-striped -->
+                                    <div>
+                                        <table id="example" class="table table-striped  table-bordered table-hover" width="100%"> 
+                                            <thead>
+                                            <tr>
+                                               <th class="center">
+                                                    <label class="pos-rel">
+                                                        <input type="checkbox" class="ace" />
+                                                        <span class="lbl"></span>
+                                                    </label>
+                                                </th>
+                                                <th class="align-center">姓名</th>
+                                                <th class="align-center">学号</th>
+                                                <th class="align-center">年级</th>
+                                                <th class="align-center">班级</th>
+                                                <th class="align-center">性别</th>
+                                                <th class="align-center">年龄</th>
+                                                <th class="align-center">宿舍</th>
+                                                <th class="align-center hidden-xs"><i class="ace-icon fa fa-wrench"></i>
+                                       				 操作
+                                    			</th>                                        
+                                            </tr>
+                                            </thead>                                           
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>  <!-- yifen -->
+                <div id="weifen" class="tab-pane fade in active">
+                   	<div class="row">
+                    <div class="col-xs-12">
+                        <form class="form-horizontal" role="form" id="form2" action="index.html" method="post">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" for="name1">
+                               	     学生姓名
+                                </label>
+                                <div class="col-sm-3">
+                                        <input type="text" class="form-control" placeholder="学生姓名" id="name1" name="name1"/>
+                                       
+                                </div>
+                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
+                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableWeifen()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>
@@ -107,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                     <!-- div.dataTables_borderWrap table-striped -->
                                     <div>
-                                        <table id="example" class="table table-striped  table-bordered table-hover">
+                                        <table id="example1" class="table table-striped  table-bordered table-hover" width="100%"> 
                                             <thead>
                                             <tr>
                                                <th class="center">
@@ -118,10 +203,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </th>
                                                 <th class="align-center">姓名</th>
                                                 <th class="align-center">学号</th>
+                                                <th class="align-center">年级</th>
                                                 <th class="align-center">班级</th>
                                                 <th class="align-center">性别</th>
                                                 <th class="align-center">年龄</th>
-                                                <th class="align-center">宿舍</th>
                                                 <th class="align-center hidden-xs"><i class="ace-icon fa fa-wrench"></i>
                                        				 操作
                                     			</th>                                        
@@ -134,6 +219,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </form>
                     </div>
                 </div>
+                </div><!--weifen  -->
+                </div><!--tabContent  -->
             </div>
         </div><!--/.main-content-inner-->
     </div><!-- /.main-content -->
@@ -168,6 +255,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/stu.js"></script>
 <script type="text/javascript">
 	initTable();
+	initTableWeifen();
 	jQuery(function ($) {
         //为工具条添加点击事件
         $(".page-toolbar>button").on(ace.click_event,function (e) {

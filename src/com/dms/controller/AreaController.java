@@ -28,58 +28,68 @@ public class AreaController {
 
 	/**
 	 * 查询所有宿舍区
+	 * 
 	 * @param area
 	 * @return
 	 */
 	@RequestMapping("findAllAreas")
-	public @ResponseBody JSONArray findAllAreas(Area area) {
+	@ResponseBody
+	public JSONArray findAllAreas(Area area) {
 
 		List<Area> areas = areaService.findAllAreas(area);
 
 		JsonConfig jsonConfig = new JsonConfig();
-		//将list转为jsonArray, 不转换Date对象
-		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor("yyyy-MM-dd"));
+		// 将list转为jsonArray, 不转换Date对象
+		jsonConfig.registerJsonValueProcessor(Date.class,
+				new JsonDateValueProcessor("yyyy-MM-dd"));
 		JSONArray array = JSONArray.fromObject(areas, jsonConfig);
 		return array;
 	}
+
 	/**
 	 * 添加宿舍区
+	 * 
 	 * @param area
 	 * @return
 	 */
 	@RequestMapping("addArea")
-	public String addArea(Area area){
+	public String addArea(Area area) {
 		areaService.addArea(area);
 		return "redirect:/goToListPage.do";
 	}
+
 	/**
 	 * 更新宿舍区
+	 * 
 	 * @param area
 	 * @return
 	 */
 	@RequestMapping("editArea")
-	public String editArea(Area area){
+	public String editArea(Area area) {
 		areaService.updateArea(area);
 		return "redirect:/goToListPage.do";
-		
+
 	}
-	
+
 	@RequestMapping("getAreaDetail")
-	public String getAreaDetail(Integer id,Model model){
-		
+	public String getAreaDetail(Integer id, Model model) {
+
 		Area area = areaService.getAreaById(id);
 		model.addAttribute("area", area);
-		
+
 		return "admin/area/editArea";
 	}
+
 	@RequestMapping("delArea")
-	public String delArea(Integer id){
-		
+	public String delArea(Integer id) {
+
 		areaService.delAreaById(id);
-		return "redirect:/goToListPage.do";		
+		return "redirect:/goToListPage.do";
 	}
+
 	/**
 	 * 跳转到宿舍区列表页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping("goToListPage")
@@ -87,9 +97,9 @@ public class AreaController {
 		return "admin/area/areaList";
 
 	}
-	
+
 	@RequestMapping("goToAddPage")
-	public String goToAddPage(){
+	public String goToAddPage() {
 		return "admin/area/addArea";
 	}
 
