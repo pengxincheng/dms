@@ -10210,7 +10210,7 @@ textarea.input-transparent:focus,
     display: block !important;
   }
 }
-.tab-content {
+.tab-content1 {
   border: 1px solid #C5D0DC;
   padding: 16px 12px;
   position: relative;
@@ -10987,7 +10987,6 @@ tr.detail-row > td {
   display: inline-block;
   padding: 0 10px;
   line-height: 37px;
-  float: right;
   position: relative;
 }
 .widget-header-large > .widget-toolbar {
