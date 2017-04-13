@@ -181,7 +181,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li>
 
                     <li class="">
-                        <a href="reportRepair.jsp" target="main">
+                        <a href="goToRepairTasksList.do" target="main">
                             <i class="menu-icon fa fa-bar-chart"></i>
                             上报维修
                             <span class="badge badge-success">2</span>

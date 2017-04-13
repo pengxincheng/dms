@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 								<label class="col-sm-1 control-label no-padding-right" for="stuGrade">年级</label>
                                 <div class="col-sm-3">
-                                    <select class="form-control" id="stuGrade" name="stuClass" data-validation-engine="validate[required]">
+                                    <select class="form-control" id="stuGrade" name="stuGrade" data-validation-engine="validate[required]">
                                         <option value="" selected="selected">-请选择-</option>
                                         <option value="2013级">2013级</option>
                                         <option value="2014级">2014级</option>

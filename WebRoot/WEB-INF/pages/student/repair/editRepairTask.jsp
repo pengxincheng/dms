@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -63,57 +62,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             </div>
         </div>
-        <div class="main-content-inner padding-page-content">
+        <div class="main-content-inner pediting-page-content">
             <div class="page-content">
                 <div class="space-4"></div>
                 <div class="row">
                     <div class=" col-xs-12">
-                        <form class="form-horizontal" role="form" id="editStu" name="editStu" action="editStu.do" method="post">
+                       <form class="form-horizontal" role="form" id="editRepairTask" name="editRepairTask" action="editRepairTask.do" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="name">姓名</label>
-                                <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="name" name="name" value="${user.name }"/>
-                                </div> 
-                                
-                                <label class="col-sm-1 control-label no-padding-right" for="stuNo">学号</label>
-                                <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required,custom[number]]" class="form-control" placeholder="名称" id="stuNo" name="stuNo" value="${user.stuNo }"/>
-                                </div> 
+                               <label class="col-sm-1 control-label no-pediting-right" for="form-field-8">故障描述</label>
+	                             <div class="col-sm-11">
+	                                 <textarea class="form-control" id="problemDes" name="problemDes" placeholder="故障描述" style="width: 356px; height: 66px;">${repairTask.problemDes}</textarea>
+	                             </div>                                          
                             </div>
-							<div class="form-group">
-								<label class="col-sm-1 control-label no-padding-right" for="stuGrade">年级</label>
-                                <div class="col-sm-3">
-                                    <select class="form-control" id="stuGrade" name="stuGrade" data-validation-engine="validate[required]">
-                                        <option value="" selected="selected">-请选择-</option>
-                                        <option ${user.stuGrade eq '2013级' ? 'selected':''} value="2013级">2013级</option>
-                                        <option ${user.stuGrade eq '2014级' ? 'selected':''} value="2014级">2014级</option>
-                                        <option ${user.stuGrade eq '2015级' ? 'selected':''} value="2015级">2015级</option>
-                                        <option ${user.stuGrade eq '2016级' ? 'selected':''} value="2016级">2016级</option>
-                                    </select>
-                                </div> 
-                                
-                                <label class="col-sm-1 control-label no-padding-right" for="stuClass">班级</label>
-                                <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="班级" id="stuClass" name="stuClass" value="${user.stuClass }"/>
-                                </div>
-                                
-                            </div>	
-                            <div class="form-group">
-                            	<label class="col-sm-1 control-label no-padding-right" for="age">年龄</label>
-                                <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required,custom[number]]" class="form-control" placeholder="名称" id="age" name="age" value="${user.age}"/>
-                                </div>
-                                
-                                <label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
-                                <div class="col-sm-3">
-                                   <select class="form-control" id="gender" name="gender" data-validation-engine="validate[required]">
-                                        <option value="" selected="selected">-请选择-</option>
-                                        <option ${user.gender eq '男' ? 'selected':''} value="男">男</option>
-                                        <option ${user.gender eq '女' ? 'selected':''} value="女">女</option>
-                                    </select>
-                                </div>   
-                            </div>	
-                            <input type="hidden" name="userId" id="userId" value="${user.userId }"/>					
+                            <input type="hidden" value="${repairTask.id }" id="id" name="id"/>
                         </form>
 						<div class="align-right">
 								
@@ -165,24 +126,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
 <script src="assets/js/ace-elements.js"></script>
-<script src="js/stu.js"></script>
+<script src="js/area.js"></script>
 
 
 
 <!-- 自己写的JS，请放在这里 -->
 <script type="text/javascript">
-	
     jQuery(function ($) {
         //日期控件使用示例，详细文档请参考http://www.my97.net/dp/demo/index.htm
         $("#divBirthday").on(ace.click_event, function () {
             WdatePicker({el: 'buildTime'});
         });
 
-        //wysiwyg编辑器初始化
-        $('#my-editor').ace_wysiwyg().prev().addClass('wysiwyg-style1');
+      
 
         //表单验证组件初始化，详细文档请参考http://code.ciaoca.com/jquery/validation-engine/ 或官网文档http://posabsolute.github.io/jQuery-Validation-Engine/
-        $("#editStu").validationEngine({
+        $("#editRepairTask").validationEngine({
             scrollOffset: 98,//必须设置，因为Toolbar position为Fixed
             promptPosition: 'bottomLeft',
             autoHidePrompt: true
@@ -190,17 +149,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         $("#btnSubmit").on(ace.click_event, function () {
             //console.log("validate begin..");
-            //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addStu').validationEngine('validate')) {
+            //console.log($('#editNotify').validationEngine('validate'));
+            if ($('#editNotify').validationEngine('validate')) {
                 //submit
             }
         });
         $("#btnSave").on(ace.click_event, function () {
             //console.log("validate begin..");
-            //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#editStu').validationEngine('validate')) {
+            //console.log($('#editNotify').validationEngine('validate'));
+            if ($('#editRepairTask').validationEngine('validate')) {
             	alert("操作成功");
-                $('#editStu').submit();
+                $('#editRepairTask').submit();
             }
         });
         $("#btnReturn").on(ace.click_event, function () {
