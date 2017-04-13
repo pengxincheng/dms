@@ -96,6 +96,17 @@ public class RepairTaskController {
 		repairTaskService.updateRepairTask(repairTask);
 		return "redirect:/goToRepairTasksList.do";
 	}
+	/**
+	 * 删除
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("delRepairTask")
+	public String delRepairTask(Integer id){
+		
+		repairTaskService.delRepairTaskById(id);
+		return "redirect:/goToRepairTasksList.do";
+	}
 	
 	
 
