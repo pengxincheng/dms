@@ -55,4 +55,10 @@ public class ApplyGoodController {
 	public String goToStuApplyGoodsList(){
 		return "student/applyGood/applyGoodList";
 	}
+	
+	/*管理员*/
+	@RequestMapping("goToStuApplyGoodsListForManager")
+	public String goToStuApplyGoodsListForManager(){
+		return "dormManager/applyGood/applyGoodList";
+	}
 }

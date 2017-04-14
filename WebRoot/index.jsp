@@ -190,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <b class="arrow"></b>
                     </li>
                     <li class="">
-                        <a href="portal-2.html" target="main">
+                        <a href="goToStuApplyGoodsList.do" target="main">
                             <i class="menu-icon fa fa-legal"></i>
                             申领物品
                         </a>
@@ -331,7 +331,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <b class="arrow"></b>
                     </li>  
                     <li class="">
-                        <a href="goToStuApplyGoodsList.do" target="main">
+                        <a href="goToStuApplyGoodsListForManager.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		物品发放
                         </a>
