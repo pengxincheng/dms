@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.dao.ApplyGoodMapper" >
+  <resultMap id="ApplyGoodMap" type="com.dms.entity.ApplyGood" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="applyer" property="applyer" jdbcType="VARCHAR" />
+    <result column="room" property="room" jdbcType="VARCHAR" />
+    <result column="good" property="good" jdbcType="VARCHAR" />
+    <result column="apply_time" property="applyTime" jdbcType="TIMESTAMP" />
+    <result column="audit_man" property="auditMan" jdbcType="VARCHAR" />
+    <result column="audit_opinion" property="auditOpinion" jdbcType="VARCHAR" />
+    <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, applyer, room, good, apply_time, audit_man, audit_opinion, audit_time, status, 
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ApplyGoodMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_applygood
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAllApplyGoods" resultMap="ApplyGoodMap" parameterType="com.dms.entity.ApplyGood">
+  	select 
+  	<include refid="Base_Column_List" />
+    from tab_applygood
+    where 1=1
+    <if test="status != null and status !=''">  
+        and status like CONCAT('%',#{status},'%')
+    </if> 
+    <if test="applyer != null and applyer !=''">  
+        and applyer = #{applyer}
+    </if>
+     <if test="auditMan != null and auditMan !=''">  
+        and audit_man = #{auditMan}
+    </if>
+    order by id desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_applygood
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dms.entity.ApplyGood" >
+    insert into tab_applygood (id, applyer, room, 
+      good, apply_time, audit_man, 
+      audit_opinion, audit_time, status, 
+      remark)
+    values (#{id,jdbcType=INTEGER}, #{applyer,jdbcType=VARCHAR}, #{room,jdbcType=VARCHAR}, 
+      #{good,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{auditMan,jdbcType=VARCHAR}, 
+      #{auditOpinion,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.entity.ApplyGood" >
+    insert into tab_applygood
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applyer != null" >
+        applyer,
+      </if>
+      <if test="room != null" >
+        room,
+      </if>
+      <if test="good != null" >
+        good,
+      </if>
+      <if test="applyTime != null" >
+        apply_time,
+      </if>
+      <if test="auditMan != null" >
+        audit_man,
+      </if>
+      <if test="auditOpinion != null" >
+        audit_opinion,
+      </if>
+      <if test="auditTime != null" >
+        audit_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applyer != null" >
+        #{applyer,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null" >
+        #{room,jdbcType=VARCHAR},
+      </if>
+      <if test="good != null" >
+        #{good,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditMan != null" >
+        #{auditMan,jdbcType=VARCHAR},
+      </if>
+      <if test="auditOpinion != null" >
+        #{auditOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.ApplyGood" >
+    update tab_applygood
+    <set >
+      <if test="applyer != null" >
+        applyer = #{applyer,jdbcType=VARCHAR},
+      </if>
+      <if test="room != null" >
+        room = #{room,jdbcType=VARCHAR},
+      </if>
+      <if test="good != null" >
+        good = #{good,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null" >
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditMan != null" >
+        audit_man = #{auditMan,jdbcType=VARCHAR},
+      </if>
+      <if test="auditOpinion != null" >
+        audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null" >
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.entity.ApplyGood" >
+    update tab_applygood
+    set applyer = #{applyer,jdbcType=VARCHAR},
+      room = #{room,jdbcType=VARCHAR},
+      good = #{good,jdbcType=VARCHAR},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      audit_man = #{auditMan,jdbcType=VARCHAR},
+      audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

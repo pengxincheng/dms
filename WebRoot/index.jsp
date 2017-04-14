@@ -331,7 +331,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <b class="arrow"></b>
                     </li>  
                     <li class="">
-                        <a href="#">
+                        <a href="goToStuApplyGoodsList.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		物品发放
                         </a>

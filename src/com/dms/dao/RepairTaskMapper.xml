@@ -32,6 +32,9 @@
     <if test="reporter != null and reporter !=''">  
         and reporter = #{reporter}
     </if>
+    <if test="dealMan != null and dealMan !=''">  
+        and deal_man = #{dealMan}
+    </if>
     order by id desc
   </select>
   
