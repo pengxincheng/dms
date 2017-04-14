@@ -25,10 +25,14 @@
   	select 
   	<include refid="Base_Column_List" />
     from tab_repair
-    where reporter = #{reporter}
+    where 1=1
     <if test="status != null and status !=''">  
         and status = #{status}
     </if> 
+    <if test="reporter != null and reporter !=''">  
+        and reporter = #{reporter}
+    </if>
+    order by id desc
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

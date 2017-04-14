@@ -315,7 +315,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     </li>
                      <li class="">
-                        <a href="#">
+                        <a href="goToRepairTasksListForManager.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		维修处理
                         </a>

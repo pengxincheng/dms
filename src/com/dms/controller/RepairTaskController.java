@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.RepairTask;
@@ -30,6 +30,7 @@ public class RepairTaskController {
 	@Autowired
 	private RepairTaskService repairTaskService;
 
+	/*学生相关方法开始*/
 	/**
 	 * 获取自己的维修任务列表
 	 * 
@@ -38,10 +39,17 @@ public class RepairTaskController {
 	 */
 	@RequestMapping("getAllRepairTasks")
 	@ResponseBody
-	public JSONArray getAllRepairTasks(RepairTask repairTask) {
-		repairTask.setReporter("彭新成");
-		List<RepairTask> repairTasks = repairTaskService
-				.findAllRepairTasks(repairTask);
+	public JSONArray getAllRepairTasks(RepairTask repairTask,HttpServletRequest request) {
+		User u = (User) request.getSession().getAttribute("currentUser");
+		if(u.getRoleId() == 2){
+			repairTask.setDealMan(u.getName());
+		}
+		else{
+			repairTask.setReporter(u.getName());
+		}
+		
+		
+		List<RepairTask> repairTasks = repairTaskService.findAllRepairTasks(repairTask);
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Date.class,
 				new JsonDateValueProcessor("yyyy-MM-dd HH:mm"));
@@ -59,7 +67,6 @@ public class RepairTaskController {
 	public String addRepairTask(RepairTask repairTask,HttpServletRequest request) {
 		
 		User u = (User) request.getSession().getAttribute("currentUser");
-		
 		
 		String area = u.getRoom().getBuilding().getArea().getAreaName();
 		String building = u.getRoom().getBuilding().getBuildingName();
@@ -107,16 +114,71 @@ public class RepairTaskController {
 		repairTaskService.delRepairTaskById(id);
 		return "redirect:/goToRepairTasksList.do";
 	}
+	/**
+	 * 提交
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("submitRepairTask")
+	public String submitRepairTask(Integer id,HttpServletRequest request){
+		
+		User u = (User) request.getSession().getAttribute("currentUser");
+		
+		RepairTask repairTask = repairTaskService.getRepairTaskById(id);
+		repairTask.setDealMan(u.getRoom().getBuilding().getManagerName());
+		repairTask.setStatus("待修理");
+		repairTask.setReportTime(new Date());
+		repairTaskService.updateRepairTask(repairTask);
+		return "redirect:/goToRepairTasksList.do";
+		
+	}
 	
-	
-
+	/**
+	 * 学生报修列表
+	 * @return
+	 */
 	@RequestMapping("goToRepairTasksList")
 	public String goToRepairTasksList() {
 		return "student/repair/repairTaskList";
 	}
+	
 
 	@RequestMapping("goToAddRepairTask")
 	public String goToAddRepairTask() {
 		return "student/repair/addRepairTask";
 	}
+	/*学生相关方法结束*/
+	
+	
+	/*管理员相关方法开始*/
+	
+	/**
+	 * 提交
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("repair")
+	public String repair(Integer id){
+		
+		RepairTask repairTask = repairTaskService.getRepairTaskById(id);
+		
+		repairTask.setStatus("已修理");
+		repairTask.setRepairTime(new Date());
+		repairTaskService.updateRepairTask(repairTask);
+		return "redirect:/goToRepairTasksListForManager.do";
+		
+	}
+	
+	/**
+	 * 管理员修理列表
+	 * @return
+	 */
+	@RequestMapping("goToRepairTasksListForManager")
+	public String goToRepairTasksListForManager() {
+		
+		return "dormManager/repair/repairTaskList";
+	}
+	/*管理员相关方法结束*/
 }

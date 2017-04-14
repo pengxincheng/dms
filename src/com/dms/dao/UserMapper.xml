@@ -52,7 +52,7 @@
   
   <select id="selectForLogin" resultMap="userMap" parameterType="java.lang.String">
   	select u.user_id, u.stu_no, u.name, u.gender, u.age, u.stu_grade, u.stu_class, u.dorm_id, u.role_id, u.username, 
-           u.password, u.stu_img, u.area_id, u.building_id, u.room_id, u.is_alloted,r.room_sn,a.area_name,b.building_name
+           u.password, u.stu_img, u.area_id, u.building_id, u.room_id, u.is_alloted,r.room_sn,a.area_name,b.building_name,b.manager_name
     from tab_user u,tab_room r,tab_building b,tab_area a
 	where  u.room_id = r.room_id  and r.building_id = b.building_id and b.area_id = a.id and username = #{username} and password= #{password}
   </select>
