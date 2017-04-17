@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-17 17:51:36
+Date: 2017-04-17 18:35:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -225,10 +225,12 @@ CREATE TABLE `tab_visit_enregister` (
   `end_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `visit_reasion` varchar(200) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
+  `building_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_visit_enregister
 -- ----------------------------
+INSERT INTO `tab_visit_enregister` VALUES ('1', '王林', '男', '13011230320', '2017-04-17 18:22:18', null, '找同学', null, null);
 SET FOREIGN_KEY_CHECKS=1;
