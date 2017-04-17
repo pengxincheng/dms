@@ -244,7 +244,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <b class="arrow"></b>
                         <ul class="submenu">
                             <li class="">
-                                <a href="#">
+                                <a href="goToVisitEnregisterList.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                     	来访登记
                                 </a>

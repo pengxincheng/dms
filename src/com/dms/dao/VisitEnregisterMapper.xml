@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.dao.VisitEnregisterMapper" >
+  <resultMap id="VisitEnregisterMap" type="com.dms.entity.VisitEnregister" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="gander" property="gander" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="visit_reasion" property="visitReasion" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, gander, tel, start_time, end_time, visit_reasion, remark,building_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="VisitEnregisterMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_visit_enregister
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAllVisitEnregister" resultMap="VisitEnregisterMap" parameterType="com.dms.entity.VisitEnregister">
+  	select 
+  	<include refid="Base_Column_List" />
+  	 from tab_visit_enregister
+  	 where 1=1
+  	 <if test="name != null and name !=''">  
+        and name like CONCAT('%',#{name},'%')
+    </if> 
+    <if test="buildingId != null and buildingId !=''">  
+        and building_id = #{buildingId}
+    </if> 
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_visit_enregister
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dms.entity.VisitEnregister" >
+    insert into tab_visit_enregister (id, name, gander, 
+      tel, start_time, end_time, 
+      visit_reasion, remark)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gander,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{visitReasion,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.entity.VisitEnregister" >
+    insert into tab_visit_enregister
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="gander != null" >
+        gander,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="visitReasion != null" >
+        visit_reasion,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gander != null" >
+        #{gander,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitReasion != null" >
+        #{visitReasion,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.VisitEnregister" >
+    update tab_visit_enregister
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gander != null" >
+        gander = #{gander,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitReasion != null" >
+        visit_reasion = #{visitReasion,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.entity.VisitEnregister" >
+    update tab_visit_enregister
+    set name = #{name,jdbcType=VARCHAR},
+      gander = #{gander,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      visit_reasion = #{visitReasion,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
