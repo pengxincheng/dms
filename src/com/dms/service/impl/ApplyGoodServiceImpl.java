@@ -1,5 +1,6 @@
 package com.dms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +56,25 @@ public class ApplyGoodServiceImpl implements ApplyGoodService {
 		return applyGoodMapper.selectAllApplyGoods(applyGood);
 	}
 
+	@Override
+	public void submitApplyGood(Integer id,String auditMan) {
+		
+		ApplyGood applyGood = applyGoodMapper.selectByPrimaryKey(id);
+		applyGood.setApplyTime(new Date());
+		applyGood.setAuditMan(auditMan);
+		applyGood.setStatus("待审核");
+		applyGoodMapper.updateByPrimaryKeySelective(applyGood);
+		
+	}
+
+	@Override
+	public void auditApplyGood(Integer id, String status, String auditOponion) {
+		
+		ApplyGood applyGood = applyGoodMapper.selectByPrimaryKey(id);
+		
+		applyGood.setStatus(status);
+		applyGood.setAuditTime(new Date());
+		applyGood.setAuditOpinion(auditOponion);
+		applyGoodMapper.updateByPrimaryKeySelective(applyGood);
+	}
 }

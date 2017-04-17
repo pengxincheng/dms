@@ -44,5 +44,19 @@ public interface ApplyGoodService {
 	 */
 	int delApplyGoodById(Integer id);
 	
+	/**
+	 * 学生提交申请
+	 * @param id
+	 * @param auditMan
+	 */
+	void submitApplyGood(Integer id,String auditMan);
+	/**
+	 * 管理员审核
+	 * @param is
+	 * @param status
+	 * @param auditOponion
+	 */
+	void auditApplyGood(Integer id,String status,String auditOponion);
+	
 	List<ApplyGood> getAllApplyGoods(ApplyGood applyGood);
 }

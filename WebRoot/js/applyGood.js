@@ -80,6 +80,7 @@ function initTableWaitSubmit() {
 															+ id
 															+ "'><i class='ace-icon fa fa-edit'></i></a>"
 													html += "<button type='button' class='btn btn-sm btn-danger btn-white btn-op-ths'  title='删除' onclick='delApplyGood("+ id+ ")'><i class='ace-icon fa fa-trash-o'></i></button>"
+													html +=	"<button type='button' class='btn btn-sm btn-success btn-white btn-op-ths' title='提交' onclick='submitApplyGood("+ id+ ")' ><i class='ace-icon fa fa-check'></i>提交</button>"
 													return html;
 												}
 											} ],
@@ -108,6 +109,13 @@ function initTableWaitSubmit() {
 function delApplyGood(id){
 	if(confirm("确定删除吗？")){
 		location.href = "delApplyGood.do?id="+id;
+		alert("操作成功！");
+	 }
+}
+
+function submitApplyGood(id){
+	if(confirm("确定提交申请？")){
+		location.href = "submitApplyGood.do?id="+id;
 		alert("操作成功！");
 	 }
 }
@@ -280,11 +288,6 @@ function initTableAutdited() {
 										"data" : "auditTime",
 										"class" : "align-center"
 									},
-									
-									{
-										"data" : "remark",
-										"class" : "align-center"
-									},
 									{
 										"data" : "status",
 										"class" : "align-center",
@@ -413,10 +416,7 @@ function initTableAutditedForManager() {
 										"render" : function(data,
 												type, row) {
 											var id = row.id;
-											var html = " <a type='button' class='btn btn-sm btn-info btn-white btn-op-ths' title='编辑' href='getApplyGoodDetail.do?id="
-													+ id
-													+ "'><i class='ace-icon fa fa-edit'></i></a>"
-											html += "<button type='button' class='btn btn-sm btn-danger btn-white btn-op-ths'  title='删除' onclick='delApplyGood("+ id+ ")'><i class='ace-icon fa fa-trash-o'></i></button>"
+											var html =	"<button type='button' class='btn btn-sm btn-success btn-white btn-op-ths'  title='审核' onclick='audit("+ id+ ")' ><i class='ace-icon fa fa-check'></i>审核</button>";
 											return html;
 										}
 									} 
@@ -444,5 +444,18 @@ function initTableAutditedForManager() {
 	});
 }
 
+function audit(id){
+	
+	$('#myModal').modal();
+	
+	$("#submitApply").click(function(){
+		var status = $('input:radio[name="status"]:checked').val();
+		var auditOponion = $("#auditOponion").val();
+		location.href="auditApplyGood.do?id="+id+"&status="+status+"&auditOponion="+auditOponion;
+		alert("操作成功！");
+		
+	});
+	
+}
 
 

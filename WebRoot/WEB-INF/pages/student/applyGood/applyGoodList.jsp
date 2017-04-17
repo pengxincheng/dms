@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                             <hr class="no-margin">
                             <div class="page-toolbar align-right list-toolbar">
-                                <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="gotToAddApplyGood">
+                                <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddApplyGood">
                                     <i class="ace-icon fa fa-plus"></i>
                                     添加
                                 </button>
@@ -248,7 +248,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <th class="align-center">审核人</th>
                                                 <th class="align-center">审核意见</th>
                                                 <th class="align-center">审核时间</th>
-                                                <th class="align-center">备注</th>
                                                 <th class="align-center">状态</th>
                                             </tr>
                                             </thead>                                           

@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-82">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>上报维修</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>申领物品</li>
                 </ul><!-- /.breadcrumb -->
 
             </div>
@@ -67,11 +67,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="space-4"></div>
                 <div class="row">
                     <div class=" col-xs-12">
-                        <form class="form-horizontal" role="form" id="addRepairTask" name="addRepairTask" action="addRepairTask.do" method="post">
+                        <form class="form-horizontal" role="form" id="addApplyGood" name="addApplyGood" action="addApplyGood.do" method="post">
                             <div class="form-group">
-                               <label class="col-sm-1 control-label no-padding-right" for="form-field-8">故障描述</label>
+                               <label class="col-sm-1 control-label no-padding-right" for="form-field-8">名称</label>
+	                           <div class="col-sm-3">
+                                   <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="good" name="good"/>
+                               </div>                                       
+                            </div>
+                            
+                            <div class="form-group">
+                               <label class="col-sm-1 control-label no-padding-right" for="form-field-8">备注</label>
 	                             <div class="col-sm-11">
-	                                 <textarea class="form-control" id="problemDes" name="problemDes" placeholder="故障描述" style="width: 356px; height: 66px;"></textarea>
+	                                 <textarea class="form-control" id="remark" name="remark" placeholder="备注" style="width: 356px; height: 66px;"></textarea>
 	                             </div>                                          
                             </div>
                         </form>
@@ -141,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#my-editor').ace_wysiwyg().prev().addClass('wysiwyg-style1');
 
         //表单验证组件初始化，详细文档请参考http://code.ciaoca.com/jquery/validation-engine/ 或官网文档http://posabsolute.github.io/jQuery-Validation-Engine/
-        $("#addRepairTask").validationEngine({
+        $("#addApplyGood").validationEngine({
             scrollOffset: 98,//必须设置，因为Toolbar position为Fixed
             promptPosition: 'bottomLeft',
             autoHidePrompt: true
@@ -150,16 +157,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSubmit").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addNotify').validationEngine('validate')) {
+            if ($('#ApplyGood').validationEngine('validate')) {
                 //submit
             }
         });
         $("#btnSave").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addRepairTask').validationEngine('validate')) {
+            if ($('#addApplyGood').validationEngine('validate')) {
             	alert("操作成功");
-                $('#addRepairTask').submit();
+                $('#addApplyGood').submit();
             }
         });
         $("#btnReturn").on(ace.click_event, function () {

@@ -67,14 +67,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="space-4"></div>
                 <div class="row">
                     <div class=" col-xs-12">
-                       <form class="form-horizontal" role="form" id="editRepairTask" name="editRepairTask" action="editRepairTask.do" method="post">
+                       <form class="form-horizontal" role="form" id="editApplyGood" name="editApplyGood" action="editApplyGood.do" method="post">
                             <div class="form-group">
-                               <label class="col-sm-1 control-label no-pediting-right" for="form-field-8">故障描述</label>
+                               <label class="col-sm-1 control-label no-padding-right" for="form-field-8">名称</label>
+	                           <div class="col-sm-3">
+                                   <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="good" name="good" value="${applyGood.good }"/>
+                               </div>                                       
+                            </div>
+                            
+                            <div class="form-group">
+                               <label class="col-sm-1 control-label no-padding-right" for="form-field-8">备注</label>
 	                             <div class="col-sm-11">
-	                                 <textarea class="form-control" id="problemDes" name="problemDes" placeholder="故障描述" style="width: 356px; height: 66px;">${repairTask.problemDes}</textarea>
+	                                 <textarea class="form-control" id="remark" name="remark" placeholder="备注" style="width: 356px; height: 66px;">${applyGood.remark }</textarea>
 	                             </div>                                          
                             </div>
-                            <input type="hidden" value="${repairTask.id }" id="id" name="id"/>
+                            <input type="hidden" name="id" id="id" value="${applyGood.id }"/>
                         </form>
 						<div class="align-right">
 								
@@ -126,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
 <script src="assets/js/ace-elements.js"></script>
-<script src="js/area.js"></script>
+<script src="js/applyGood.js"></script>
 
 
 
@@ -141,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
 
         //表单验证组件初始化，详细文档请参考http://code.ciaoca.com/jquery/validation-engine/ 或官网文档http://posabsolute.github.io/jQuery-Validation-Engine/
-        $("#editRepairTask").validationEngine({
+        $("#editApplyGood").validationEngine({
             scrollOffset: 98,//必须设置，因为Toolbar position为Fixed
             promptPosition: 'bottomLeft',
             autoHidePrompt: true
@@ -150,16 +157,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSubmit").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#editNotify').validationEngine('validate'));
-            if ($('#editNotify').validationEngine('validate')) {
+            if ($('#editApplyGood').validationEngine('validate')) {
                 //submit
             }
         });
         $("#btnSave").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#editNotify').validationEngine('validate'));
-            if ($('#editRepairTask').validationEngine('validate')) {
+            if ($('#editApplyGood').validationEngine('validate')) {
             	alert("操作成功");
-                $('#editRepairTask').submit();
+                $('#editApplyGood').submit();
             }
         });
         $("#btnReturn").on(ace.click_event, function () {

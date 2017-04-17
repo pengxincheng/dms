@@ -178,7 +178,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <th class="align-center">审核人</th>
                                                 <th class="align-center">审核意见</th>
                                                 <th class="align-center">审核时间</th>
-                                                <th class="align-center">备注</th>
                                                 <th class="align-center">状态</th>
                                             </tr>
                                             </thead>                                           
@@ -196,6 +195,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
 
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					申领物品审核
+				</h4>
+			</div>
+			<div class="modal-body col-xs-12">
+				<div class="form-group">
+					<label class="col-sm-2 control-label no-padding-right">是否通过</label>
+	                 <div class="col-sm-10">
+	                     <div class="control-group">
+	                         <div class="radio-inline">
+	                             <label>
+	                                 <input name="status" type="radio" class="ace" value="审核通过" checked="checked">
+	                                 <span class="lbl">是</span>
+	                             </label>
+	                         </div>
+	                         <div class="radio-inline">
+	                             <label>
+	                                 <input name="status" type="radio" class="ace" value="审核不通过">
+	                                 <span class="lbl">否</span>
+	                             </label>
+	                         </div>
+	                     </div>
+                     </div>
+                     <div class="form-group">
+                     	<label class="col-sm-2 control-label no-padding-right" for="auditOponion">审核意见</label>
+                          <div class="col-sm-10">
+                                <textarea class="form-control" id="auditOponion" name="auditOponion" placeholder="审核意见"
+                                       style="width: 356px; height: 66px;"></textarea>
+                          </div>      
+                     </div>
+                 </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="submitApply">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 <!-- basic scripts -->
 
 <!--[if !IE]> -->
