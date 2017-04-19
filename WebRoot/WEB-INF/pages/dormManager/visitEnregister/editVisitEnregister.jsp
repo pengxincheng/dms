@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-82">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>修改宿舍区</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>修改记录</li>
                 </ul><!-- /.breadcrumb -->
 
             </div>
@@ -67,20 +67,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="space-4"></div>
                 <div class="row">
                     <div class=" col-xs-12">
-                        <form class="form-horizontal" role="form" id="addArea" name="addArea" action="editArea.do" method="post">
+                        <form class="form-horizontal" role="form" id="editVisitEnregister" name="editVisitEnregister" action="editVisitEnregister.do" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="form-field-8">名称</label>
+                                <label class="col-sm-1 control-label no-padding-right" for="name">姓名</label>
                                 <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="areaName" name="areaName" value="${area.areaName}"/>
-                                </div>                                            
+                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="名称" id="name" name="name" value="${visitEnregister.name }"/>
+                                </div>  
+                                
+                                <label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
+                                <div class="col-sm-3">
+                                   <select class="form-control" id="gender" name="gender" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option ${visitEnregister.gender eq '男' ? 'selected':''} value="男">男</option>
+                                        <option ${visitEnregister.gender eq '女' ? 'selected':''} value="女">女</option>
+                                    </select>
+                                </div>                                          
                             </div>
-                            <input type="hidden" value="${area.id }" name="id" id="id" />
+                            
 							<div class="form-group">
-                               <label class="col-sm-1 control-label no-padding-right" for="form-field-8">说明</label>
+                               <label class="col-sm-1 control-label no-padding-right" for="tel">联系方式</label>
                                 <div class="col-sm-3">
-                                    <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="说明" id="describe" name="describe" value="${area.describe}"/>
+                                    <input type="text" data-validation-engine="validate[required,custom[phone]]" class="form-control" placeholder="联系方式" id="tel" name="tel" value="${visitEnregister.tel }"/>
                                 </div> 
-                            </div>							
+                            </div>
+                            <div class="form-group">
+                            	 <label class="col-sm-1 control-label no-padding-right" for="visitReasion">来访事宜</label>
+	                             <div class="col-sm-11">
+	                                 <textarea class="form-control" id="visitReasion" name="visitReasion" placeholder="来访事宜" style="width: 356px; height: 66px;">${visitEnregister.visitReasion }</textarea>
+	                             </div>
+                            </div>
+                            <div class="form-group">
+                            	 <label class="col-sm-1 control-label no-padding-right" for="remark">备注</label>
+	                             <div class="col-sm-11">
+	                                 <textarea class="form-control" id="remark" name="remark" placeholder="备注" style="width: 356px; height: 66px;">${visitEnregister.remark }</textarea>
+	                             </div>
+                            </div>
+                            <input type="hidden" id="id" name="id" value="${visitEnregister.id }" />									
                         </form>
 						<div class="align-right">
 								
@@ -132,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
 <script src="assets/js/ace-elements.js"></script>
-<script src="js/area.js"></script>
+<script src="js/visitEnregister.js"></script>
 
 
 
@@ -148,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $('#my-editor').ace_wysiwyg().prev().addClass('wysiwyg-style1');
 
         //表单验证组件初始化，详细文档请参考http://code.ciaoca.com/jquery/validation-engine/ 或官网文档http://posabsolute.github.io/jQuery-Validation-Engine/
-        $("#addArea").validationEngine({
+        $("#editVisitEnregister").validationEngine({
             scrollOffset: 98,//必须设置，因为Toolbar position为Fixed
             promptPosition: 'bottomLeft',
             autoHidePrompt: true
@@ -164,9 +186,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSave").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
-            if ($('#addArea').validationEngine('validate')) {
+            if ($('#editVisitEnregister').validationEngine('validate')) {
             	alert("操作成功");
-                $('#addArea').submit();
+                $('#editVisitEnregister').submit();
             }
         });
         $("#btnReturn").on(ace.click_event, function () {

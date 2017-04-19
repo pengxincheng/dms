@@ -1,5 +1,6 @@
 package com.dms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class VisitEnregisterServiceImpl implements VisitEnregisterService {
 	@Override
 	public int addVisitEnregister(VisitEnregister visitEnregister) {
 
+		visitEnregister.setStartTime(new Date());
+		visitEnregister.setIsLeave("未离开");
 		return visitEnregisterMapper.insertSelective(visitEnregister);
 	}
 

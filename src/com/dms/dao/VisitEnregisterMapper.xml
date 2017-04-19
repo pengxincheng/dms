@@ -4,16 +4,17 @@
   <resultMap id="VisitEnregisterMap" type="com.dms.entity.VisitEnregister" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="gander" property="gander" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
     <result column="tel" property="tel" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="visit_reasion" property="visitReasion" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="building_id" property="buildingId" jdbcType="INTEGER" />
+    <result column="is_leave" property="isLeave" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, gander, tel, start_time, end_time, visit_reasion, remark,building_id
+    id, name, gender, tel, start_time, end_time, visit_reasion, remark,building_id,is_leave
   </sql>
   <select id="selectByPrimaryKey" resultMap="VisitEnregisterMap" parameterType="java.lang.Integer" >
     select 
@@ -40,12 +41,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.dms.entity.VisitEnregister" >
-    insert into tab_visit_enregister (id, name, gander, 
+    insert into tab_visit_enregister (id, name, gender, 
       tel, start_time, end_time, 
-      visit_reasion, remark)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gander,jdbcType=VARCHAR}, 
+      visit_reasion, remark,building_id,is_leave )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
       #{tel,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{visitReasion,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+      #{visitReasion,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}),#{buildingId},#{isLeave}
   </insert>
   <insert id="insertSelective" parameterType="com.dms.entity.VisitEnregister" >
     insert into tab_visit_enregister
@@ -56,8 +57,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="gander != null" >
-        gander,
+      <if test="gender != null" >
+        gender,
       </if>
       <if test="tel != null" >
         tel,
@@ -74,6 +75,12 @@
       <if test="remark != null" >
         remark,
       </if>
+      <if test="buildingId != null" >
+        building_id,
+      </if>
+      <if test="isLeave != null" >
+        is_leave,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -82,8 +89,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gander != null" >
-        #{gander,jdbcType=VARCHAR},
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
       </if>
       <if test="tel != null" >
         #{tel,jdbcType=VARCHAR},
@@ -100,6 +107,12 @@
       <if test="remark != null" >
         #{remark,jdbcType=VARCHAR},
       </if>
+      <if test="buildingId != null" >
+        #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="isLeave != null" >
+        #{isLeave,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.VisitEnregister" >
@@ -108,8 +121,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gander != null" >
-        gander = #{gander,jdbcType=VARCHAR},
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
       </if>
       <if test="tel != null" >
         tel = #{tel,jdbcType=VARCHAR},
@@ -126,18 +139,26 @@
       <if test="remark != null" >
         remark = #{remark,jdbcType=VARCHAR},
       </if>
+       <if test="buildingId != null" >
+        building_id = #{buildingId,jdbcType=INTEGER},
+      </if>
+       <if test="isLeave != null" >
+        is_leave = #{isLeave,jdbcType=VARCHAR}
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dms.entity.VisitEnregister" >
     update tab_visit_enregister
     set name = #{name,jdbcType=VARCHAR},
-      gander = #{gander,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       visit_reasion = #{visitReasion,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR}
+      remark = #{remark,jdbcType=VARCHAR},
+      building_id = #{buildingId,jdbcType=INTEGER},
+       is_leave = #{isLeave,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

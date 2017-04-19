@@ -41,7 +41,7 @@ function initTable() {
 												"class" : "align-center"
 											},
 											{
-												"data" : "gander",
+												"data" : "gender",
 												"class" : "align-center"
 											},
 											{
@@ -57,8 +57,21 @@ function initTable() {
 												"class" : "align-center"
 											},
 											{
-												"data" : "endTime",
+												"data" : "isLeave",
 												"class" : "align-center"
+											},
+											{
+												"data" : "endTime",
+												"class" : "align-center",
+												render: function (data, type, row, meta) {
+													if(row.isLeave == '已离开'){
+														data = data;
+													}
+													else{
+														data = '';
+													}
+													 return data;
+													}
 											},
 											{
 												"data" : "remark",
@@ -79,7 +92,7 @@ function initTable() {
 											},
 											{
 												// 定义操作列,######以下是重点########
-												"targets" : 8,// 操作按钮目标列
+												"targets" : 9,// 操作按钮目标列
 												"data" : null,
 												"render" : function(data,
 														type, row) {

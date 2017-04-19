@@ -7,7 +7,7 @@ public class VisitEnregister {
 
     private String name;
 
-    private String gander;
+    private String gender;
 
     private String tel;
 
@@ -20,8 +20,19 @@ public class VisitEnregister {
     private String remark;
     
     private Integer buildingId;
+    
+    private String isLeave;
+    
 
-    public Integer getId() {
+    public String getIsLeave() {
+		return isLeave;
+	}
+
+	public void setIsLeave(String isLeave) {
+		this.isLeave = isLeave;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -37,15 +48,15 @@ public class VisitEnregister {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getGander() {
-        return gander;
-    }
+    public String getGender() {
+		return gender;
+	}
 
-    public void setGander(String gander) {
-        this.gander = gander == null ? null : gander.trim();
-    }
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    public String getTel() {
+	public String getTel() {
         return tel;
     }
 
