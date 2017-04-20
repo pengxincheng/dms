@@ -76,12 +76,40 @@ public class VisitEnregisterController {
 		
 		return "dormManager/visitEnregister/editVisitEnregister";
 	}
-	
+	/**
+	 * 更新
+	 * @param visitEnregister
+	 * @return
+	 */
 	@RequestMapping("editVisitEnregister")
 	public String editVisitEnregister(VisitEnregister visitEnregister){
 		
 		visitEnregisterService.updateVisitEnregister(visitEnregister);
 		
+		return "redirect:/goToVisitEnregisterList.do";
+	}
+	/**
+	 * 删除
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("delVisitEnregister")
+	public String delVisitEnregister(Integer id){
+		
+		visitEnregisterService.delVisitEnregisterById(id);
+		
+		return "redirect:/goToVisitEnregisterList.do";
+	}
+	
+	@RequestMapping("visitorLeave")
+	public String visitorLeave(Integer id){
+		
+		VisitEnregister visitEnregister = visitEnregisterService.getVisitEnregisterById(id);
+		
+		visitEnregister.setEndTime(new Date());
+		visitEnregister.setIsLeave("已离开");
+		
+		visitEnregisterService.updateVisitEnregister(visitEnregister);
 		return "redirect:/goToVisitEnregisterList.do";
 	}
 	

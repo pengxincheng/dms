@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         <span class="lbl"></span>
                                                     </label>
                                                 </th>
-                                                <th class="align-center">姓名</th>
+                                                <th class="align-center" width="67.1818px">姓名</th>
                                                 <th class="align-center">性别</th>
                                                 <th class="align-center">联系方式</th>
                                                 <th class="align-center">来访事宜</th>

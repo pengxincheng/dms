@@ -101,6 +101,9 @@ function initTable() {
 															+ id
 															+ "'><i class='ace-icon fa fa-edit'></i></a>"
 													html += "<button type='button' class='btn btn-sm btn-danger btn-white btn-op-ths'  title='删除' onclick='delVisitEnregister("+ id+ ")'><i class='ace-icon fa fa-trash-o'></i></button>"
+													if(row.isLeave == '未离开'){
+														html += "<button type='button' class='btn btn-sm btn-success btn-white btn-op-ths' title='离开' onclick='visitorLeave("+ id+ ")' ><i class='ace-icon fa fa-check'></i>离开</button>";
+													}
 													return html;
 												}
 											} ],
@@ -142,3 +145,10 @@ function delVisitEnregister(id){
 	 }
 }
 
+/*来访者离开*/
+function visitorLeave(id){
+	if(confirm("确定已离开？")){
+		location.href = "visitorLeave.do?id="+id;
+		alert("操作成功！");
+	 }
+}
