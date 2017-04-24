@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dms.dao.RegisterMapper" >
+  <resultMap id="registerMap" type="com.dms.entity.Register" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stu_id" property="stuId" jdbcType="INTEGER" />
+    <result column="register_date" property="registerDate" jdbcType="TIMESTAMP" />
+    <result column="return_time" property="returnTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="building_id" property="buildingId" jdbcType="INTEGER" />
+    <result column="reasion" property="reasion" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <association property="stu" resultMap="com.dms.dao.UserMapper.userMap"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, stu_id, register_date, return_time, type, building_id, reasion, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="registerMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_register
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAllRegisters" resultMap="registerMap" parameterType="com.dms.entity.Register">
+    select r.id, r.stu_id, r.register_date, r.return_time, r.type, r.building_id, r.reasion, r.remark,u.name,u.stu_class,u.stu_no,room.room_sn
+    from tab_register r,tab_user u,tab_room room
+    where  r.stu_id = u.user_id and u.room_id=room.room_id and r.building_id=#{buildingId}
+    <if test="type != null and type !=''">  
+        and r.type = #{type}
+    </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tab_register
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dms.entity.Register" >
+    insert into tab_register (id, stu_id, register_date, 
+      return_time, type, building_id, 
+      reasion, remark)
+    values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, #{registerDate,jdbcType=TIMESTAMP}, 
+      #{returnTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, #{buildingId,jdbcType=INTEGER}, 
+      #{reasion,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dms.entity.Register" >
+    insert into tab_register
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stuId != null" >
+        stu_id,
+      </if>
+      <if test="registerDate != null" >
+        register_date,
+      </if>
+      <if test="returnTime != null" >
+        return_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="buildingId != null" >
+        building_id,
+      </if>
+      <if test="reasion != null" >
+        reasion,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stuId != null" >
+        #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="registerDate != null" >
+        #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingId != null" >
+        #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="reasion != null" >
+        #{reasion,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dms.entity.Register" >
+    update tab_register
+    <set >
+      <if test="stuId != null" >
+        stu_id = #{stuId,jdbcType=INTEGER},
+      </if>
+      <if test="registerDate != null" >
+        register_date = #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnTime != null" >
+        return_time = #{returnTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="buildingId != null" >
+        building_id = #{buildingId,jdbcType=INTEGER},
+      </if>
+      <if test="reasion != null" >
+        reasion = #{reasion,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dms.entity.Register" >
+    update tab_register
+    set stu_id = #{stuId,jdbcType=INTEGER},
+      register_date = #{registerDate,jdbcType=TIMESTAMP},
+      return_time = #{returnTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=VARCHAR},
+      building_id = #{buildingId,jdbcType=INTEGER},
+      reasion = #{reasion,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

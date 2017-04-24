@@ -253,7 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </li>
                             
                             <li class="">
-                                <a href="#">
+                                <a href="goToRegisterList.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                    		 晚归登记
                                 </a>
@@ -262,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </li>
                             
                             <li class="">
-                                <a href="#">
+                                <a href="goToRegisterListFroQueQin.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                    		 缺勤登记
                                 </a>

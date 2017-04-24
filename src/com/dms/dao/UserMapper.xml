@@ -50,6 +50,13 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   
+  <select id="selectByStuNo" resultMap="userMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tab_user
+    where stu_no = #{stuNo}
+  </select>
+  
   <select id="selectForLogin" resultMap="userMap" parameterType="java.lang.String">
   	select u.user_id, u.stu_no, u.name, u.gender, u.age, u.stu_grade, u.stu_class, u.dorm_id, u.role_id, u.username, 
            u.password, u.stu_img, u.area_id, u.building_id, u.room_id, u.is_alloted,r.room_sn,a.area_name,b.building_name,b.manager_name

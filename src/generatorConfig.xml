@@ -31,10 +31,10 @@
 		</javaModelGenerator>
 		<!-- 指定dao类生成在哪个包 -->
 		<sqlMapGenerator targetPackage="com.dms.dao"
-			targetProject="dms/src" />
+			targetProject="dms/src"/>
 		<javaClientGenerator type="XMLMAPPER" targetPackage="com.dms.dao" targetProject="dms/src" />
 
-		<table tableName="tab_visit_enregister" domainObjectName="VisitEnregister" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+		<table tableName="tab_register" domainObjectName="Register" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
     		enableSelectByExample="false" selectByExampleQueryId="false"/>
 	
 	</context>

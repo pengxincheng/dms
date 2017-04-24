@@ -32,4 +32,6 @@ public interface UserMapper {
      * @return
      */
     List<User> selectAllStusNotAlloted(User user);
+    
+    User selectByStuNo(String stuNo);
 }

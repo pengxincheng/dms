@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
 
@@ -16,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.Area;
@@ -128,6 +131,23 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "admin/stu/editStu";
 	}
+	
+	@RequestMapping("checkStuIsExistByStuNo")
+	@ResponseBody
+	public JSONObject checkStuIsExistByStuNo(String stuNo){
+		JSONObject jsonObject =new JSONObject();
+		User stu = userService.getStuByStuNo(stuNo);
+		if(null == stu){
+			jsonObject.put("result", false);
+			jsonObject.put("msg", "该学号不存在");
+		}
+		else{
+			jsonObject.put("result", true);
+			jsonObject.put("msg", "成功");
+		}
+		return jsonObject;
+	} 
+	
 	@RequestMapping("editStu")
 	public String editStu(User user){
 		userService.updateStu(user);

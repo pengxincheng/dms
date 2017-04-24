@@ -43,4 +43,6 @@ public interface UserService {
 	
 	int updateStu(User user);
 	
+	User getStuByStuNo(String stuNo);
+	
 }
