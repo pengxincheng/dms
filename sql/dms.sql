@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-17 18:35:42
+Date: 2017-04-24 16:32:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `tab_applygood` (
   `status` varchar(50) DEFAULT NULL,
   `remark` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_applygood
@@ -128,6 +128,29 @@ INSERT INTO `tab_notify` VALUES ('21', '丢失手机', '<!-- custom html data --
 INSERT INTO `tab_notify` VALUES ('22', 'weqw', null, '1', '2017-04-04 00:50:32', null, null);
 
 -- ----------------------------
+-- Table structure for tab_register
+-- ----------------------------
+DROP TABLE IF EXISTS `tab_register`;
+CREATE TABLE `tab_register` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_id` int(11) DEFAULT NULL,
+  `register_date` datetime DEFAULT NULL,
+  `return_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `type` varchar(50) DEFAULT NULL,
+  `building_id` int(11) DEFAULT NULL,
+  `reasion` varchar(500) DEFAULT NULL,
+  `remark` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tab_register
+-- ----------------------------
+INSERT INTO `tab_register` VALUES ('1', '2', '2017-04-24 16:11:24', '2017-04-24 16:11:29', '晚归', '1', '出去打球了', null);
+INSERT INTO `tab_register` VALUES ('2', '2', '2017-04-24 16:11:26', '2017-04-24 16:11:29', '晚归', '1', '路上堵车了', '堵车了');
+INSERT INTO `tab_register` VALUES ('5', '2', '2017-04-24 00:00:00', '2017-04-24 16:16:10', '缺勤', '1', '去同学那里了', '。。');
+
+-- ----------------------------
 -- Table structure for tab_repair
 -- ----------------------------
 DROP TABLE IF EXISTS `tab_repair`;
@@ -210,7 +233,7 @@ INSERT INTO `tab_user` VALUES ('1', '', '张三', '男', '21', null, null, null,
 INSERT INTO `tab_user` VALUES ('2', '201316920422', '彭新成', '男', '21', '2013级', '软件1302', '1', '3', '201316920422', 'ICy5YqxZB1uWSwcVLSNLcA==', null, '1', '1', '1', '1');
 INSERT INTO `tab_user` VALUES ('3', null, '王二', '女', '40', null, null, '1', '2', 'manager', 'ICy5YqxZB1uWSwcVLSNLcA==', null, '1', '1', '1', '1');
 INSERT INTO `tab_user` VALUES ('4', '201316920419', '徐赛赛', '男', '22', '2013级', '软件1302', null, '3', '201316920419', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
-INSERT INTO `tab_user` VALUES ('6', '201316920422', '王磊', '男', '22', '2013级', '软件1302', null, '3', '201316920422', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
+INSERT INTO `tab_user` VALUES ('6', '201316920420', '王磊', '男', '22', '2013级', '软件1302', null, '3', '201316920422', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for tab_visit_enregister
@@ -219,18 +242,23 @@ DROP TABLE IF EXISTS `tab_visit_enregister`;
 CREATE TABLE `tab_visit_enregister` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
-  `gander` varchar(20) DEFAULT NULL,
+  `gender` varchar(20) DEFAULT NULL,
   `tel` varchar(20) DEFAULT NULL,
-  `start_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `end_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
   `visit_reasion` varchar(200) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   `building_id` int(11) DEFAULT NULL,
+  `is_leave` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_visit_enregister
 -- ----------------------------
-INSERT INTO `tab_visit_enregister` VALUES ('1', '王林', '男', '13011230320', '2017-04-17 18:22:18', null, '找同学', null, null);
+INSERT INTO `tab_visit_enregister` VALUES ('1', '王林', '男', '13011230320', '2017-04-20 08:06:20', '2017-04-20 11:06:20', '找同学', '', '1', '已离开');
+INSERT INTO `tab_visit_enregister` VALUES ('2', '李达康', '男', '13011255588', '2017-04-20 10:30:18', '2017-04-20 11:00:30', null, '京州市市委书记', '1', '已离开');
+INSERT INTO `tab_visit_enregister` VALUES ('4', '季昌明', '男', '15738865718', '2017-04-20 10:20:20', '2017-04-20 10:58:20', '来看儿子', '检察长', '1', '未离开');
+INSERT INTO `tab_visit_enregister` VALUES ('6', '陈海', '男', '13011255588', '2017-04-20 11:09:47', '2017-04-20 11:09:47', '来看小皮球啦', '反贪局长', '1', '未离开');
+INSERT INTO `tab_visit_enregister` VALUES ('9', '高玉良', '男', '12345698778', '2017-04-20 11:23:54', null, '看儿子', '', '1', '未离开');
 SET FOREIGN_KEY_CHECKS=1;
