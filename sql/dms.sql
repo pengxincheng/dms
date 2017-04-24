@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-24 16:32:18
+Date: 2017-04-24 18:06:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -93,6 +93,28 @@ INSERT INTO `tab_building` VALUES ('4', '1', '2017-04-05', '2087-04-05', '王二
 INSERT INTO `tab_building` VALUES ('5', '1', '2017-04-05', '2087-04-05', '王二', '21', null, null, 'A-03', '女生宿舍');
 INSERT INTO `tab_building` VALUES ('6', '1', '2017-04-05', '2087-04-05', '王二', '999', null, null, 'A-02', '男生宿舍');
 INSERT INTO `tab_building` VALUES ('7', '2', '2017-04-06', '2087-04-06', '王二', '1', null, null, 'B-01', '111');
+
+-- ----------------------------
+-- Table structure for tab_change_room
+-- ----------------------------
+DROP TABLE IF EXISTS `tab_change_room`;
+CREATE TABLE `tab_change_room` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `stu_id` int(11) DEFAULT NULL,
+  `reasion` varchar(500) DEFAULT NULL,
+  `reamrk` varchar(500) DEFAULT NULL,
+  `apply_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `audit_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `status` varchar(50) DEFAULT NULL,
+  `audit_opinion` varchar(500) DEFAULT NULL,
+  `target_room` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tab_change_room
+-- ----------------------------
+INSERT INTO `tab_change_room` VALUES ('1', '2', '123', '456', '2017-04-24 17:42:31', null, '7', '8', '9');
 
 -- ----------------------------
 -- Table structure for tab_notify
