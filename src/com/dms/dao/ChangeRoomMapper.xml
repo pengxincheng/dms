@@ -5,16 +5,17 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="stu_id" property="stuId" jdbcType="INTEGER" />
     <result column="reasion" property="reasion" jdbcType="VARCHAR" />
-    <result column="reamrk" property="reamrk" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="apply_time" property="applyTime" jdbcType="TIMESTAMP" />
     <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="audit_opinion" property="auditOpinion" jdbcType="VARCHAR" />
-    <result column="target_room" property="targetRoom" jdbcType="INTEGER" />
+    <result column="target_room" property="targetRoom" jdbcType="VARCHAR" />
+    <result column="audit_man" property="auditMan" jdbcType="VARCHAR" />
     <association property="stu" resultMap="com.dms.dao.UserMapper.userMap"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, stu_id, reasion, reamrk, apply_time, audit_time, status, audit_opinion, target_room
+    id, stu_id, reasion, remark, apply_time, audit_time, status, audit_opinion, target_room,audit_man
   </sql>
   <select id="selectByPrimaryKey" resultMap="changeRoomMap" parameterType="java.lang.Integer" >
     select 
@@ -25,12 +26,14 @@
   
   <select id="selectAllChangeRooms" resultMap="changeRoomMap" parameterType="com.dms.entity.ChangeRoom">
   	select 
-    c.id, c.stu_id, c.reasion, c.reamrk, c.apply_time, c.audit_time, c.status, c.audit_opinion, c.target_room,
+    c.id, c.stu_id, c.reasion, c.remark, c.apply_time, c.audit_time, c.status, c.audit_opinion, c.target_room,c.audit_man,
    	u.name,u.stu_class,u.stu_no,
    	r.room_sn
     from tab_change_room c,tab_user u,tab_room r
     where c.stu_id = u.user_id and u.room_id = r.room_id
-    
+	<if test="status != null and status !=''">  
+        and status like CONCAT('%',#{status},'%')
+    </if> 
     order by id desc
   </select>
   
@@ -40,12 +43,12 @@
   </delete>
   <insert id="insert" parameterType="com.dms.entity.ChangeRoom" >
     insert into tab_change_room (id, stu_id, reasion, 
-      reamrk, apply_time, audit_time, 
-      status, audit_opinion, target_room
+      remark, apply_time, audit_time, 
+      status, audit_opinion, target_room,audit_man
       )
     values (#{id,jdbcType=INTEGER}, #{stuId,jdbcType=INTEGER}, #{reasion,jdbcType=VARCHAR}, 
-      #{reamrk,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{auditTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=VARCHAR}, #{auditOpinion,jdbcType=VARCHAR}, #{targetRoom,jdbcType=INTEGER}
+      #{remark,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, #{auditTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{auditOpinion,jdbcType=VARCHAR}, #{targetRoom,jdbcType=VARCHAR},#{auditMan}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dms.entity.ChangeRoom" >
@@ -60,8 +63,8 @@
       <if test="reasion != null" >
         reasion,
       </if>
-      <if test="reamrk != null" >
-        reamrk,
+      <if test="remark != null" >
+        remark,
       </if>
       <if test="applyTime != null" >
         apply_time,
@@ -78,6 +81,9 @@
       <if test="targetRoom != null" >
         target_room,
       </if>
+       <if test="auditMan != null" >
+        audit_man,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -89,8 +95,8 @@
       <if test="reasion != null" >
         #{reasion,jdbcType=VARCHAR},
       </if>
-      <if test="reamrk != null" >
-        #{reamrk,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="applyTime != null" >
         #{applyTime,jdbcType=TIMESTAMP},
@@ -105,7 +111,10 @@
         #{auditOpinion,jdbcType=VARCHAR},
       </if>
       <if test="targetRoom != null" >
-        #{targetRoom,jdbcType=INTEGER},
+        #{targetRoom,jdbcType=VARCHAR},
+      </if>
+       <if test="auditMan != null" >
+        auditMan,
       </if>
     </trim>
   </insert>
@@ -118,8 +127,8 @@
       <if test="reasion != null" >
         reasion = #{reasion,jdbcType=VARCHAR},
       </if>
-      <if test="reamrk != null" >
-        reamrk = #{reamrk,jdbcType=VARCHAR},
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
       </if>
       <if test="applyTime != null" >
         apply_time = #{applyTime,jdbcType=TIMESTAMP},
@@ -134,7 +143,10 @@
         audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
       </if>
       <if test="targetRoom != null" >
-        target_room = #{targetRoom,jdbcType=INTEGER},
+        target_room = #{targetRoom,jdbcType=VARCHAR},
+      </if>
+      <if test="auditMan != null" >
+        audit_man = #{auditMan,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -143,12 +155,13 @@
     update tab_change_room
     set stu_id = #{stuId,jdbcType=INTEGER},
       reasion = #{reasion,jdbcType=VARCHAR},
-      reamrk = #{reamrk,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       apply_time = #{applyTime,jdbcType=TIMESTAMP},
       audit_time = #{auditTime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=VARCHAR},
       audit_opinion = #{auditOpinion,jdbcType=VARCHAR},
-      target_room = #{targetRoom,jdbcType=INTEGER}
+      target_room = #{targetRoom,jdbcType=VARCHAR}
+      audit_man=#{auditMan}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

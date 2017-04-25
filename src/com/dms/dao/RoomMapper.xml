@@ -30,6 +30,9 @@
   	<if test="roomSn != null and roomSn !=''">  
         and room_sn like CONCAT('%',#{roomSn},'%')
     </if> 
+    <if test="buildingId != null and buildingId !=''">  
+        and r.building_id = #{buildingId}
+    </if> 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tab_room

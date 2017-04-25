@@ -39,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 自己写的CSS，请放在这里 -->
     <style type="text/css">
+
     </style>
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
@@ -56,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-40">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>维修任务列表</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>申请调换列表</li>
                 </ul><!-- /.breadcrumb -->
             </div>
         </div>
@@ -68,11 +69,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                <a data-toggle="tab" href="#waitSubmit">待提交</a>
                           </li>
                           <li class="">
-                               <a data-toggle="tab" href="#waitRepair">待维修</a>
+                               <a data-toggle="tab" href="#waitAudit">待审核</a>
                           </li>
-
                           <li class="">
-                               <a data-toggle="tab" href="#repaired">已修好</a>
+                               <a data-toggle="tab" href="#audited">已审核</a>
                           </li>
                       </ul>
                 </div>
@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                             <hr class="no-margin">
                             <div class="page-toolbar align-right list-toolbar">
-                                <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddRepairTask">
+                                <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddChangeRoom">
                                     <i class="ace-icon fa fa-plus"></i>
                                     添加
                                 </button>
@@ -121,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                     <!-- div.dataTables_borderWrap table-striped -->
                                     <div>
-                                        <table id="example2" class="table table-striped  table-bordered table-hover">
+                                        <table id="waitSubmitTable" class="table table-striped  table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                <th class="center">
@@ -130,10 +130,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         <span class="lbl"></span>
                                                     </label>
                                                 </th>
-                                                <th class="align-center">报修人</th>
-                                                 <th class="align-center">报修宿舍</th>
-                                                <th class="align-center">报修内容</th>
+                                                <th class="align-center">申请人</th>
+                                                <th class="align-center">学号</th>
+                                                <th class="align-center">班级</th>
+                                                <th class="align-center">当前宿舍</th>
+                                                <th class="align-center">调换宿舍</th>
+                                                <th class="align-center">调换原因</th>
                                                 <th class="align-center">状态</th>
+                                                <th class="align-center">备注</th>
                                                 <th class="align-center hidden-xs"><i class="ace-icon fa fa-wrench"></i>
                                        				 操作
                                     			</th>                                        
@@ -147,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
                 </div><!-- waitSubmit -->
-                <div id="waitRepair" class="tab-pane fade">
+                <div id="waitAudit" class="tab-pane fade">
                 <div class="row">
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
@@ -174,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                     <!-- div.dataTables_borderWrap table-striped -->
                                     <div>
-                                        <table id="example" class="table table-striped  table-bordered table-hover" width="100%">
+                                        <table id="waitAuditTable" class="table table-striped  table-bordered table-hover" width="100%">
                                             <thead>
                                             <tr>
                                                <th class="center">
@@ -183,12 +187,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         <span class="lbl"></span>
                                                     </label>
                                                 </th>
-                                                <th class="align-center">报修人</th>
-                                                 <th class="align-center">报修宿舍</th>
-                                                <th class="align-center">报修内容</th>
-                                                <th class="align-center">报修时间</th>
-                                                <th class="align-center">修理人</th>
+                                               	<th class="align-center">申请人</th>
+                                                <th class="align-center">学号</th>
+                                                <th class="align-center">班级</th>
+                                                <th class="align-center">当前宿舍</th>
+                                                <th class="align-center">调换宿舍</th>
+                                                <th class="align-center">调换原因</th>
+                                                <th class="align-center">申请时间</th>
+                                                <th class="align-center">审核人</th>
                                                 <th class="align-center">状态</th>
+                                                <th class="align-center">备注</th>
                                             </tr>
                                             </thead>                                           
                                         </table>
@@ -198,8 +206,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </form>
                     </div>
                 </div>
-                </div><!-- waitRepair -->
-                 <div id="repaired" class="tab-pane fade">
+                </div><!-- waitAudit -->
+                 <div id="audited" class="tab-pane fade">
                   	<div class="row">
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form2" action="index.html" method="post">
@@ -230,7 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                     <!-- div.dataTables_borderWrap table-striped -->
                                     <div>
-                                        <table id="example1" class="table table-striped  table-bordered table-hover" width="100%">
+                                        <table id="autidedTable" class="table table-striped  table-bordered table-hover" width="100%">
                                             <thead>
                                             <tr>
                                                <th class="center">
@@ -239,13 +247,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         <span class="lbl"></span>
                                                     </label>
                                                 </th>
-                                                <th class="align-center">报修人</th>
-                                                 <th class="align-center">报修宿舍</th>
-                                                <th class="align-center">报修内容</th>
-                                                <th class="align-center">报修时间</th>
-                                                <th class="align-center">修理人</th>
-                                                <th class="align-center">修理时间</th>
+                                                <th class="align-center">申请人</th>
+                                                <th class="align-center">学号</th>
+                                                <th class="align-center">班级</th>
+                                                <th class="align-center">当前宿舍</th>
+                                                <th class="align-center">调换宿舍</th>
+                                                <th class="align-center">调换原因</th>
+                                                <th class="align-center">申请时间</th>
+                                                <th class="align-center">审核人</th>
+                                                <th class="align-center">审核意见</th>
+                                                <th class="align-center">审核时间</th>
                                                 <th class="align-center">状态</th>
+                                                <th class="align-center">备注</th>
                                             </tr>
                                             </thead>                                           
                                         </table>
@@ -288,11 +301,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="assets/js/src/ace.js"></script>
 
 <!-- 自己写的JS，请放在这里 -->
-<script src="js/repairTask.js"></script>
+<script src="js/changeRoom.js"></script>
 <script type="text/javascript">
-	initTable();
-	initTableRepaired();
 	initTableWaitSubmit();
+	initTableWaitAudit();
+	initTableAutdited();
 	jQuery(function ($) {
         //为工具条添加点击事件
         $(".page-toolbar>button").on(ace.click_event,function (e) {
@@ -301,6 +314,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 window.location.href = ($(this).data("ths-href"));
             }
         });
+
         //为表格操作列添加点击事件
         $(".col-op-ths>button").on(ace.click_event,function(e){
             if($(this).data("ths-href"))
@@ -308,6 +322,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 window.location.href = ($(this).data("ths-href"));
             }
         });
+
         //为表格添加排序事件
         $("#simple-table>thead>tr>th").on(ace.click_event, function (e) {
             var $i = $(this).find("i");
@@ -319,17 +334,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $i.removeClass("fa-sort-desc").addClass("fa-sort-asc");
             }
         })
+
         //And for the first simple table, which doesn't have TableTools or dataTables
         //select/deselect all rows according to table header checkbox
         var active_class = 'active';
         $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
             var th_checked = this.checked;//checkbox inside "TH" table header
+
             $(this).closest('table').find('tbody > tr').each(function(){
                 var row = this;
                 if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
                 else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
             });
         });
+
         //select/deselect a row when the checkbox is checked/unchecked
         $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
             var $row = $(this).closest('tr');

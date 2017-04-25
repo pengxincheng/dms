@@ -207,7 +207,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li>
 					
 					 <li class="">
-                        <a href="portal-main.html" target="main">
+                        <a href="goToChangeRoomList.do" target="main">
                             <i class="menu-icon fa fa-area-chart"></i>
                             调换宿舍
                         </a>
@@ -273,12 +273,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                     </li>
                     <li class="">
-                        <a href="#">
-                            <i class="menu-icon fa fa-arrow-circle-right"></i>
-                            	宿舍管理
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-th"></i>
+                            <span class="menu-text">宿舍管理</span>
+                            <b class="arrow fa fa-angle-down"></b>
                         </a>
 
                         <b class="arrow"></b>
+                        <ul class="submenu">
+                            <li class="">
+                                <a href="#" target="main">
+                                    <i class="menu-icon fa fa-list"></i>
+                                    	宿舍列表
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="">
+                                <a href="#" target="main">
+                                    <i class="menu-icon fa fa-list"></i>
+                                   		 卫生检查
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            
+                            <li class="">
+                                <a href="goToChangeRoomListForManager.do" target="main">
+                                    <i class="menu-icon fa fa-list"></i>
+                                   		 调换宿舍
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
+
                     </li>
                     <li class="">
                         <a href="#">

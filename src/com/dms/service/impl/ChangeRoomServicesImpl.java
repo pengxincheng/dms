@@ -1,5 +1,6 @@
 package com.dms.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ChangeRoomServicesImpl implements ChangeRoomService {
 
 	@Override
 	public int addChangeRoom(ChangeRoom changeRoom) {
+		
+		changeRoom.setStatus("待提交");
+		
 		return changeRoomMapper.insertSelective(changeRoom);
 	}
 
@@ -42,6 +46,29 @@ public class ChangeRoomServicesImpl implements ChangeRoomService {
 	@Override
 	public int delChangeRoomById(Integer id) {
 		return changeRoomMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public void auditApply(Integer id, String status, String auditOponion) {
+		
+		ChangeRoom changeRoom = changeRoomMapper.selectByPrimaryKey(id);
+		changeRoom.setAuditOpinion(auditOponion);
+		changeRoom.setStatus(status);
+		changeRoom.setAuditTime(new Date());
+		
+		changeRoomMapper.updateByPrimaryKeySelective(changeRoom);
+		
+		
+	}
+
+	@Override
+	public void submitApply(Integer id,String auditMan) {
+		ChangeRoom changeRoom = changeRoomMapper.selectByPrimaryKey(id);
+		changeRoom.setApplyTime(new Date());
+		changeRoom.setAuditMan(auditMan);
+		changeRoom.setStatus("待审核");
+		
+		changeRoomMapper.updateByPrimaryKeySelective(changeRoom);
 	}
 
 }

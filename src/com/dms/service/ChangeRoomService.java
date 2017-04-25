@@ -42,4 +42,16 @@ public interface ChangeRoomService {
 	 * @return
 	 */
 	int delChangeRoomById(Integer id);
+	/**
+	 * 审核
+	 * @param id
+	 * @param status
+	 * @param auditOponion
+	 */
+	void auditApply(Integer id, String status, String auditOponion);
+	/**
+	 * 提交
+	 * @param id
+	 */
+	void submitApply(Integer id,String auditMan);
 }

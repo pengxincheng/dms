@@ -9,7 +9,7 @@ public class ChangeRoom {
 
     private String reasion;
 
-    private String reamrk;
+    private String remark;
 
     private Date applyTime;
 
@@ -19,11 +19,21 @@ public class ChangeRoom {
 
     private String auditOpinion;
 
-    private Integer targetRoom;
+    private String targetRoom;
     
     private User stu;
     
-    public User getStu() {
+    private String auditMan;
+    
+	public String getAuditMan() {
+		return auditMan;
+	}
+
+	public void setAuditMan(String auditMan) {
+		this.auditMan = auditMan;
+	}
+
+	public User getStu() {
 		return stu;
 	}
 
@@ -55,15 +65,15 @@ public class ChangeRoom {
         this.reasion = reasion == null ? null : reasion.trim();
     }
 
-    public String getReamrk() {
-        return reamrk;
-    }
+    public String getRemark() {
+		return remark;
+	}
 
-    public void setReamrk(String reamrk) {
-        this.reamrk = reamrk == null ? null : reamrk.trim();
-    }
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
-    public Date getApplyTime() {
+	public Date getApplyTime() {
         return applyTime;
     }
 
@@ -95,11 +105,13 @@ public class ChangeRoom {
         this.auditOpinion = auditOpinion == null ? null : auditOpinion.trim();
     }
 
-    public Integer getTargetRoom() {
-        return targetRoom;
-    }
+	public String getTargetRoom() {
+		return targetRoom;
+	}
 
-    public void setTargetRoom(Integer targetRoom) {
-        this.targetRoom = targetRoom;
-    }
+	public void setTargetRoom(String targetRoom) {
+		this.targetRoom = targetRoom;
+	}
+
+   
 }
