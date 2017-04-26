@@ -1,5 +1,6 @@
 package com.dms.controller;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +17,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 
 
+
+
+
+
+import com.dms.Util.ExcellUtils;
 import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.Area;
 import com.dms.entity.Room;
@@ -192,5 +200,23 @@ public class UserController {
 
 		return jsonArray;
 
+	}
+	
+	@RequestMapping("importStu")
+	public String testExcell(HttpServletRequest request) {
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		InputStream in = null;
+		List<List<Object>> listob = null;
+		MultipartFile file = multipartRequest.getFile("stuExcell");
+		try{
+			in = file.getInputStream();
+			listob = new ExcellUtils().getListByExcel(in,file.getOriginalFilename());
+			in.close();
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return "";
 	}
 }

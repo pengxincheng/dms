@@ -204,16 +204,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
 
                         <b class="arrow"></b>
-                    </li>
-					
-					<li class="">
-                        <a href="portal-main.html" target="main">
-                            <i class="menu-icon fa fa-area-chart"></i>
-                            迁出宿舍
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
+                    </li>					
                 </ul>
             </li>
             <li class="">

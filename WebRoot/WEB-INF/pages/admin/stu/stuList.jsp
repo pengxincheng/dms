@@ -181,9 +181,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <i class="ace-icon fa fa-trash-o"></i>
                                     删除
                                 </button>
-                                <button type="button" class="btn btn-xs btn-purple btn-xs-ths" id="btnExport">
+                                <button type="button" class="btn btn-xs btn-purple btn-xs-ths" id="btnImport">
                                     <i class="ace-icon fa fa-file-excel-o"></i>
-                                    导出
+                                    导入
                                 </button>
                             </div>
                             <div class="row">
@@ -225,8 +225,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!--/.main-content-inner-->
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
-
-<!-- basic scripts -->
+<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<form method="post" id="importStu" name="importStu" enctype="multipart/form-data" action="importStu.do">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">从Excell导入</h4>
+				</div>
+				
+				<div class="modal-body col-xs-12">
+					<div class="form-group">
+						<div class="col-sm-3">
+							<input type="file" id="stuExcell" name="stuExcell"> 
+						</div>
+					</div>
+				
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="submit" class="btn btn-primary" 
+					id="btnImport1" onclick="return checkData()">导入</button>
+			</div>
+			</form>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+	</div>
+	<!-- basic scripts -->
 
 <!--[if !IE]> -->
 <script src="components/jquery/dist/jquery.js"></script>
