@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-24 18:06:56
+Date: 2017-04-26 19:11:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ CREATE TABLE `tab_applygood` (
 -- ----------------------------
 -- Records of tab_applygood
 -- ----------------------------
-INSERT INTO `tab_applygood` VALUES ('1', '彭新成', 'A04-N426', '拖把', '2017-04-17 15:56:58', '王二', null, '2017-04-14 17:33:13', '待提交', '原来的拖把坏了');
+INSERT INTO `tab_applygood` VALUES ('1', '彭新成', 'A04-N426', '拖把', '2017-04-25 15:02:32', '王二', null, '2017-04-25 15:02:32', '待提交', '拖把丢了');
 INSERT INTO `tab_applygood` VALUES ('2', '彭新成', 'A04-N426', '扫把', '2017-04-17 12:17:12', '王二', '', '2017-04-17 12:17:19', '审核通过', '原来的坏了');
 INSERT INTO `tab_applygood` VALUES ('3', '彭新成', 'A04-N426', '扫把', '2017-04-14 17:40:44', '王二', '同意，来领吧', '2017-04-14 17:40:44', '审核通过', '原来的坏了');
 INSERT INTO `tab_applygood` VALUES ('4', '彭新成', 'A04-N426', '扫把', '2017-04-14 17:42:47', '王二', '不同意', '2017-04-14 17:42:47', '审核不通过', '原来的坏了');
@@ -88,7 +88,7 @@ CREATE TABLE `tab_building` (
 -- ----------------------------
 -- Records of tab_building
 -- ----------------------------
-INSERT INTO `tab_building` VALUES ('1', '1', '2010-01-01', '2070-01-01', '王二', '100', '90', '1', 'A-04', '男生宿舍');
+INSERT INTO `tab_building` VALUES ('1', '1', '2010-01-01', '2070-01-01', '王二', '100', '1', '1', 'A-04', '男生宿舍');
 INSERT INTO `tab_building` VALUES ('4', '1', '2017-04-05', '2087-04-05', '王二', '999', null, null, 'A-01', '11111');
 INSERT INTO `tab_building` VALUES ('5', '1', '2017-04-05', '2087-04-05', '王二', '21', null, null, 'A-03', '女生宿舍');
 INSERT INTO `tab_building` VALUES ('6', '1', '2017-04-05', '2087-04-05', '王二', '999', null, null, 'A-02', '男生宿舍');
@@ -102,19 +102,46 @@ CREATE TABLE `tab_change_room` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stu_id` int(11) DEFAULT NULL,
   `reasion` varchar(500) DEFAULT NULL,
-  `reamrk` varchar(500) DEFAULT NULL,
-  `apply_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `audit_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `remark` varchar(500) DEFAULT NULL,
+  `apply_time` datetime DEFAULT NULL,
+  `audit_time` datetime DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `audit_opinion` varchar(500) DEFAULT NULL,
-  `target_room` int(11) DEFAULT NULL,
+  `target_room` varchar(50) DEFAULT NULL,
+  `audit_man` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_change_room
 -- ----------------------------
-INSERT INTO `tab_change_room` VALUES ('1', '2', '123', '456', '2017-04-24 17:42:31', null, '7', '8', '9');
+INSERT INTO `tab_change_room` VALUES ('1', '2', '他们宿舍安静', '睡觉睡的好', '2017-04-25 16:46:12', '2017-04-25 16:43:04', '待审核', '', 'A04-N425', '王二');
+INSERT INTO `tab_change_room` VALUES ('2', '2', '他们宿舍赶紧', '', '2017-04-24 20:49:06', '2017-04-25 16:06:25', '审核通过', '好的，你一天内搬过去吧', 'A04-N425', '王二');
+INSERT INTO `tab_change_room` VALUES ('3', '2', '他们宿舍凉爽', '', '2017-04-24 20:49:06', '2017-04-24 20:49:06', '审核通过', '', 'A04-N425', '王二');
+INSERT INTO `tab_change_room` VALUES ('4', '2', '他们宿舍打游戏', '', '2017-04-24 20:49:06', '2017-04-24 20:49:06', '审核不通过', '', 'A04-N425', '王二');
+INSERT INTO `tab_change_room` VALUES ('6', '2', '测试', '测试', null, null, '待提交', null, 'A04-N425', null);
+
+-- ----------------------------
+-- Table structure for tab_check_hygiene
+-- ----------------------------
+DROP TABLE IF EXISTS `tab_check_hygiene`;
+CREATE TABLE `tab_check_hygiene` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `chack_time` datetime DEFAULT NULL,
+  `room_id` int(11) DEFAULT NULL,
+  `check_man` varchar(50) DEFAULT NULL,
+  `mark` int(11) DEFAULT NULL,
+  `describes` varchar(500) DEFAULT NULL,
+  `building_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tab_check_hygiene
+-- ----------------------------
+INSERT INTO `tab_check_hygiene` VALUES ('1', '2017-04-25 17:14:49', '1', '张三', '4', '宿舍卫生好的很', '1');
+INSERT INTO `tab_check_hygiene` VALUES ('2', '2017-04-26 09:30:38', '1', '侯亮平', '4', '宿舍很干净，很整洁', '1');
+INSERT INTO `tab_check_hygiene` VALUES ('3', '2017-04-26 09:31:13', '5', '李四', '2', '宿舍地上全是垃圾', '1');
 
 -- ----------------------------
 -- Table structure for tab_notify
@@ -163,7 +190,7 @@ CREATE TABLE `tab_register` (
   `reasion` varchar(500) DEFAULT NULL,
   `remark` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_register
@@ -215,7 +242,7 @@ CREATE TABLE `tab_room` (
   `isFiled` varchar(20) DEFAULT NULL,
   `room_sn` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_room
@@ -223,6 +250,7 @@ CREATE TABLE `tab_room` (
 INSERT INTO `tab_room` VALUES ('1', '1', '1', '4', '啦啦啦啦啦', '4', '4', '0', 'A04-N426');
 INSERT INTO `tab_room` VALUES ('3', '1', '6', '4', '优秀宿舍', '4', '0', '1', 'A02-S426');
 INSERT INTO `tab_room` VALUES ('4', '2', '7', '4', '宿舍宿舍', '4', '0', '1', 'B01-N426');
+INSERT INTO `tab_room` VALUES ('5', '1', '1', '6', '哈哈哈', '6', '0', '1', 'A04-N425');
 
 -- ----------------------------
 -- Table structure for tab_user
@@ -246,7 +274,7 @@ CREATE TABLE `tab_user` (
   `room_id` int(11) DEFAULT NULL,
   `is_alloted` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_user
@@ -255,7 +283,10 @@ INSERT INTO `tab_user` VALUES ('1', '', '张三', '男', '21', null, null, null,
 INSERT INTO `tab_user` VALUES ('2', '201316920422', '彭新成', '男', '21', '2013级', '软件1302', '1', '3', '201316920422', 'ICy5YqxZB1uWSwcVLSNLcA==', null, '1', '1', '1', '1');
 INSERT INTO `tab_user` VALUES ('3', null, '王二', '女', '40', null, null, '1', '2', 'manager', 'ICy5YqxZB1uWSwcVLSNLcA==', null, '1', '1', '1', '1');
 INSERT INTO `tab_user` VALUES ('4', '201316920419', '徐赛赛', '男', '22', '2013级', '软件1302', null, '3', '201316920419', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
-INSERT INTO `tab_user` VALUES ('6', '201316920420', '王磊', '男', '22', '2013级', '软件1302', null, '3', '201316920422', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
+INSERT INTO `tab_user` VALUES ('6', '201316920418', '王磊', '男', '22', '2013级', '软件1302', null, '3', '201316920422', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
+INSERT INTO `tab_user` VALUES ('7', '201316920417', '张仁杰', '男', '22', '2013级', '软件1305', null, '3', '201316920418', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
+INSERT INTO `tab_user` VALUES ('8', '201316920420', '陈贵龙', '男', '22', '2013级', '软件1302', null, '3', '201316920420', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
+INSERT INTO `tab_user` VALUES ('9', '201316920423', '徐名扬', '男', '23', '2013级', '软件1303', null, '3', '201316920423', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for tab_visit_enregister
