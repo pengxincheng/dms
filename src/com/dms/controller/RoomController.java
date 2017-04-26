@@ -3,6 +3,8 @@ package com.dms.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
@@ -18,6 +20,7 @@ import com.dms.dao.RoomMapper;
 import com.dms.entity.Area;
 import com.dms.entity.Building;
 import com.dms.entity.Room;
+import com.dms.entity.User;
 import com.dms.service.AreaService;
 import com.dms.service.BuildingService;
 import com.dms.service.RoomService;
@@ -56,6 +59,31 @@ public class RoomController {
 		return array;
 
 	}
+	
+	/**
+	 * 宿舍列表  宿管员用
+	 * 
+	 * @param room
+	 * @return
+	 */
+	@RequestMapping("getAllRoomsForManager")
+	@ResponseBody
+	public JSONArray getAllRoomsForManager(Room room,HttpServletRequest request) {
+
+		User user = (User) request.getSession().getAttribute("currentUser");
+		
+		room.setBuildingId(Integer.parseInt(user.getBuildingId()));
+		
+		List<Room> rooms = roomService.findAllRooms(room);
+		JsonConfig jsonConfig = new JsonConfig();
+		// 将list转为jsonArray, 不转换Date对象
+		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor("yyyy-MM-dd"));
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		JSONArray array = JSONArray.fromObject(rooms, jsonConfig);
+		return array;
+
+	}
+
 
 	/**
 	 * 添加宿舍
@@ -134,5 +162,16 @@ public class RoomController {
 		model.addAttribute("areas", areas);
 		return "admin/room/addRoom";
 	}
+	
+	/**
+	 * 跳转到列表页  宿管员用
+	 * 
+	 * @return
+	 */
+	@RequestMapping("goToListPageForManager")
+	public String goToListPageForManager() {
+		return "dormManager/room/roomList";
+	}
+	
 
 }

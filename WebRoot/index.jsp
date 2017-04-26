@@ -197,15 +197,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                         <b class="arrow"></b>
                     </li>
-                    <li class="">
-                        <a href="portal-main.html" target="main">
-                            <i class="menu-icon fa fa-area-chart"></i>
-                            卫生评比
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>
-					
 					 <li class="">
                         <a href="goToChangeRoomList.do" target="main">
                             <i class="menu-icon fa fa-area-chart"></i>
@@ -233,7 +224,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
                 <b class="arrow"></b>
                 <ul class="submenu">
+					<li class="">
+                        <a href="goToStuListForManager.do" target="main">
+                            <i class="menu-icon fa fa-arrow-circle-right"></i>
+                           		学生列表
+                        </a>
 
+                        <b class="arrow"></b>
+                    </li>  
                     <li class="">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-th"></i>
@@ -282,13 +280,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <b class="arrow"></b>
                         <ul class="submenu">
                             <li class="">
-                                <a href="#" target="main">
+                                <a href="goToListPageForManager.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                     	宿舍列表
                                 </a>
 
                                 <b class="arrow"></b>
-                            </li>
+                            </li> 
                             
                             <li class="">
                                 <a href="goToCheckHygieneList.do" target="main">
@@ -310,14 +308,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </ul>
 
                     </li>
-                    <li class="">
-                        <a href="#">
-                            <i class="menu-icon fa fa-arrow-circle-right"></i>
-                           		卫生管理
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>      
                     <li class="">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-th"></i>
@@ -352,14 +342,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                         <b class="arrow"></b>
                     </li>   
-                    <li class="">
-                        <a href="#">
-                            <i class="menu-icon fa fa-arrow-circle-right"></i>
-                           		迁入迁出
-                        </a>
-
-                        <b class="arrow"></b>
-                    </li>  
+                    
                     <li class="">
                         <a href="goToStuApplyGoodsListForManager.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>

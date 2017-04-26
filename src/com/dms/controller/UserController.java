@@ -165,4 +165,32 @@ public class UserController {
 		return "admin/stu/addStu";
 	}
 
+	@RequestMapping("goToStuListForManager")
+	public String goToStuListForManager() {
+		return "dormManager/stu/stuList";
+	}
+	
+	/**
+	 * 宿管员获取学生 
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("getAllStusForManager")
+	@ResponseBody
+	public JSONArray getAllStusForManager(User user,HttpServletRequest request) {
+
+		User u = (User) request.getSession().getAttribute("currentUser");
+		u.setBuildingId(u.getBuildingId());
+		
+		List<User> users = userService.getAllUsers(user);
+
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor("yyyy-MM-dd"));
+		JSONArray jsonArray = JSONArray.fromObject(users, jsonConfig);
+
+		return jsonArray;
+
+	}
 }
