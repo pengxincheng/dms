@@ -15,12 +15,12 @@ function initTableWaitSubmit() {
 						$('#waitSubmitTable').DataTable(
 								{
 									destroy: true,   //是否允许破坏表
-									pageLength : 10,// 每页显示多少条记录
+									pageLength : 6,// 每页显示多少条记录
 									searching : false,
 									lengthChange : true,
 									data : data,
 									info : false,
-									lengthMenu : [ 10, 15, 20 ],
+									lengthMenu : [ 6, 10, 15, 20 ],
 									pagingType : "full_numbers",
 									dom : "t<'ths-page'fl><'ths-pager'p>",
 									columns : [
@@ -152,12 +152,12 @@ function initTableWaitAudit() {
 				$('#waitAuditTable').DataTable(
 						{
 							destroy: true,   //是否允许破坏表
-							pageLength : 10,// 每页显示多少条记录
+							pageLength : 6,// 每页显示多少条记录
 							searching : false,
 							lengthChange : true,
 							data : data,
 							info : false,
-							lengthMenu : [ 10, 15, 20 ],
+							lengthMenu : [ 6, 10, 15, 20 ],
 							pagingType : "full_numbers",
 							dom : "t<'ths-page'fl><'ths-pager'p>",
 							columns : [
@@ -267,12 +267,12 @@ function initTableAutdited() {
 				$('#autidedTable').DataTable(
 						{
 							destroy: true,   //是否允许破坏表
-							pageLength : 10,// 每页显示多少条记录
+							pageLength : 6,// 每页显示多少条记录
 							searching : false,
 							lengthChange : true,
 							data : data,
 							info : false,
-							lengthMenu : [ 10, 15, 20 ],
+							lengthMenu : [ 6, 10, 15, 20 ],
 							pagingType : "full_numbers",
 							dom : "t<'ths-page'fl><'ths-pager'p>",
 							columns : [
@@ -392,12 +392,12 @@ function initTableAutditedForManager() {
 				$('#waitAuditTable').DataTable(
 						{
 							destroy: true,   //是否允许破坏表
-							pageLength : 10,// 每页显示多少条记录
+							pageLength : 6,// 每页显示多少条记录
 							searching : false,
 							lengthChange : true,
 							data : data,
 							info : false,
-							lengthMenu : [ 10, 15, 20 ],
+							lengthMenu : [ 6, 10, 15, 20 ],
 							pagingType : "full_numbers",
 							dom : "t<'ths-page'fl><'ths-pager'p>",
 							columns : [

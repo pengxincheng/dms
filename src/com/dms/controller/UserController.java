@@ -1,6 +1,7 @@
 package com.dms.controller;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
 
 
 
@@ -211,12 +213,26 @@ public class UserController {
 		try{
 			in = file.getInputStream();
 			listob = new ExcellUtils().getListByExcel(in,file.getOriginalFilename());
+			List<User> stus = new ArrayList<User>();
+			for(List<Object> objects : listob){
+				User stu = new User();
+				stu.setName(String.valueOf(objects.get(0)));
+				stu.setStuNo(String.valueOf(objects.get(1)));
+				stu.setGender(String.valueOf(objects.get(2)));
+				stu.setAge(Integer.parseInt(String.valueOf(objects.get(3))));
+				stu.setStuGrade(String.valueOf(objects.get(4)));
+				stu.setStuClass(String.valueOf(objects.get(5)));
+				
+				stus.add(stu);
+			}
+			
+			userService.batchAddStu(stus);
+			
 			in.close();
-
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		return "";
+		return "redirect:/goToStuList.do";
 	}
 }

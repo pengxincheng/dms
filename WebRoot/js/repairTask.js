@@ -17,12 +17,12 @@ function initTable() {
 						$('#example').DataTable(
 								{
 									destroy: true,   //是否允许破坏表
-									pageLength : 10,// 每页显示多少条记录
+									pageLength : 6,// 每页显示多少条记录
 									searching : false,
 									lengthChange : true,
 									data : data,
 									info : false,
-									lengthMenu : [ 10, 15, 20 ],
+									lengthMenu : [ 6, 10, 15, 20 ],
 									pagingType : "full_numbers",
 									dom : "t<'ths-page'fl><'ths-pager'p>",
 									columns : [
@@ -120,12 +120,12 @@ function initTableRepaired() {
 				$('#example1').DataTable(
 						{
 							destroy: true,   //是否允许破坏表
-							pageLength : 10,// 每页显示多少条记录
+							pageLength : 6,// 每页显示多少条记录
 							searching : false,
 							lengthChange : true,
 							data : data,
 							info : false,
-							lengthMenu : [ 10, 15, 20 ],
+							lengthMenu : [ 6, 10, 15, 20 ],
 							pagingType : "full_numbers",
 							dom : "t<'ths-page'fl><'ths-pager'p>",
 							columns : [
@@ -220,12 +220,12 @@ function initTableWaitSubmit() {
 				$('#example2').DataTable(
 						{
 							destroy: true,   //是否允许破坏表
-							pageLength : 10,// 每页显示多少条记录
+							pageLength : 6,// 每页显示多少条记录
 							searching : false,
 							lengthChange : true,
 							data : data,
 							info : false,
-							lengthMenu : [ 10, 15, 20 ],
+							lengthMenu : [ 6, 10, 15, 20 ],
 							pagingType : "full_numbers",
 							dom : "t<'ths-page'fl><'ths-pager'p>",
 							columns : [
@@ -326,12 +326,12 @@ function initTableForManagerWaitDeal(){
 				$('#managerWaitDeal').DataTable(
 						{
 							destroy: true,   //是否允许破坏表
-							pageLength : 10,// 每页显示多少条记录
+							pageLength : 6,// 每页显示多少条记录
 							searching : false,
 							lengthChange : true,
 							data : data,
 							info : false,
-							lengthMenu : [ 10, 15, 20 ],
+							lengthMenu : [ 6, 10, 15, 20 ],
 							pagingType : "full_numbers",
 							dom : "t<'ths-page'fl><'ths-pager'p>",
 							columns : [

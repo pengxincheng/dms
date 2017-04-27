@@ -34,4 +34,6 @@ public interface UserMapper {
     List<User> selectAllStusNotAlloted(User user);
     
     User selectByStuNo(String stuNo);
+    
+    int batchInsert(List<User> stus);
 }

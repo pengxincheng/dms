@@ -72,6 +72,12 @@ public class UserServiceImpl implements UserService {
 
 		return userMapper.selectByStuNo(stuNo);
 	}
+
+	@Override
+	public int batchAddStu(List<User> stus) {
+		
+		return userMapper.batchInsert(stus);
+	}
 	
 
 }

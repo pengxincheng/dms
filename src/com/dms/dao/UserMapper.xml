@@ -290,4 +290,25 @@
       is_alloted = #{isAlloted,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  
+  <insert id="batchInsert" parameterType="java.util.List" keyProperty="Id">  
+        insert into tab_user(stu_no, name, gender, age, stu_grade, stu_class,username,password,role_id,is_alloted)
+        values   
+        <foreach collection="list" item="item" index="index" separator=",">  
+            (
+             #{item.stuNo},
+             #{item.name},
+             #{item.gender},
+             #{item.age},
+             #{item.stuGrade},
+             #{item.stuClass},
+             #{item.stuNo},
+             'ICy5YqxZB1uWSwcVLSNLcA==',
+             '3',
+             '0'
+             )  
+        </foreach>              
+    </insert>  
+
+  
 </mapper>

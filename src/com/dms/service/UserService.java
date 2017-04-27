@@ -45,4 +45,6 @@ public interface UserService {
 	
 	User getStuByStuNo(String stuNo);
 	
+	int batchAddStu(List<User> stus);
+	
 }
