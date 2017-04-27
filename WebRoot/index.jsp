@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--新增条-->
 <div class="ths-toolbar">
     <div class="row">
-        <div class="col-sm-4 hidden-xs">欢迎您，管理员</div>
+        <div class="col-sm-4 hidden-xs">欢迎您，${sessionScope.currentUser.name}</div>
         <div class="col-xs-12 col-sm-8 ">
             <ul class=" pull-right" data-level="top">
                 <li>
