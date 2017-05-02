@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-04-26 19:11:12
+Date: 2017-05-02 16:09:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -274,7 +274,7 @@ CREATE TABLE `tab_user` (
   `room_id` int(11) DEFAULT NULL,
   `is_alloted` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tab_user
@@ -287,6 +287,8 @@ INSERT INTO `tab_user` VALUES ('6', '201316920418', '王磊', '男', '22', '2013
 INSERT INTO `tab_user` VALUES ('7', '201316920417', '张仁杰', '男', '22', '2013级', '软件1305', null, '3', '201316920418', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
 INSERT INTO `tab_user` VALUES ('8', '201316920420', '陈贵龙', '男', '22', '2013级', '软件1302', null, '3', '201316920420', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
 INSERT INTO `tab_user` VALUES ('9', '201316920423', '徐名扬', '男', '23', '2013级', '软件1303', null, '3', '201316920423', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
+INSERT INTO `tab_user` VALUES ('10', '201316920403', '唐林', '男', '20', '2013级', '软件1302', null, '3', '201316920403', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
+INSERT INTO `tab_user` VALUES ('11', '201316920404', '李永涛', '男', '20', '2013级', '软件1303', null, '3', '201316920404', 'ICy5YqxZB1uWSwcVLSNLcA==', null, null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for tab_visit_enregister
