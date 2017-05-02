@@ -434,3 +434,102 @@ function checkData(){
    }  
    return true;  
 }  
+
+
+
+
+
+jQuery(function($) {
+	// And for the first simple table, which doesn't have TableTools or
+	// dataTables
+	// select/deselect all rows according to table header checkbox
+	var active_class = 'active';
+	$('#example > thead > tr > th input[type=checkbox]').eq(0).on('click',
+		function() {
+			var th_checked = this.checked;// checkbox inside "TH" table// header
+			$(this).closest('table').find('tbody > tr').each(function() {
+					var row = this;
+						if (th_checked)
+							$(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+							else
+								$(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+						});
+			});
+
+	// select/deselect a row when the checkbox is checked/unchecked
+	$('#example').on('click', 'td input[type=checkbox]', function() {
+		var $row = $(this).closest('tr');
+		// if($row.is('.detail-row ')) return;
+		if (this.checked)
+			$row.addClass(active_class);
+		else
+			$row.removeClass(active_class);
+	});
+	
+	$('#example1 > thead > tr > th input[type=checkbox]').eq(0).on('click',function() {
+				var th_checked = this.checked;// checkbox inside "TH" table// header
+				$(this).closest('table').find('tbody > tr').each(function() {
+						var row = this;
+							if (th_checked)
+								$(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+								else
+									$(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+							});
+				});
+
+		// select/deselect a row when the checkbox is checked/unchecked
+		$('#example1').on('click', 'td input[type=checkbox]', function() {
+			var $row = $(this).closest('tr');
+			// if($row.is('.detail-row ')) return;
+			if (this.checked)
+				$row.addClass(active_class);
+			else
+				$row.removeClass(active_class);
+		});
+});
+
+function getSelectedIds(){
+	var checkBoxes = new Array();
+	var ids = new Array();
+	var j = 0;
+	checkBoxes = $('#example1 > tbody > tr > td input[type=checkbox]');
+	for(var i=0;i<checkBoxes.length;i++){
+		if(checkBoxes[i].checked){
+			ids[j] = checkBoxes[i].value;
+			j++;
+		}
+	}
+	return ids;
+}
+//批量删除
+$('#btnDelete').click(function(){
+	var ids = getSelectedIds();
+	if(ids.length != 0){
+		$.ajax({
+			url : 'batchDeleteStu.do',// 跳转到 action
+			
+			  data : { 
+				  		"ids" :ids
+			  		},			 
+			traditional : true,
+			type : "post",
+			cache : false,
+			dataType : "json",
+			success : function(data){
+				alert("操作成功");
+				window.location.href="goToStuList.do";
+			},
+			error:function(){
+				alert("系统异常");
+			}
+		});
+	}
+	else{
+		alert("请先选择！");
+	}	
+});
+//批量分配宿舍
+$('#btnAllot').click(function(){
+	alert(1);
+});
+

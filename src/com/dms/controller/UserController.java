@@ -235,4 +235,19 @@ public class UserController {
 		
 		return "redirect:/goToStuList.do";
 	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpServletRequest request){
+		request.getSession().invalidate();
+		return "redirect:/login.jsp";
+	}
+	
+	@RequestMapping("batchDeleteStu")
+	@ResponseBody
+	public JSONObject batchDeleteStu(Integer[] ids){
+		JSONObject jsonObject = new JSONObject();
+		userService.batchDelStu(ids);
+		jsonObject.put("msg", "操作成功");
+		return jsonObject;
+	}
 }

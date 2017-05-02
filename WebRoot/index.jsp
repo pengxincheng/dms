@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -67,16 +68,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <li> <a href="#" class="grey"><i class="ace-icon fa fa-angle-double-right blue"></i> 常用模块五</a> </li>
                         </ul>
                     </div>
-
                 </li>
                 <li><i class="ace-icon fa fa-file-o grey bigger-100" title="待办事项"></i><span class="badge badge-warning">99</span></li>
                 <li><i class="ace-icon fa fa-bullhorn grey bigger-110" title="通知"></i><span class="badge badge-success">2</span></li>
                 <li><i class="ace-icon fa fa-envelope-o grey bigger-110" title="未读邮件"></i><span class="badge badge-important">5</span></li>
-
                 <li><i class="ace-icon fa fa-user grey bigger-110" title="我的工作台"></i></li>
                 <li><i class="ace-icon fa fa-search grey bigger-110" title="搜索"></i></li>
-                <li> <i class="ace-icon fa fa-gears grey bigger-110" title="设置"></i></li>
-                <li> <i class="ace-icon fa fa-power-off grey bigger-110" title="注销"></i></li>
+                <li><i class="ace-icon fa fa-gears grey bigger-110" title="设置"></i></li>
+                <li><a class="ace-icon fa fa-power-off grey bigger-110" title="注销" href="logout.do"></a></li>
             </ul>
         </div>
     </div>
@@ -86,23 +85,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="navbar" class="navbar navbar-default ths-top-menu">
     <div class="navbar-container " id="navbar-container">
         <!-- #section:basics/sidebar.mobile.toggle 移动端 菜单选项-->
-
         <button data-target="#sidebarTop" data-toggle="collapse" type="button"
                 class="pull-left navbar-toggle collapsed">
             <span class="sr-only">菜单</span>
-
             <i class="ace-icon fa fa-th white bigger-175"></i>
         </button>
-
         <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
             <span class="sr-only">模块</span>
-
             <i class="ace-icon fa fa-navicon white bigger-175"></i>
         </button>
-
     </div>
-
-
     <!-- /section:basics/sidebar.mobile.toggle -->
     <div class="navbar-header pull-left">
         <!-- #section:basics/navbar.layout.brand -->
@@ -114,61 +106,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </a>
         <!-- /section:basics/navbar.toggle -->
     </div>
-
     <!-- #section:basics/navbar.dropdown -->
-
-
-    <div class="navbar-buttons navbar-header pull-right" role="navigation">
-        <!--注释蒋欣-->
-        <!--<ul class="nav ace-nav">
-              <li class="light-blue dropdown-modal">
-                  <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                      <img class="nav-user-photo" src="../assets/avatars/avatar2.png" alt=""/>
-                                  <span class="user-info">
-                                      <small>Hi,</small>
-                                      蒋欣
-                                  </span>
-
-                      <i class="ace-icon fa fa-caret-down"></i>
-                  </a>
-
-                  <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
-                      <li>
-                          <a href="#">
-                              <i class="ace-icon fa fa-cog"></i>
-                              个人设置
-                          </a>
-                      </li>
-
-                      <li class="divider"></li>
-
-                      <li>
-                          <a href="#">
-                              <i class="ace-icon fa fa-power-off"></i>
-                              注销
-                          </a>
-                      </li>
-                  </ul>
-          </ul>
-        <!--注释蒋欣-->
-    </div>
    <!-- .sidebar -->
     <!-- /section:basics/navbar.dropdown -->
 </div><!-- /.navbar-container -->
-
 <!-- /section:basics/navbar.layout -->
 <div class="main-container" id="main-container">
     <!-- #section:basics/sidebar -->
     <div id="sidebar" class="sidebar responsive  sidebar-fixed" >
-
         <ul class="nav nav-list">
+        	<c:if test="${sessionScope.currentUser.roleId eq 3}">
             <li class="active open">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-th-large"></i>
                     <span class="menu-text">学生</span>
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
-				
                 <ul class="submenu">
                     <li class="active">
                         <a href="findAllNotifies.do" target="main">
@@ -176,17 +129,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             通知公告
                             <span class="badge badge-warning">5</span>
                         </a>
-
                         <b class="arrow"></b>
                     </li>
-
                     <li class="">
                         <a href="goToRepairTasksList.do" target="main">
                             <i class="menu-icon fa fa-bar-chart"></i>
                             上报维修
                             <span class="badge badge-success">2</span>
                         </a>
-
                         <b class="arrow"></b>
                     </li>
                     <li class="">
@@ -194,7 +144,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-legal"></i>
                             申领物品
                         </a>
-
                         <b class="arrow"></b>
                     </li>
 					 <li class="">
@@ -202,12 +151,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-area-chart"></i>
                             调换宿舍
                         </a>
-
                         <b class="arrow"></b>
                     </li>					
                 </ul>
             </li>
-            <li class="">
+            </c:if>
+            <c:if test="${sessionScope.currentUser.roleId eq 2}">
+            <li class="active open">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-reorder"></i>
                     <span class="menu-text">我的宿舍管理员</span>
@@ -220,7 +170,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		学生列表
                         </a>
-
                         <b class="arrow"></b>
                     </li>  
                     <li class="">
@@ -229,7 +178,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <span class="menu-text">登记管理</span>
                             <b class="arrow fa fa-angle-down"></b>
                         </a>
-
                         <b class="arrow"></b>
                         <ul class="submenu">
                             <li class="">
@@ -237,29 +185,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <i class="menu-icon fa fa-list"></i>
                                     	来访登记
                                 </a>
-
                                 <b class="arrow"></b>
                             </li>
-                            
                             <li class="">
                                 <a href="goToRegisterList.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                    		 晚归登记
                                 </a>
-
                                 <b class="arrow"></b>
                             </li>
-                            
                             <li class="">
                                 <a href="goToRegisterListFroQueQin.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                    		 缺勤登记
                                 </a>
-
                                 <b class="arrow"></b>
                             </li>
                         </ul>
-
                     </li>
                     <li class="">
                         <a href="#" class="dropdown-toggle">
@@ -267,7 +209,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <span class="menu-text">宿舍管理</span>
                             <b class="arrow fa fa-angle-down"></b>
                         </a>
-
                         <b class="arrow"></b>
                         <ul class="submenu">
                             <li class="">
@@ -275,29 +216,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <i class="menu-icon fa fa-list"></i>
                                     	宿舍列表
                                 </a>
-
                                 <b class="arrow"></b>
                             </li> 
-                            
                             <li class="">
                                 <a href="goToCheckHygieneList.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                    		 卫生检查
                                 </a>
-
                                 <b class="arrow"></b>
                             </li>
-                            
                             <li class="">
                                 <a href="goToChangeRoomListForManager.do" target="main">
                                     <i class="menu-icon fa fa-list"></i>
                                    		 调换宿舍
                                 </a>
-
                                 <b class="arrow"></b>
                             </li>
                         </ul>
-
                     </li>
                     <li class="">
                         <a href="#" class="dropdown-toggle">
@@ -305,7 +240,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <span class="menu-text">通知公告</span>
                             <b class="arrow fa fa-angle-down"></b>
                         </a>
-
                         <b class="arrow"></b>
                         <ul class="submenu">
                             <li class="">
@@ -323,29 +257,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <b class="arrow"></b>
                             </li>                                                       
                         </ul>
-
                     </li>
                      <li class="">
                         <a href="goToRepairTasksListForManager.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		维修处理
                         </a>
-
                         <b class="arrow"></b>
                     </li>   
-                    
                     <li class="">
                         <a href="goToStuApplyGoodsListForManager.do" target="main">
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		物品发放
                         </a>
-
                         <b class="arrow"></b>
                     </li>                                                                             
                 </ul>
             </li>
-            
-            <li class="">
+            </c:if>
+            <c:if test="${sessionScope.currentUser.roleId eq 1}">
+            <li class="active open">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-reorder"></i>
                     <span class="menu-text">管理员</span>
@@ -358,7 +289,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                             	宿舍区管理
                         </a>
-
                         <b class="arrow"></b>
                     </li>
                     <li class="">
@@ -366,7 +296,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		楼宇管理
                         </a>
-
                         <b class="arrow"></b>
                     </li>                 
                      <li class="">
@@ -374,7 +303,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		宿舍管理
                         </a>
-
                         <b class="arrow"></b>
                     </li>   
                     <li class="">
@@ -382,7 +310,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		学生管理
                         </a>
-
                         <b class="arrow"></b>
                     </li>  
                     <li class="">
@@ -390,11 +317,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <i class="menu-icon fa fa-arrow-circle-right"></i>
                            		物品发放
                         </a>
-
                         <b class="arrow"></b>
                     </li>                                                                             
                 </ul>
             </li>
+            </c:if>
         </ul><!-- /.nav-list -->
 
         <!-- #section:basics/sidebar.layout.minimize -->

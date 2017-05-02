@@ -47,4 +47,5 @@ public interface UserService {
 	
 	int batchAddStu(List<User> stus);
 	
+	int batchDelStu(Integer[] ids);
 }

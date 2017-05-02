@@ -173,6 +173,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            
                             <hr class="no-margin">
                             <div class="page-toolbar align-right list-toolbar">
+                            <button type="button" class="btn btn-xs btn-success btn-xs-ths" id="btnAllot">
+                                    <i class="ace-icon fa fa-plus"></i>
+                                    自动分配
+                                </button>
                                 <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddStu">
                                     <i class="ace-icon fa fa-plus"></i>
                                     添加
@@ -317,26 +321,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         })
 
-        //And for the first simple table, which doesn't have TableTools or dataTables
-        //select/deselect all rows according to table header checkbox
-        var active_class = 'active';
-        $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-            var th_checked = this.checked;//checkbox inside "TH" table header
-
-            $(this).closest('table').find('tbody > tr').each(function(){
-                var row = this;
-                if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-                else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-            });
-        });
-
-        //select/deselect a row when the checkbox is checked/unchecked
-        $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-            var $row = $(this).closest('tr');
-//            if($row.is('.detail-row ')) return;
-            if(this.checked) $row.addClass(active_class);
-            else $row.removeClass(active_class);
-        });
+        
     });
     
 </script>

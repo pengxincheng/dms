@@ -36,4 +36,6 @@ public interface UserMapper {
     User selectByStuNo(String stuNo);
     
     int batchInsert(List<User> stus);
+    
+    int batchDelStu(Integer[] ids);
 }

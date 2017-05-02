@@ -78,6 +78,12 @@ public class UserServiceImpl implements UserService {
 		
 		return userMapper.batchInsert(stus);
 	}
+
+	@Override
+	public int batchDelStu(Integer[] ids) {
+		
+		return userMapper.batchDelStu(ids);
+	}
 	
 
 }

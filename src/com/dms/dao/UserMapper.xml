@@ -103,6 +103,16 @@
     delete from tab_user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
+  
+  <delete id="batchDelStu" parameterType="java.lang.Integer">
+        delete from tab_user where user_id in (
+        <foreach collection="array" item="id" separator=",">
+            #{id}
+        </foreach>
+        )  
+
+ </delete>
+  
   <insert id="insert" parameterType="com.dms.entity.User" >
     insert into tab_user (user_id, stu_no, name, 
       gender, age, stu_grade, 
