@@ -235,13 +235,21 @@ public class UserController {
 		
 		return "redirect:/goToStuList.do";
 	}
-	
+	/**
+	 * 退出
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("logout")
 	public String logout(HttpServletRequest request){
 		request.getSession().invalidate();
 		return "redirect:/login.jsp";
 	}
-	
+	/**
+	 * 批量刪除
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping("batchDeleteStu")
 	@ResponseBody
 	public JSONObject batchDeleteStu(Integer[] ids){
@@ -250,4 +258,19 @@ public class UserController {
 		jsonObject.put("msg", "操作成功");
 		return jsonObject;
 	}
+	/**
+	 * 批量分配宿舍
+	 * @param ids
+	 * @param areaId
+	 * @return
+	 */
+	@RequestMapping("autoAllot")
+	@ResponseBody
+	public JSONObject autoAllot(Integer[] ids,Integer areaId){
+		JSONObject jsonObject = userService.autoAllot(ids, areaId);
+		return jsonObject;
+		
+	}
+	
+	
 }

@@ -33,6 +33,7 @@
     <if test="buildingId != null and buildingId !=''">  
         and r.building_id = #{buildingId}
     </if> 
+    order by room_sn
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tab_room

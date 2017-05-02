@@ -2,6 +2,8 @@ package com.dms.service;
 
 import java.util.List;
 
+import net.sf.json.JSONObject;
+
 import com.dms.entity.User;
 
 /**
@@ -48,4 +50,6 @@ public interface UserService {
 	int batchAddStu(List<User> stus);
 	
 	int batchDelStu(Integer[] ids);
+	
+	JSONObject autoAllot(Integer[] ids,Integer areaId);
 }

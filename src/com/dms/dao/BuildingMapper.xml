@@ -36,7 +36,7 @@
     <if test="areaId != null and areaId !=''">  
         and b.area_id = #{areaId}
     </if> 
-    
+    order by building_name
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

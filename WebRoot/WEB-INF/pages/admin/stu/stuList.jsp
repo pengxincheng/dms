@@ -261,7 +261,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- /.modal-content -->
 	</div>
 	<!-- /.modal -->
+	
+	<div class="modal fade" id="allot" tabindex="-1" role="dialog"aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<form method="post" id="selectArea" name="selectArea">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">自动分配宿舍</h4>
+				</div>
+				
+				<div class="modal-body col-xs-12">
+					<div class="form-group">
+						<div class="col-sm-6">
+							<label class="col-sm-6 control-label no-padding-right" for="stuGrade">选择宿舍区</label>
+							<select class="form-control" id="areaId" name="areaId" data-validation-engine="validate[required]">
+                                <option value="" selected="selected">-请选择-</option>
+                            </select>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="btnSubmitAllot">确定</button>
+			</div>
+			</form>
+		</div>
+		<!-- /.modal-content -->
 	</div>
+	
 	<!-- basic scripts -->
 
 <!--[if !IE]> -->

@@ -530,6 +530,51 @@ $('#btnDelete').click(function(){
 });
 //批量分配宿舍
 $('#btnAllot').click(function(){
-	alert(1);
+	$('#allot').modal();
+	$.ajax({
+		url : 'findAllAreas.do',// 跳转到 action	 
+		traditional : true,
+		type : "post",
+		cache : false,
+		dataType : "json",
+		success : function(data){
+			document.getElementById("areaId").options.length=0;
+			$("#areaId").append("<option value='' selected='selected'>-请选择-</option>");
+			$.each(data,function(n,value){
+				$("#areaId").append("<option value="+value.id+">"+value.areaName+"</option>");
+			});
+		},
+		error:function(){
+			alert("系统异常");
+		}
+	});
+});
+
+$('#btnSubmitAllot').click(function(){
+	var ids = getSelectedIds();
+	if(ids.length != 0){
+		$.ajax({
+			url : 'autoAllot.do',// 跳转到 action
+			
+			  data : { 
+				  		"ids" :ids,
+				  		"areaId" :$('#areaId').val()
+			  		},			 
+			traditional : true,
+			type : "post",
+			cache : false,
+			dataType : "json",
+			success : function(data){
+				alert("自动分配成功！共选择"+data.total+"人,"+data.alloted+"人已分配");
+				window.location.href="goToStuList.do";
+			},
+			error:function(){
+				alert("系统异常");
+			}
+		});
+	}
+	else{
+		alert("请先选择学生！");
+	}	
 });
 

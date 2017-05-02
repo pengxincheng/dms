@@ -25,7 +25,7 @@
   	<if test="areaName != null and areaName !=''">  
         and area_name like CONCAT('%',#{areaName},'%')
     </if> 
-    order by build_time desc
+    order by area_name 
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
