@@ -102,10 +102,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div> 
                             </div>	
                             <div class="form-group">
-                            	 <label class="col-sm-1 control-label no-padding-right" for="form-field-8">说明</label>
-	                             <div class="col-sm-11">
-	                                 <textarea class="form-control" id="introduct" name="introduct" placeholder="说明" style="width: 356px; height: 66px;">${building.introduct}</textarea>
-	                             </div>
+                            	 <label class="col-sm-1 control-label no-padding-right" for="introduct">男生OR女生</label>
+                                <div class="col-sm-3">
+                                    <select class="form-control" id="introduct" name="introduct" data-validation-engine="validate[required]">
+                                       <option value="" >-请选择-</option>
+                                       <option ${building.introduct eq '男' ? 'selected':''} value="男">男生宿舍</option>
+                                       <option ${building.introduct eq '女' ? 'selected':''} value="女">女生宿舍</option>
+                                    </select>
+                                </div> 
                             </div>	
                             <input type="hidden" name="buildingId" id="buildingId" value="${building.buildingId}">					
                         </form>

@@ -66,7 +66,15 @@ function initTable() {
 											},
 											{
 												"data" : "introduct",
-												"class" : "align-center"
+												"class" : "align-center",
+												render :function(data,type,row){
+													if(row.introduct =='男'){
+														return row.introduct='男生宿舍';
+													}
+													else{
+														return row.introduct='女生宿舍';
+													}
+												},
 											},
 											{
 												"data" : null,

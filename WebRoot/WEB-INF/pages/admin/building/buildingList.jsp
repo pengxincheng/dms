@@ -129,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <th class="align-center">现住人数</th>
                                                 <th class="align-center">开始使用时间</th>
                                                 <th class="align-center">房屋到期时间</th>
-                                                <th class="align-center">说明</th>
+                                                <th class="align-center">男生OR女生</th>
                                                 <th class="align-center hidden-xs"><i class="ace-icon fa fa-wrench"></i>
                                        				 操作
                                     			</th>                                        
