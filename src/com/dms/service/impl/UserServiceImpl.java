@@ -1,5 +1,6 @@
 package com.dms.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.From;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.dms.Util.PasswordUtil;
 import com.dms.dao.UserMapper;
+import com.dms.entity.Building;
 import com.dms.entity.Room;
 import com.dms.entity.User;
 import com.dms.service.RoomService;
@@ -96,50 +98,72 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public JSONObject autoAllot(Integer[] ids, Integer areaId) {
 		JSONObject jsonObject = new JSONObject();
-		Room room = new Room();
-		room.setAreaId(areaId);
-		List<Room> rooms = roomServices.findAllRooms(room);
-		int i = 0;
-		for (Room r : rooms) {
-			int available = r.getTotalnum() - r.getCurrentnum();
-			if (available <= 0) {
-				continue;
-			}
-			int j = i;
-			if (ids.length-i > available) {
-				
-				for (; j < (i + available); j++) {
-					User stu = userMapper.selectByPrimaryKey(ids[j]);
-					stu.setRoomId(String.valueOf(r.getRoomId()));
-					stu.setBuildingId(String.valueOf(r.getBuildingId()));
-					stu.setAreaId(String.valueOf(areaId));
-					stu.setIsAlloted("1");
-					userMapper.updateByPrimaryKeySelective(stu);
-				}
-				r.setCurrentnum(r.getTotalnum());
-				r.setIsfiled("0");// 住满
-				roomServices.updateRoom(r);
-				i=j;
+		int alloted = 0;
+		List<User> boyStus = new ArrayList<User>();
+		List<User> girlStus = new ArrayList<User>();
+		for (int i = 0; i < ids.length; i++) {
+			User user = new User();
+			user = userMapper.selectByPrimaryKey(ids[i]);
+			if (user.getGender().equals("男")) {
+				boyStus.add(user);
 			} else {
-				for (; j < ids.length; j++) {
-					User stu = userMapper.selectByPrimaryKey(ids[j]);
-					stu.setRoomId(String.valueOf(r.getRoomId()));
-					stu.setBuildingId(String.valueOf(r.getBuildingId()));
-					stu.setAreaId(String.valueOf(areaId));
-					stu.setIsAlloted("1");
-					userMapper.updateByPrimaryKeySelective(stu);
-				}
-				r.setCurrentnum(ids.length-i);
-				r.setIsfiled("1");
-				roomServices.updateRoom(r);
-				i=j;
-			}
-			if(i >= ids.length){
-				break;
+				girlStus.add(user);
 			}
 		}
+		// 开始分配男生
+		Room room = new Room();
+		room.getBuilding().setIntroduct("男");
+		room.setAreaId(areaId);
+		room.setIsfiled("1");
+		List<Room> rooms = roomServices.findAllRooms(room);
+		for (Room r : rooms) {
+			int available = r.getTotalnum() - r.getCurrentnum();
+			for (int j = 0; j < available; j++) {
+				User stu = boyStus.get(j);
+				stu.setRoomId(String.valueOf(r.getRoomId()));
+				stu.setBuildingId(String.valueOf(r.getBuildingId()));
+				stu.setAreaId(String.valueOf(areaId));
+				stu.setIsAlloted("1");
+				userMapper.updateByPrimaryKeySelective(stu);
+				r.setCurrentnum(r.getCurrentnum() + 1);
+				alloted += 1;
+			}
+			if (r.getCurrentnum() == r.getTotalnum()) {
+				r.setIsfiled("0");// 住满
+			} else {
+				r.setIsfiled("1");
+			}
+			roomServices.updateRoom(r);
+		}
+
+		// 开始分配女生
+		Room room1 = new Room();
+		room1.getBuilding().setIntroduct("女");
+		room1.setAreaId(areaId);
+		room1.setIsfiled("1");
+		List<Room> rooms1 = roomServices.findAllRooms(room1);
+		for (Room r : rooms1) {
+			int available = r.getTotalnum() - r.getCurrentnum();
+			for (int j = 0; j < available; j++) {
+				User stu = girlStus.get(j);
+				stu.setRoomId(String.valueOf(r.getRoomId()));
+				stu.setBuildingId(String.valueOf(r.getBuildingId()));
+				stu.setAreaId(String.valueOf(areaId));
+				stu.setIsAlloted("1");
+				userMapper.updateByPrimaryKeySelective(stu);
+				r.setCurrentnum(r.getCurrentnum() + 1);
+				alloted += 1;
+			}
+			if (r.getCurrentnum() == r.getTotalnum()) {
+				r.setIsfiled("0");// 住满
+			} else {
+				r.setIsfiled("1");
+			}
+			roomServices.updateRoom(r);
+		}
+
 		jsonObject.put("total", ids.length);
-		jsonObject.put("alloted", i);
+		jsonObject.put("alloted", alloted);
 		return jsonObject;
 	}
 

@@ -19,7 +19,7 @@ public class Room {
 
 	private String roomSn;
 
-	private Building building;
+	private Building building = new Building();
 	
 	public Building getBuilding() {
 		return building;

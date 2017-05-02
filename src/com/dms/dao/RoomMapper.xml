@@ -24,7 +24,7 @@
   </select>
   
   <select id="selectAllRooms" resultMap="RoomMap" parameterType="com.dms.entity.Room">
-  	select r.room_id, r.area_id, r.building_id, r.type, r.introduct, r.totalNum, r.currentNum, r.isFiled, r.room_sn,a.area_name,b.building_name,b.manager_name
+  	select r.room_id, r.area_id, r.building_id, r.type, r.introduct, r.totalNum, r.currentNum, r.isFiled, r.room_sn,a.area_name,b.building_name,b.manager_name,b.introduct
 	from tab_room r,tab_area a,tab_building b
 	where r.building_id = b.building_id and b.area_id = a.id
   	<if test="roomSn != null and roomSn !=''">  
@@ -32,6 +32,12 @@
     </if> 
     <if test="buildingId != null and buildingId !=''">  
         and r.building_id = #{buildingId}
+    </if> 
+    <if test="building.introduct != null and building.introduct !=''">  
+        and b.introduct = #{building.introduct}
+    </if> 
+     <if test="isfiled != null and isfiled !=''">  
+        and r.is_filed = #{isfiled}
     </if> 
     order by room_sn
   </select>
