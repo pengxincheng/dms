@@ -84,10 +84,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                	     学生姓名
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="学生姓名" id="name" name="name"/>
+                                    <input type="text" class="form-control" placeholder="学生姓名" id="name" name="name"/>
                                        
                                 </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                
+                                 <label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
+                                <div class="col-sm-3">
+                                   <select class="form-control" id="genderYifen" name="genderYifen" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                          		<div class="col-sm-4 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
@@ -157,10 +166,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                	     学生姓名
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="学生姓名" id="name1" name="name1"/>
-                                       
+                                   <input type="text" class="form-control" placeholder="学生姓名" id="name1" name="name1"/>
                                 </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                 <label class="col-sm-1 control-label no-padding-right" for="gender">性别</label>
+                                <div class="col-sm-3">
+                                   <select class="form-control" id="genderWeifen" name="genderWeifen" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                          		<div class="col-sm-4 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableWeifen()">
                                         <i class="ace-icon fa fa-search"></i>

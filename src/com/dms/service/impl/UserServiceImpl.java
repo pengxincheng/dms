@@ -111,55 +111,81 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		// 开始分配男生
-		Room room = new Room();
-		room.getBuilding().setIntroduct("男");
-		room.setAreaId(areaId);
-		room.setIsfiled("1");
-		List<Room> rooms = roomServices.findAllRooms(room);
-		for (Room r : rooms) {
-			int available = r.getTotalnum() - r.getCurrentnum();
-			for (int j = 0; j < available; j++) {
-				User stu = boyStus.get(j);
-				stu.setRoomId(String.valueOf(r.getRoomId()));
-				stu.setBuildingId(String.valueOf(r.getBuildingId()));
-				stu.setAreaId(String.valueOf(areaId));
-				stu.setIsAlloted("1");
-				userMapper.updateByPrimaryKeySelective(stu);
-				r.setCurrentnum(r.getCurrentnum() + 1);
-				alloted += 1;
+		if (boyStus.size() > 0) {
+			Room room = new Room();
+			room.getBuilding().setIntroduct("男");
+			room.setAreaId(areaId);
+			room.setIsfiled("1");
+			List<Room> rooms = roomServices.findAllRooms(room);
+			boolean flag = false;
+			for (Room r : rooms) {
+				if(flag){
+					break;
+				}
+				int available = r.getTotalnum() - r.getCurrentnum();
+				List<User> allotedStus = new ArrayList<User>();
+				for (int j = 0; j < available; j++) {
+					if (j >= boyStus.size()) {
+						flag = true;
+						break;
+					}
+					User stu = boyStus.get(j);
+					stu.setRoomId(String.valueOf(r.getRoomId()));
+					stu.setBuildingId(String.valueOf(r.getBuildingId()));
+					stu.setAreaId(String.valueOf(areaId));
+					stu.setIsAlloted("1");
+					userMapper.updateByPrimaryKeySelective(stu);
+					r.setCurrentnum(r.getCurrentnum() + 1);
+					alloted += 1;
+					allotedStus.add(stu);
+				}
+				boyStus.removeAll(allotedStus);
+				if (r.getCurrentnum() == r.getTotalnum()) {
+					r.setIsfiled("0");// 住满
+				} else {
+					r.setIsfiled("1");
+				}
+				roomServices.updateRoom(r);
+				
 			}
-			if (r.getCurrentnum() == r.getTotalnum()) {
-				r.setIsfiled("0");// 住满
-			} else {
-				r.setIsfiled("1");
-			}
-			roomServices.updateRoom(r);
 		}
-
 		// 开始分配女生
-		Room room1 = new Room();
-		room1.getBuilding().setIntroduct("女");
-		room1.setAreaId(areaId);
-		room1.setIsfiled("1");
-		List<Room> rooms1 = roomServices.findAllRooms(room1);
-		for (Room r : rooms1) {
-			int available = r.getTotalnum() - r.getCurrentnum();
-			for (int j = 0; j < available; j++) {
-				User stu = girlStus.get(j);
-				stu.setRoomId(String.valueOf(r.getRoomId()));
-				stu.setBuildingId(String.valueOf(r.getBuildingId()));
-				stu.setAreaId(String.valueOf(areaId));
-				stu.setIsAlloted("1");
-				userMapper.updateByPrimaryKeySelective(stu);
-				r.setCurrentnum(r.getCurrentnum() + 1);
-				alloted += 1;
+		if (girlStus.size() > 0) {
+			Room room1 = new Room();
+			room1.getBuilding().setIntroduct("女");
+			room1.setAreaId(areaId);
+			room1.setIsfiled("1");
+			List<Room> rooms1 = roomServices.findAllRooms(room1);
+			boolean flag = false;
+			for (Room r : rooms1) {
+				if(flag){
+					break;
+				}
+				List<User> allotedStus = new ArrayList<User>();
+				int available = r.getTotalnum() - r.getCurrentnum();
+				for (int j = 0; j < available; j++) {
+					if (j >= girlStus.size()) {
+						flag = true;
+						break;
+					}
+					User stu = girlStus.get(j);
+					stu.setRoomId(String.valueOf(r.getRoomId()));
+					stu.setBuildingId(String.valueOf(r.getBuildingId()));
+					stu.setAreaId(String.valueOf(areaId));
+					stu.setIsAlloted("1");
+					userMapper.updateByPrimaryKeySelective(stu);
+					r.setCurrentnum(r.getCurrentnum() + 1);
+					alloted += 1;
+					allotedStus.add(stu);
+				}
+				girlStus.removeAll(allotedStus);
+				if (r.getCurrentnum() == r.getTotalnum()) {
+					r.setIsfiled("0");// 住满
+				} else {
+					r.setIsfiled("1");
+				}
+				roomServices.updateRoom(r);
 			}
-			if (r.getCurrentnum() == r.getTotalnum()) {
-				r.setIsfiled("0");// 住满
-			} else {
-				r.setIsfiled("1");
-			}
-			roomServices.updateRoom(r);
 		}
 
 		jsonObject.put("total", ids.length);

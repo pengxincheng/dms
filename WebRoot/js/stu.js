@@ -1,10 +1,10 @@
 function initTable() {
-	
 			$.ajax({
 				url : 'getAllStus.do',// 跳转到 action
 				
 				  data : { 
 					  		"name" : $("#name").val(),
+					  		"gender":$("#genderYifen").val(),
 					  		"roleId" : 3
 				  		},			 
 				traditional : true,
@@ -172,9 +172,9 @@ function getBuildingByAreaId(buildingId){
 function initTableWeifen() {
 	$.ajax({
 		url : 'getAllStusNotAlloted.do',// 跳转到 action
-		
 		  data : { 
 			  		"name" : $("#name1").val(),
+			  		"gender":$("#genderWeifen").val(),
 			  		"roleId" : 3,
 			  		"isAlloted":"0"
 		  		},			 
