@@ -18,7 +18,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="assets/css/bootstrap.css"/>
     <link rel="stylesheet" href="components/font-awesome/css/font-awesome.css"/>
-
+ 	<!-- page plugin css -->
+    <link rel="stylesheet" href="components/_mod/jQuery-Validation-Engine/validationEngine.jquery.css"/>
+    <link rel="stylesheet" href="components/_mod/jQuery-Validation-Engine/template.css"/>
     <!-- ace styles -->
     <link rel="stylesheet" href="assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style"/>
 
@@ -55,26 +57,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-sm-4 hidden-xs">欢迎您，${sessionScope.currentUser.name}</div>
         <div class="col-xs-12 col-sm-8 ">
             <ul class=" pull-right" data-level="top">
-                <li>
-                    <div class="inline pos-rel">
-                        <a href="#" class="dropdown-toggle dropdown-hover" data-toggle="dropdown">
-                            <i class="ace-icon fa fa-windows grey bigger-110" title="常用菜单"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-light dropdown-caret dropdown-closer ths-toolbar-quickmenu">
-                            <li> <a href="#" class="grey"><i class="ace-icon fa fa-angle-double-right blue"></i> 常用模块一</a> </li>
-                            <li> <a href="#" class="grey"><i class="ace-icon fa fa-angle-double-right blue"></i> 常用模块二</a> </li>
-                            <li> <a href="#" class="grey"><i class="ace-icon fa fa-angle-double-right blue"></i> 常用模块三</a> </li>
-                            <li> <a href="#" class="grey"><i class="ace-icon fa fa-angle-double-right blue"></i> 常用模块四</a> </li>
-                            <li> <a href="#" class="grey"><i class="ace-icon fa fa-angle-double-right blue"></i> 常用模块五</a> </li>
-                        </ul>
-                    </div>
-                </li>
                 <li><i class="ace-icon fa fa-file-o grey bigger-100" title="待办事项"></i><span class="badge badge-warning">99</span></li>
                 <li><i class="ace-icon fa fa-bullhorn grey bigger-110" title="通知"></i><span class="badge badge-success">2</span></li>
-                <li><i class="ace-icon fa fa-envelope-o grey bigger-110" title="未读邮件"></i><span class="badge badge-important">5</span></li>
-                <li><i class="ace-icon fa fa-user grey bigger-110" title="我的工作台"></i></li>
-                <li><i class="ace-icon fa fa-search grey bigger-110" title="搜索"></i></li>
-                <li><i class="ace-icon fa fa-gears grey bigger-110" title="设置"></i></li>
+                <li><i class="ace-icon fa fa-user grey bigger-110" title="修改密码" onclick="changePassword()"></i></li>
                 <li><a class="ace-icon fa fa-power-off grey bigger-110" title="注销" href="logout.do"></a></li>
             </ul>
         </div>
@@ -343,7 +328,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div><!--/.main-content-inner-->
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					修改密码
+				</h4>
+			</div>
+			<form name="changePwd" id="changePwd">
+			<div class="modal-body col-xs-12">
+				<div class="row">
+					<label class="col-sm-2 control-label no-padding-right" for="oldPwd">原密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" data-validation-engine="validate[required]" class="form-control" placeholder="原密码" id="oldPwd" name="oldPwd"/>
+                    </div>  
+                 </div>
+                 <div class="row"><br></div>
+                 <div class="row">
+					<label class="col-sm-2 control-label no-padding-right" for="newPwd">新密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" data-validation-engine="validate[required]" class="form-control" placeholder="新密码" id="newPwd" name="newPwd"/>
+                    </div>  
+                 </div>
+                  <div class="row"><br></div>
+                 <div class="row">
+					<label class="col-sm-2 control-label no-padding-right" for="newPwd1">确认密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" data-validation-engine="validate[required]" class="form-control" placeholder="确认密码" id="newPwd1" name="newPwd1"/>
+                    </div>  
+                 </div>
+			</div>
+			</form>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="submitChange">
+					提交
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 <!-- basic scripts -->
 
 <!--[if !IE]> -->
@@ -359,10 +388,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="components/bootstrap/dist/js/bootstrap.js"></script>
 
 <!-- page specific plugin scripts -->
-
+<!--表单验证jquery.validationEngine-->
+<script src="components/_mod/jQuery-Validation-Engine/jquery.validationEngine-zh_CN.js" type="text/javascript"
+        charset="utf-8"></script>
+<script src="components/_mod/jQuery-Validation-Engine/jquery.validationEngine.js" type="text/javascript"
+        charset="utf-8"></script>
 <!-- ace scripts -->
 <script src="assets/js/src/elements.scroller.js"></script>
 <script src="assets/js/src/ace.js"></script>
+<script src="assets/js/ace-elements.js"></script>
 <script src="assets/js/src/ace.basics.js"></script>
 <script src="assets/js/src/ace.sidebar.js"></script>
 <script src="assets/js/src/ace.sidebar-scroll-1.js"></script>
@@ -406,6 +440,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          },3000);
          */
     });
+    
+function changePassword(){
+	$('#myModal').modal();
+}
+
+$("#submitChange").click(function(){
+	var oldPwd = $("#oldPwd").val();
+	var newPwd = $("#newPwd").val();
+	var newPwd1 = $("#newPwd1").val();
+	if(oldPwd=="" || newPwd=="" || newPwd1==""){
+		alert("不能为空");
+		return;
+	}
+	if(newPwd != newPwd1){
+		alert("两次密码不一样！");
+		return;
+	}
+	 $.ajax({
+		url : 'changePassword.do',// 跳转到 action  
+		data : {
+			"oldPwd" :oldPwd,
+			"newPwd" : newPwd
+		},
+		type : "post",
+		cache : false,
+		async: false,
+		dataType : "json",
+		success : function(data) {
+			if(data.result){
+				alert(data.msg);
+				window.location.reload();
+			}
+			else{
+				alert(data.msg);
+			}
+		},
+		error : function() {
+			// view("异常！");  
+			alert("异常！");
+		}
+	}); 
+});
+
 </script>
 
 

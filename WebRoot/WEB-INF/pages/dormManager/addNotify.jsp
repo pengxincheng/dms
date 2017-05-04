@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class=" col-xs-12">
                         <form class="form-horizontal" role="form" id="addNotify" name="addNotify" action="#" method="post">
                             <div class="form-group">
-                                 <label class="col-sm-1 control-label no-padding-right" for="form-field-8">标题</label>
+                                <label class="col-sm-1 control-label no-padding-right" for="form-field-8">标题</label>
                                 <div class="col-sm-3">
                                     <input type="text" data-validation-engine="validate[required]" class="form-control" placeholder="标题" id="notifyTitle" name="notifyTitle"/>
                                 </div>                                            

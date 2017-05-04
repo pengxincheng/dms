@@ -32,8 +32,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.dms.Util.ExcellUtils;
 import com.dms.Util.JsonDateValueProcessor;
+import com.dms.Util.PasswordUtil;
 import com.dms.entity.Area;
 import com.dms.entity.Building;
 import com.dms.entity.Room;
@@ -341,11 +343,43 @@ public class UserController {
 		}
 		return "redirect:/goToManagerList.do";
 	}
-	
+	/**
+	 * 删除宿管员
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping("delManager")
 	public String delManager(Integer userId){
 		userService.delStu(userId);
 		return "redirect:/goToManagerList.do";
+	}
+	/**
+	 * 修改密码
+	 * @param newPwd
+	 * @param oldPwd
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("changePassword")
+	@ResponseBody
+	public JSONObject changePassword(String newPwd,String oldPwd,HttpServletRequest request){
+		JSONObject jsonObject = new JSONObject();
+		
+		newPwd = PasswordUtil.EncoderByMd5(newPwd);
+		User u = (User) request.getSession().getAttribute("currentUser");
+		if(u.getPassword().equals(PasswordUtil.EncoderByMd5(oldPwd))){
+			u.setPassword(newPwd);
+			userService.updateStu(u);
+			request.getSession().setAttribute("currentUser", u);
+			jsonObject.put("result", true);
+			jsonObject.put("msg", "修改成功");
+			return jsonObject;
+		}else{
+			jsonObject.put("result", false);
+			jsonObject.put("msg", "密码不正确");
+			return jsonObject;
+		}
+		
 	}
 	
 }
