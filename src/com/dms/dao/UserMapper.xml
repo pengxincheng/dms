@@ -73,13 +73,13 @@
         and name like CONCAT('%',#{name},'%')
     </if> 
     <if test="roleId != null and roleId !=''">  
-        and role_id = #{roleId}
+        and u.role_id = #{roleId}
     </if>
     <if test="isAlloted != null and isAlloted !=''">  
-        and is_alloted = #{isAlloted}
+        and u.is_alloted = #{isAlloted}
     </if>
     <if test="buildingId != null and buildingId !=''">  
-        and building_id = #{buildingId}
+        and u.building_id = #{buildingId}
     </if>
     <if test="gender != null and gender !=''">  
         and u.gender = #{gender}

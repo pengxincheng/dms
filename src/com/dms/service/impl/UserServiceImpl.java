@@ -197,8 +197,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int addManager(User user) {
+		Room room = new Room();
+		room.setBuildingId(Integer.parseInt(user.getBuildingId()));
+		room = roomServices.findAllRooms(room).get(0);
+		
+		user.setRoomId(String.valueOf(room.getRoomId()));
+		user.setAreaId(String.valueOf(room.getAreaId()));
 		user.setIsAlloted("1");
 		user.setPassword("ICy5YqxZB1uWSwcVLSNLcA=="); // 初始密码123
+		
 		int result = userMapper.insertSelective(user);
 		if (result > 0){
 			Building building = buildingService.getBuildingById(Integer.parseInt(user.getBuildingId()));

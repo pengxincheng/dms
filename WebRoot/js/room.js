@@ -63,6 +63,10 @@ function initTable() {
 												}
 											},
 											{
+												"data" : "currentnum",
+												"class" : "align-center"
+											},
+											{
 												"data" : "isfiled",
 												"class" : "align-center",
 												 render: function (data, type, row, meta) {
@@ -96,7 +100,7 @@ function initTable() {
 											},
 											{
 												// 定义操作列,######以下是重点########
-												"targets" : 7,// 操作按钮目标列
+												"targets" : 8,// 操作按钮目标列
 												"data" : null,
 												"render" : function(data,
 														type, row) {

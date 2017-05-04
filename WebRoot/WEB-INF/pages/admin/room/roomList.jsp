@@ -120,6 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <th class="align-center">所属宿舍区</th>
                                                 <th class="align-center">所属楼宇</th>
                                                 <th class="align-center">类型</th>
+                                                 <th class="align-center">当前人数</th>
                                                 <th class="align-center">是否住满</th>
                                                  <th class="align-center">说明</th>                                   
                                                 <th class="align-center hidden-xs"><i class="ace-icon fa fa-wrench"></i>

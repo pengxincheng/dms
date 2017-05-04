@@ -140,7 +140,7 @@ public class BuildingController {
 
 		User user = new User();
 		user.setRoleId(2);
-		List<User> users = userService.getAllUsers(user);
+		List<User> users = userService.getAllManager(user);
 
 		model.addAttribute("areas", areas);
 		model.addAttribute("users", users);

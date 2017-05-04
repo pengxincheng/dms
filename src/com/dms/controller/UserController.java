@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
 import com.dms.Util.ExcellUtils;
 import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.Area;
@@ -197,7 +198,7 @@ public class UserController {
 	public JSONArray getAllStusForManager(User user,HttpServletRequest request) {
 
 		User u = (User) request.getSession().getAttribute("currentUser");
-		u.setBuildingId(u.getBuildingId());
+		user.setBuildingId(u.getBuildingId());
 		
 		List<User> users = userService.getAllUsers(user);
 
@@ -325,6 +326,12 @@ public class UserController {
 	 */
 	@RequestMapping("editManager")
 	public String editManager(User user){
+		Room room = new Room();
+		room.setBuildingId(Integer.parseInt(user.getBuildingId()));
+		room = roomService.findAllRooms(room).get(0);
+		
+		user.setRoomId(String.valueOf(room.getRoomId()));
+		user.setAreaId(String.valueOf(room.getAreaId()));
 		int result =  userService.updateStu(user);
 		if (result > 0){
 			Building building = buildingService.getBuildingById(Integer.parseInt(user.getBuildingId()));
