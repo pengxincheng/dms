@@ -66,7 +66,7 @@
   
   <select id="selectAllUsers" resultMap="userMap" parameterType="com.dms.entity.User">
   	select u.user_id, u.stu_no, u.name, u.gender, u.age, u.stu_grade, u.stu_class, u.dorm_id, u.role_id, u.username, 
-           u.password, u.stu_img, u.area_id, u.building_id, u.room_id, u.is_alloted,r.room_sn,a.area_name
+           u.password, u.stu_img, u.area_id, u.building_id, u.room_id, u.is_alloted,r.room_sn,a.area_name,b.building_name
     from tab_user u,tab_room r,tab_building b,tab_area a
 	where  u.room_id = r.room_id  and r.building_id = b.building_id and b.area_id = a.id
     <if test="name != null and name !=''">  
@@ -85,6 +85,29 @@
         and u.gender = #{gender}
     </if> 
     	order by u.stu_no
+  </select>
+  
+  <select id="selectAllManager" resultMap="userMap" parameterType="com.dms.entity.User">
+  	select u.user_id, u.stu_no, u.name, u.gender, u.age, u.stu_grade, u.stu_class, u.dorm_id, u.role_id, u.username, 
+           u.password, u.stu_img, u.area_id, u.building_id, u.room_id, u.is_alloted,b.building_name
+    from tab_user u,tab_building b
+	where  u.building_id = b.building_id
+    <if test="name != null and name !=''">  
+        and name like CONCAT('%',#{name},'%')
+    </if> 
+    <if test="roleId != null and roleId !=''">  
+        and role_id = #{roleId}
+    </if>
+    <if test="isAlloted != null and isAlloted !=''">  
+        and is_alloted = #{isAlloted}
+    </if>
+    <if test="buildingId != null and buildingId !=''">  
+        and u.building_id = #{buildingId}
+    </if>
+    <if test="gender != null and gender !=''">  
+        and u.gender = #{gender}
+    </if> 
+    	order by name
   </select>
   
   <select id="selectAllStusNotAlloted" resultMap="userMap1" parameterType="com.dms.entity.User">

@@ -29,12 +29,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 
+
+
 import com.dms.Util.ExcellUtils;
 import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.Area;
+import com.dms.entity.Building;
 import com.dms.entity.Room;
 import com.dms.entity.User;
 import com.dms.service.AreaService;
+import com.dms.service.BuildingService;
 import com.dms.service.RoomService;
 import com.dms.service.UserService;
 
@@ -52,6 +56,8 @@ public class UserController {
 	private RoomService roomService;
 	@Autowired
 	private AreaService areaService;
+	@Autowired
+	private BuildingService buildingService;
 
 	/**
 	 * 登录验证
@@ -116,10 +122,10 @@ public class UserController {
 	 */
 	@RequestMapping("addStu")
 	public String addStu(User user){
+		user.setRoleId(3);
 		userService.addStu(user);
 		return "redirect:/goToStuList.do";
 	}
-	
 	/**
 	 * 删除学生
 	 * @param userId
@@ -271,6 +277,68 @@ public class UserController {
 		return jsonObject;
 		
 	}
+	/**
+	 * 管理员列表
+	 * @return
+	 */
+	@RequestMapping("goToManagerList")
+	public String goToManagerList(){
+		return "admin/manager/managerList";
+	}
+	/**
+	 * 添加页
+	 * @return
+	 */
+	@RequestMapping("goToAddManager")
+	public String goToAddManager(){
+		return "admin/manager/addManager";
+	}
+	@RequestMapping("getManagerDetail")
+	public String getManagerDetail(Integer userId,Model model){
+		User manager = userService.getUserById(userId);
+		model.addAttribute("manager", manager);
+		return "admin/manager/editManager";
+		
+	}
+	/**
+	 * 添加宿管员
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("addManager")
+	public String addManager(User user){
+		user.setRoleId(2);
+		userService.addManager(user);
+		return "redirect:/goToManagerList.do";
+	}
+	@RequestMapping("getAllManager")
+	@ResponseBody
+	public List<User> getAllManager(User user) {
+
+		List<User> users = userService.getAllManager(user);
+		return users;
+	}
+	/**
+	 * 编辑宿管员
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("editManager")
+	public String editManager(User user){
+		int result =  userService.updateStu(user);
+		if (result > 0){
+			Building building = buildingService.getBuildingById(Integer.parseInt(user.getBuildingId()));
+			building.setManagerName(user.getName());
+			buildingService.updateBuilding(building);
+			
+		}
+		return "redirect:/goToManagerList.do";
+	}
 	
+	@RequestMapping("delManager")
+	public String delManager(Integer userId){
+		userService.delStu(userId);
+		return "redirect:/goToManagerList.do";
+	}
 	
 }

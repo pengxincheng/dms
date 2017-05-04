@@ -52,4 +52,8 @@ public interface UserService {
 	int batchDelStu(Integer[] ids);
 	
 	JSONObject autoAllot(Integer[] ids,Integer areaId);
+	
+	int addManager(User user);
+	
+	List<User> getAllManager(User user);
 }

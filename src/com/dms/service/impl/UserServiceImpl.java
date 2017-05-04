@@ -15,6 +15,7 @@ import com.dms.dao.UserMapper;
 import com.dms.entity.Building;
 import com.dms.entity.Room;
 import com.dms.entity.User;
+import com.dms.service.BuildingService;
 import com.dms.service.RoomService;
 import com.dms.service.UserService;
 
@@ -30,6 +31,8 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 	@Autowired
 	private RoomService roomServices;
+	@Autowired
+	private BuildingService buildingService;
 
 	@Override
 	public User getUserById(Integer userId) {
@@ -61,7 +64,6 @@ public class UserServiceImpl implements UserService {
 
 		user.setIsAlloted("0");
 		user.setPassword("ICy5YqxZB1uWSwcVLSNLcA=="); // 初始密码123
-		user.setRoleId(3);
 		user.setUsername(user.getStuNo());
 		return userMapper.insertSelective(user);
 	}
@@ -119,7 +121,7 @@ public class UserServiceImpl implements UserService {
 			List<Room> rooms = roomServices.findAllRooms(room);
 			boolean flag = false;
 			for (Room r : rooms) {
-				if(flag){
+				if (flag) {
 					break;
 				}
 				int available = r.getTotalnum() - r.getCurrentnum();
@@ -146,7 +148,7 @@ public class UserServiceImpl implements UserService {
 					r.setIsfiled("1");
 				}
 				roomServices.updateRoom(r);
-				
+
 			}
 		}
 		// 开始分配女生
@@ -158,7 +160,7 @@ public class UserServiceImpl implements UserService {
 			List<Room> rooms1 = roomServices.findAllRooms(room1);
 			boolean flag = false;
 			for (Room r : rooms1) {
-				if(flag){
+				if (flag) {
 					break;
 				}
 				List<User> allotedStus = new ArrayList<User>();
@@ -191,6 +193,25 @@ public class UserServiceImpl implements UserService {
 		jsonObject.put("total", ids.length);
 		jsonObject.put("alloted", alloted);
 		return jsonObject;
+	}
+
+	@Override
+	public int addManager(User user) {
+		user.setIsAlloted("1");
+		user.setPassword("ICy5YqxZB1uWSwcVLSNLcA=="); // 初始密码123
+		int result = userMapper.insertSelective(user);
+		if (result > 0){
+			Building building = buildingService.getBuildingById(Integer.parseInt(user.getBuildingId()));
+			building.setManagerName(user.getName());
+			buildingService.updateBuilding(building);
+		}
+			return result;
+	}
+
+	@Override
+	public List<User> getAllManager(User user) {
+
+		return userMapper.selectAllManager(user);
 	}
 
 }

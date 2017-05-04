@@ -38,4 +38,6 @@ public interface UserMapper {
     int batchInsert(List<User> stus);
     
     int batchDelStu(Integer[] ids);
+    
+    List<User> selectAllManager(User user);
 }
