@@ -72,16 +72,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                	     名称
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍名" id="roomSn" name="roomSn"/>
+                                  <input type="text" class="form-control" placeholder="宿舍名" id="roomSn" name="roomSn"/>
                                        
                                 </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                
+                                <label class="col-sm-1 control-label no-padding-right" for="areaId">宿舍区</label>
+                                <div class="col-sm-3">
+                                   <select class="form-control" id="areaId" name="areaId" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        
+                                    </select>
+                                </div>
+                                
+                                
+                          		<div class="col-sm-4 ">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>
-                            </div>
+                            	</div>
 
                             </div>
                             

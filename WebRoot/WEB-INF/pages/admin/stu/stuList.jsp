@@ -36,7 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!--THS CSS 插件-->
     <link rel="stylesheet" href="assets/css/ths.css"/>
-
+	<!--可搜索下拉列表  -->
+	<link rel="stylesheet" href="js/searchSelect/css/combo.select.css">
     <!-- 自己写的CSS，请放在这里 -->
     <style type="text/css">
 
@@ -80,6 +81,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
                             <div class="form-group">
+                            	<label class="col-sm-1 control-label no-padding-right" for="roomId">
+                               	    宿舍
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="roomId" id="roomId">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label class="col-sm-1 control-label no-padding-right" for="name">
                                	     学生姓名
                                 </label>
@@ -96,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <option value="女">女</option>
                                     </select>
                                 </div>
-                          		<div class="col-sm-4 align-right">
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
@@ -176,7 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <option value="女">女</option>
                                     </select>
                                 </div>
-                          		<div class="col-sm-4 align-right">
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableWeifen()">
                                         <i class="ace-icon fa fa-search"></i>
@@ -334,6 +348,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
+<script src="js/searchSelect/js/jquery.combo.select.js"></script>
 
 <!-- 自己写的JS，请放在这里 -->
 <script src="js/stu.js"></script>
@@ -371,6 +386,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         
     });
+    
+    $(function() {
+		$('select').comboSelect();
+	});
     
 </script>
 </body>

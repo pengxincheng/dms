@@ -35,6 +35,9 @@
     </if>  -->
     <if test="areaId != null and areaId !=''">  
         and b.area_id = #{areaId}
+    </if>
+    <if test="buildingName != null and buildingName !=''">  
+        and b.building_name like CONCAT('%',#{buildingName},'%')
     </if> 
     order by building_name
   </select>

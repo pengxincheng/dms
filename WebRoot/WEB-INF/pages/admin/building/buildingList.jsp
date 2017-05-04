@@ -68,18 +68,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="areaId">
-                               	     宿舍区
+                                <label class="col-sm-1 control-label no-padding-right" for="areaId">宿舍区</label>
+                                <div class="col-sm-3">
+                                   <select class="form-control" id="areaId" name="areaId" data-validation-engine="validate[required]">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        
+                                    </select>
+                                </div> 
+                                 <label class="col-sm-1 control-label no-padding-right" for="buildingName">
+                               	  楼宇名称
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区" id="areaId" name="areaId"/>
-                                       
-                                </div>
-                                 <label class="col-sm-1 control-label no-padding-right" for="areaId">
-                               	  名称
-                                </label>
-                                <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="名称" id="areaId" name="areaId"/>
+                                        <input type="text" class="form-control" placeholder="名称" id="buildingName" name="buildingName"/>
                                 </div>
                           		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>

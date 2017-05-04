@@ -578,3 +578,22 @@ $('#btnSubmitAllot').click(function(){
 	}	
 });
 
+$.ajax({
+	url : 'getAllRooms.do',// 跳转到 action  
+	type : "post",
+	cache : false,
+	async: false,
+	dataType : "json",
+	success : function(data) {
+		var temp = "";
+		 $.each(data,function(i,n){
+			 temp += "<option value='"+n.id+"'>"+n.roomSn+"</option>";
+		});
+		 $("#roomId").append(temp);
+	},
+	error : function() {
+		// view("异常！");  
+		alert("异常！");
+	}
+});
+

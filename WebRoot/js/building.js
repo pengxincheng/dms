@@ -5,7 +5,7 @@ function initTable() {
 				
 				  data : { 
 					  		"buildingName" : $("#buildingName").val(),
-					  		"area.areaName" : $("#areaId").val() 
+					  		"areaId" : $("#areaId").val() 
 				  		},			 
 				traditional : true,
 				type : "post",
@@ -131,4 +131,24 @@ function delBuilding(id){
 		alert("操作成功！");
 	 }
 }
+
+$.ajax({
+	url : 'findAllAreas.do',// 跳转到 action  
+	type : "post",
+	cache : false,
+	async: false,
+	dataType : "json",
+	success : function(data) {
+		var temp = "";
+		 $.each(data,function(i,n){
+			 temp += "<option value='"+n.id+"'>"+n.areaName+"</option>";
+		});
+		 $("#areaId").append(temp);
+	},
+	error : function() {
+		// view("异常！");  
+		alert("异常！");
+	}
+});
+
 
