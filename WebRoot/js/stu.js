@@ -302,6 +302,10 @@ function initTableForManager() {
 		
 		  data : { 
 			  		"name" : $("#name").val(),
+			  		"stuNo":$("#stuNo").val(),
+			  		"stuGrade":$("#stuGrade").val(),
+			  		"stuClass":$("#stuClass").val(),
+			  		"roomId":$("#roomId1").val(),
 			  		"roleId" : 3
 		  		},			 
 		traditional : true,
@@ -590,6 +594,25 @@ $.ajax({
 			 temp += "<option value='"+n.id+"'>"+n.roomSn+"</option>";
 		});
 		 $("#roomId").append(temp);
+	},
+	error : function() {
+		// view("异常！");  
+		alert("异常！");
+	}
+});
+
+$.ajax({
+	url : 'getAllRoomsForManager.do',// 跳转到 action  
+	type : "post",
+	cache : false,
+	async: false,
+	dataType : "json",
+	success : function(data) {
+		var temp = "";
+		 $.each(data,function(i,n){
+			 temp += "<option value='"+n.id+"'>"+n.roomSn+"</option>";
+		});
+		 $("#roomId1").append(temp);
 	},
 	error : function() {
 		// view("异常！");  

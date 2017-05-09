@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-40">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>学生列表</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>宿舍管理员列表</li>
                 </ul><!-- /.breadcrumb -->
             </div>
         </div>
@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                           		<div class="col-sm-4 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
-                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableWeifen()">
+                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>

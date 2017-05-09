@@ -3,7 +3,8 @@ function initTable() {
 				url : 'getAllManager.do',// 跳转到 action
 				
 				  data : { 
-					  		"name" : $("#name").val(),
+					  		"name" : $("#name1").val(),
+					  		"gender":$("#genderWeifen").val(),
 					  		"roleId" : 2
 				  		},			 
 				traditional : true,

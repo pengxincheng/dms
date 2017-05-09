@@ -71,6 +71,9 @@
 	where  u.room_id = r.room_id  and r.building_id = b.building_id and b.area_id = a.id
     <if test="name != null and name !=''">  
         and name like CONCAT('%',#{name},'%')
+    </if>
+    <if test="stuNo != null and stuNo !=''">  
+        and stu_no like CONCAT('%',#{stuNo},'%')
     </if> 
     <if test="roleId != null and roleId !=''">  
         and u.role_id = #{roleId}
@@ -81,8 +84,17 @@
     <if test="buildingId != null and buildingId !=''">  
         and u.building_id = #{buildingId}
     </if>
+     <if test="roomId != null and roomId !=''">  
+        and u.room_id = #{roomId}
+    </if>
     <if test="gender != null and gender !=''">  
         and u.gender = #{gender}
+    </if>
+    <if test="stuGrade != null and stuGrade !=''">  
+        and u.stu_grade  like CONCAT('%',#{stuGrade},'%')
+    </if>
+     <if test="stuClass != null and stuClass !=''">  
+        and u.stu_class  like CONCAT('%',#{stuGrade},'%')
     </if> 
     	order by u.stu_no
   </select>

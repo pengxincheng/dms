@@ -36,7 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!--THS CSS 插件-->
     <link rel="stylesheet" href="assets/css/ths.css"/>
-
+	<!--可搜索下拉列表  -->
+	<link rel="stylesheet" href="js/searchSelect/css/combo.select.css">
     <!-- 自己写的CSS，请放在这里 -->
     <style type="text/css">
 
@@ -66,21 +67,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
+                           <div class="form-group">
+	                           	<label class="col-sm-1 control-label no-padding-right" for="name">学生姓名</label>
+	                            <div class="col-sm-3">
+	                                <input type="text" class="form-control" placeholder="学生姓名" id="name" name="name"/>
+	                            </div>
+	                            
+	                            <label class="col-sm-1 control-label no-padding-right" for="stuNo">学号</label>
+	                            <div class="col-sm-3">
+	                                <input type="text" class="form-control" placeholder="学号" id="stuNo" name="stuNo"/>
+	                            </div>
+                           </div>
+                           
+                           <div class="form-group">
+	                           	<label class="col-sm-1 control-label no-padding-right" for="stuGrade">年级</label>
+	                            <div class="col-sm-3">
+	                                <input type="text" class="form-control" placeholder="年级" id="stuGrade" name="stuGrade"/>
+	                            </div>
+	                            
+	                            <label class="col-sm-1 control-label no-padding-right" for="stuClass">班级</label>
+	                            <div class="col-sm-3">
+	                                <input type="text" class="form-control" placeholder="班级" id="stuClass" name="stuClass"/>
+	                            </div>
+                           </div>
+                           
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="name">
-                               	     学生姓名
+                                <label class="col-sm-1 control-label no-padding-right" for="roomId">
+                               	    宿舍
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="学生姓名" id="name" name="name"/>
-                                       
-                                </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="dowebok">
+										<select name="roomId" id="roomId1">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                              	
+                              	<div class="col-sm-5 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
-                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
+                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableForManager()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>
+                            	</div>
                             </div>
+                          		
 
                             </div>
                             
@@ -163,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
-
+<script src="js/searchSelect/js/jquery.combo.select.js"></script>
 <!-- 自己写的JS，请放在这里 -->
 <script src="js/stu.js"></script>
 <script type="text/javascript">
@@ -219,6 +250,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
     });
     
+     $(function() {
+		$('select').comboSelect();
+	});
 </script>
 </body>
 </html>
