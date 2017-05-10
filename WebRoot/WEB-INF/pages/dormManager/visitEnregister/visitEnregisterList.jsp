@@ -68,12 +68,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="areaName">
-                               	     名称
-                                </label>
+                            	<label class="col-sm-1 control-label no-padding-right" for="name">来访人姓名 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区名" id="areaName" name="areaName"/>
-                                       
+                                    <input type="text" class="form-control" placeholder="来访人姓名" id="name" name="name"/>
+                                </div>
+                                
+                                <label class="col-sm-1 control-label no-padding-right" for="isLeave">是否离开</label>
+                                <div class="col-sm-3">
+                                	 <select class="form-control" id="isLeave" name="isLeave">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option value="已离开">已离开</option>
+                                        <option value="未离开">未离开</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" for="name">来访时间 </label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" placeholder="来访人姓名" id="name" name="name"/>
                                 </div>
                           		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>

@@ -5,6 +5,7 @@ function initTable() {
 				  data : { 
 					  		"name" : $("#name").val(),
 					  		"gender":$("#genderYifen").val(),
+					  		"roomId":$("#roomId").val(),
 					  		"roleId" : 3
 				  		},			 
 				traditional : true,
@@ -591,7 +592,7 @@ $.ajax({
 	success : function(data) {
 		var temp = "";
 		 $.each(data,function(i,n){
-			 temp += "<option value='"+n.id+"'>"+n.roomSn+"</option>";
+			 temp += "<option value='"+n.roomId+"'>"+n.roomSn+"</option>";
 		});
 		 $("#roomId").append(temp);
 	},
@@ -610,7 +611,7 @@ $.ajax({
 	success : function(data) {
 		var temp = "";
 		 $.each(data,function(i,n){
-			 temp += "<option value='"+n.id+"'>"+n.roomSn+"</option>";
+			 temp += "<option value='"+n.roomId+"'>"+n.roomSn+"</option>";
 		});
 		 $("#roomId1").append(temp);
 	},
