@@ -4,7 +4,10 @@ function initTable() {
 				url : 'getAllVisitEnregisters.do',// 跳转到 action
 				
 				  data : { 
-					  		"name" : $("#name").val() 			  		
+					  		"name" : $("#name").val(),
+					  		"isLeave" : $("#isLeave").val(),
+					  		"inTime" : $("#inTime").val(),
+					  		"outTime" : $("#outTime").val()
 				  		},			 
 				traditional : true,
 				type : "post",

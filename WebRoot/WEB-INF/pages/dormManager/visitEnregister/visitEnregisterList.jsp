@@ -83,10 +83,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="name">来访时间 </label>
+                                <label class="col-sm-1 control-label no-padding-right" for="txtBirthday">
+                                    来访时间
+                                </label>
                                 <div class="col-sm-3">
-                                    <input type="text" class="form-control" placeholder="来访人姓名" id="name" name="name"/>
-                                </div>
+                                    <div class="input-group" id="divBirthday">
+                                        <input type="text" class="form-control" placeholder="起始时间" id="inTime" name="inTime" readonly="readonly"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white btn-default" id="btnBirthday">
+                                            <i class="ace-icon fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-3">
+                                    <div class="input-group" id="divBirthday1">
+                                        <input type="text" class="form-control" placeholder="终止时间" id="outTime" name="outTime" readonly="readonly"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white btn-default" id="btnBirthday">
+                                            <i class="ace-icon fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                    </div>
+                                 </div>   
+                                
+                                
+
                           		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
@@ -174,6 +196,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="components/datatables/dataTables.fixedHeader.min.js"></script>
 <script src="components/datatables/dataTables.select.min.js"></script>
 <script src="components/datatables/dataTables.responsive.min.js"></script>
+<!--日期控件-->
+<script src="components/My97DatePicker/WdatePicker.js"></script>
 
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
@@ -183,6 +207,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	initTable();
 	jQuery(function ($) {
+	
+		$("#divBirthday").on(ace.click_event, function () {
+            WdatePicker({el: 'inTime'});
+        });
+        $("#divBirthday1").on(ace.click_event, function () {
+            WdatePicker({el: 'outTime'});
+        });
         //为工具条添加点击事件
         $(".page-toolbar>button").on(ace.click_event,function (e) {
             if($(this).data("ths-href"))

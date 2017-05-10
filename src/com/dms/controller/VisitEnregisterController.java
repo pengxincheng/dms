@@ -36,7 +36,7 @@ public class VisitEnregisterController {
 	 */
 	@RequestMapping("getAllVisitEnregisters")
 	@ResponseBody
-	public JSONArray getAllVisitEnregisters(VisitEnregister visitEnregister,HttpServletRequest request){
+	public JSONArray getAllVisitEnregisters(VisitEnregister visitEnregister,HttpServletRequest request,String inTime,String outTime){
 		
 		User u = (User) request.getSession().getAttribute("currentUser");
 		
