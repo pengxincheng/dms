@@ -1,6 +1,7 @@
 package com.dms.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dms.entity.VisitEnregister;
 
@@ -17,5 +18,5 @@ public interface VisitEnregisterMapper {
 
     int updateByPrimaryKey(VisitEnregister record);
     
-    List<VisitEnregister> selectAllVisitEnregister(VisitEnregister visitEnregister);
+    List<VisitEnregister> selectAllVisitEnregister(Map<String, Object> map);
 }

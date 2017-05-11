@@ -132,7 +132,7 @@ function initTable() {
 								});
 					}
 					else{
-						alert("暂无该宿舍区！");	
+						alert("暂无记录！");	
 					}
 				},			
 				error : function() {

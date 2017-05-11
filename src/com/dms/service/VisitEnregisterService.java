@@ -1,5 +1,6 @@
 package com.dms.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.dms.entity.VisitEnregister;
@@ -16,7 +17,7 @@ public interface VisitEnregisterService {
 	 * @param visitEnregister
 	 * @return
 	 */
-	List<VisitEnregister> findAllVisitEnregisters(VisitEnregister visitEnregister);
+	List<VisitEnregister> findAllVisitEnregisters(VisitEnregister visitEnregister,Date startDate,Date endDate);
 	/**
 	 * 添加来访登记
 	 * @param visitEnregister

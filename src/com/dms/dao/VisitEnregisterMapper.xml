@@ -23,17 +23,23 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectAllVisitEnregister" resultMap="VisitEnregisterMap" parameterType="com.dms.entity.VisitEnregister">
+  <select id="selectAllVisitEnregister" resultMap="VisitEnregisterMap" parameterType="java.util.Map">
   	select 
   	<include refid="Base_Column_List" />
-  	 from tab_visit_enregister
-  	 where 1=1
-  	 <if test="name != null and name !=''">  
-        and name like CONCAT('%',#{name},'%')
+  	 from tab_visit_enregister 
+  	 where 1 = 1
+  	<if test="visitEnregister.name != null and visitEnregister.name !=''">  
+        and name like CONCAT('%',#{visitEnregister.name},'%')
     </if> 
-    <if test="buildingId != null and buildingId !=''">  
-        and building_id = #{buildingId}
+    <if test="visitEnregister.buildingId != null and visitEnregister.buildingId !=''">  
+        and building_id = #{visitEnregister.buildingId}
     </if> 
+    <if test="visitEnregister.isLeave != null and visitEnregister.isLeave !=''">  
+        and is_leave = #{visitEnregister.isLeave,jdbcType=INTEGER}
+    </if> 
+    <if test="startDate!=null and endDate!=null">
+        and start_time between #{startDate,jdbcType=TIMESTAMP} and #{endDate,jdbcType=TIMESTAMP} 
+	</if>   
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
