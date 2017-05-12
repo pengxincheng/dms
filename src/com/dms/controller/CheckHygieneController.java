@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.management.loading.PrivateClassLoader;
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
@@ -22,6 +23,7 @@ import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.CheckHygiene;
 import com.dms.entity.Room;
 import com.dms.entity.User;
+import com.dms.service.BuildingService;
 import com.dms.service.CheckHygieneService;
 import com.dms.service.RoomService;
 
@@ -36,6 +38,8 @@ public class CheckHygieneController {
 	private CheckHygieneService checkHygieneService;
 	@Autowired
 	private RoomService roomService;
+	@Autowired
+	private BuildingService buildingService;
 
 	/**
 	 * 卫生检查列表
@@ -45,14 +49,14 @@ public class CheckHygieneController {
 	 */
 	@RequestMapping("getAllCheckHygienes")
 	@ResponseBody
-	public JSONArray getAllCheckHygienes(CheckHygiene checkHygiene) {
-
-		List<CheckHygiene> checkHygienes = checkHygieneService
-				.findAllCheckHygienes(checkHygiene);
+	public JSONArray getAllCheckHygienes(CheckHygiene checkHygiene,HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("currentUser");
+		
+		checkHygiene.setBuildingId(Integer.parseInt(user.getBuildingId()));
+		List<CheckHygiene> checkHygienes = checkHygieneService.findAllCheckHygienes(checkHygiene);
 		JsonConfig jsonConfig = new JsonConfig();
 
-		jsonConfig.registerJsonValueProcessor(Date.class,
-				new JsonDateValueProcessor("yyyy-MM-dd"));
+		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor("yyyy-MM-dd"));
 
 		JSONArray array = JSONArray.fromObject(checkHygienes, jsonConfig);
 		return array;
@@ -150,10 +154,31 @@ public class CheckHygieneController {
 		return "redirect:/goToCheckHygieneList.do";
 
 	}
-
+	/**
+	 * 卫生统计（学生）
+	 * @return
+	 */
 	@RequestMapping("goToCensusPage")
 	public String goToCensusPage() {
 		return "student/hygieneCensus";
+	}
+	
+	/**
+	 * 卫生统计（宿管员）
+	 * @return
+	 */
+	@RequestMapping("goToCensusPageForManager")
+	public String goToCensusPageForManager() {
+		return "dormManager/hygieneCensus";
+	}
+	
+	/**
+	 * 卫生统计（系统管理员）
+	 * @return
+	 */
+	@RequestMapping("goToCensusPageForAdmin")
+	public String goToCensusPageForAdmin() {
+		return "admin/hygieneCensus";
 	}
 
 	/**
@@ -163,13 +188,13 @@ public class CheckHygieneController {
 	 */
 	@RequestMapping("censusAll")
 	@ResponseBody
-	public JSONObject censusAll() {
+	public JSONObject censusAll(CheckHygiene checkHygiene) {
 		JSONObject jsonObject = new JSONObject();
 
 		List<String> names = new ArrayList<String>();
 		JSONArray jsonArray = new JSONArray();
 
-		List<Map<String, Object>> maps = checkHygieneService.censusAll();
+		List<Map<String, Object>> maps = checkHygieneService.censusAll(checkHygiene);
 
 		for (Map<String, Object> map : maps) {
 			Map<String, Object> nameValue = new HashMap<String, Object>();
@@ -211,8 +236,7 @@ public class CheckHygieneController {
 	 */
 	@RequestMapping("censusOne")
 	@ResponseBody
-	public JSONObject censusOne(CheckHygiene checkHygiene,
-			HttpServletRequest request) {
+	public JSONObject censusOne(CheckHygiene checkHygiene,HttpServletRequest request) {
 
 		JSONObject jsonObject = new JSONObject();
 		
@@ -234,6 +258,37 @@ public class CheckHygieneController {
 		jsonObject.put("xAxis", xAxis);
 		jsonObject.put("marks", marks);
 		return jsonObject;
-
 	}
+	
+	/**
+	 * 卫生按楼宇统计
+	 * @return
+	 */
+	@RequestMapping("censusBuilding")
+	@ResponseBody
+	public JSONObject censusBuilding(){
+		JSONObject jsonObject = new JSONObject();
+
+		List<String> buildingNames = new ArrayList<String>();
+		JSONArray jsonArray = new JSONArray();
+
+		List<Map<String, Object>> maps = checkHygieneService.censusBuilding();
+
+		for (Map<String, Object> map : maps) {
+			Map<String, Object> nameValue = new HashMap<String, Object>();
+			Integer buildingId = (Integer) map.get("buildingId");
+			
+			String buildingName = buildingService.getBuildingById(buildingId).getBuildingName();
+			buildingNames.add(buildingName);
+			
+			nameValue.put("value", map.get("count"));
+			nameValue.put("name", buildingName);
+			jsonArray.add(nameValue);
+		}
+
+		jsonObject.put("buildingNames", buildingNames);
+		jsonObject.put("nameValue", jsonArray);
+		return jsonObject;
+	}
+
 }

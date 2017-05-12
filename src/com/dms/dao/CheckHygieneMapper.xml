@@ -15,6 +15,10 @@
   	<result column="mark" property="mark" jdbcType="INTEGER" />
   	<result column="count" property="count" jdbcType="INTEGER" />
   </resultMap>
+  <resultMap type="java.util.Map" id="map1">
+  	<result column="building_id" property="buildingId" jdbcType="INTEGER" />
+  	<result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, chack_time, room_id, check_man, mark, describes, building_id
   </sql>
@@ -24,12 +28,21 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectForPie" resultMap="map">
+  <select id="selectForPie" resultMap="map" parameterType="com.dms.entity.CheckHygiene">
   	select  mark,count(*) as count
-	from tab_check_hygiene
+	from tab_check_hygiene where 1=1
+	<if test="buildingId != null and buildingId !=''">  
+        and building_id = #{buildingId}
+    </if> 
 	group by mark
   </select>
- 
+	
+  <select id="selectForBuildingCensus" resultMap="map1">
+	select  building_id,count(*) as count
+	from tab_check_hygiene 
+	where  mark > 3
+	group by building_id
+  </select>
   
   <select id="selectAllCheckHygienes" resultMap="checkHygieneMap" parameterType="com.dms.entity.CheckHygiene">
   	 select 

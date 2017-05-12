@@ -20,5 +20,7 @@ public interface CheckHygieneMapper {
     
     List<CheckHygiene> selectAllCheckHygienes(CheckHygiene checkHygiene);
     
-    List<Map<String,Object>> selectForPie();
+    List<Map<String,Object>> selectForPie(CheckHygiene checkHygiene);
+    
+    List<Map<String,Object>> selectForBuildingCensus();
 }

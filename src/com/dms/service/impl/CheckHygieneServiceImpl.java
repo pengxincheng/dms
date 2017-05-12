@@ -46,9 +46,15 @@ public class CheckHygieneServiceImpl implements CheckHygieneService {
 	}
 
 	@Override
-	public List<Map<String,Object>> censusAll() {
+	public List<Map<String,Object>> censusAll(CheckHygiene checkHygiene) {
 		
-		return checkHygieneMapper.selectForPie();
+		return checkHygieneMapper.selectForPie(checkHygiene);
+	}
+
+	@Override
+	public List<Map<String, Object>> censusBuilding() {
+		// TODO Auto-generated method stub
+		return checkHygieneMapper.selectForBuildingCensus();
 	}
 
 }

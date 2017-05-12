@@ -54,5 +54,7 @@ public interface CheckHygieneService {
 	 * 全校卫生统计
 	 * @return
 	 */
-	List<Map<String,Object>> censusAll();
+	List<Map<String,Object>> censusAll(CheckHygiene checkHygiene);
+	
+	List<Map<String,Object>> censusBuilding();
 }

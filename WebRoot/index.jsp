@@ -153,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li class="active open">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-reorder"></i>
-                    <span class="menu-text">我的宿舍管理员</span>
+                    <span class="menu-text">宿舍管理员</span>
                     <b class="arrow fa fa-angle-down"></b>
                 </a>
                 <b class="arrow"></b>
@@ -264,7 +264,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            		物品发放
                         </a>
                         <b class="arrow"></b>
-                    </li>                                                                             
+                    </li>
+                     <li class="">
+                        <a href="goToCensusPageForManager.do" target="main">
+                            <i class="menu-icon fa fa-arrow-circle-right"></i>
+                           		卫生统计
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
                 </ul>
             </li>
             </c:if>
@@ -311,7 +318,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                            		宿舍管理员列表
                         </a>
                         <b class="arrow"></b>
-                    </li>                                                                             
+                    </li>
+                    
+                    <li class="">
+                        <a href="goToCensusPageForAdmin.do" target="main">
+                            <i class="menu-icon fa fa-arrow-circle-right"></i>
+                           		卫生统计
+                        </a>
+                        <b class="arrow"></b>
+                    </li> 
                 </ul>
             </li>
             </c:if>
