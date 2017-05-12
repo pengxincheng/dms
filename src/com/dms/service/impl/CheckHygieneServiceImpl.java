@@ -1,6 +1,7 @@
 package com.dms.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,12 @@ public class CheckHygieneServiceImpl implements CheckHygieneService {
 	@Override
 	public int delCheckHygieneById(Integer id) {
 		return checkHygieneMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Map<String,Object>> censusAll() {
+		
+		return checkHygieneMapper.selectForPie();
 	}
 
 }

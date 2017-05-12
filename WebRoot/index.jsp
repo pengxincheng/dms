@@ -137,7 +137,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             调换宿舍
                         </a>
                         <b class="arrow"></b>
-                    </li>					
+                    </li>	
+                    
+                    <li class="">
+                        <a href="goToCensusPage.do" target="main">
+                            <i class="menu-icon fa fa-area-chart"></i>
+                            卫生统计
+                        </a>
+                        <b class="arrow"></b>
+                    </li>				
                 </ul>
             </li>
             </c:if>

@@ -11,6 +11,10 @@
     <result column="building_id" property="buildingId" jdbcType="INTEGER" />
     <association property="room" resultMap="com.dms.dao.RoomMapper.RoomMap"/>
   </resultMap>
+  <resultMap type="java.util.Map" id="map">
+  	<result column="mark" property="mark" jdbcType="INTEGER" />
+  	<result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
   <sql id="Base_Column_List" >
     id, chack_time, room_id, check_man, mark, describes, building_id
   </sql>
@@ -19,6 +23,13 @@
     from tab_check_hygiene
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectForPie" resultMap="map">
+  	select  mark,count(*) as count
+	from tab_check_hygiene
+	group by mark
+  </select>
+ 
   
   <select id="selectAllCheckHygienes" resultMap="checkHygieneMap" parameterType="com.dms.entity.CheckHygiene">
   	 select 
@@ -34,7 +45,8 @@
     </if> 
     <if test="roomId != null and roomId !=''">  
         and c.room_id = #{roomId}
-    </if> 
+    </if>
+    order by  c.chack_time desc
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

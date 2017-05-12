@@ -1,6 +1,7 @@
 package com.dms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.dms.entity.CheckHygiene;
 
@@ -49,4 +50,9 @@ public interface CheckHygieneService {
 	 * @return
 	 */
 	int delCheckHygieneById(Integer id);
+	/**
+	 * 全校卫生统计
+	 * @return
+	 */
+	List<Map<String,Object>> censusAll();
 }
