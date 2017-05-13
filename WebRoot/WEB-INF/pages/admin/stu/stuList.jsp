@@ -388,7 +388,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     });
     
     $(function() {
-		$('select').comboSelect();
+		$('#roomId').comboSelect();
 	});
     
 </script>

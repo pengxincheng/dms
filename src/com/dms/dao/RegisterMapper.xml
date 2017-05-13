@@ -25,10 +25,14 @@
   <select id="selectAllRegisters" resultMap="registerMap" parameterType="com.dms.entity.Register">
     select r.id, r.stu_id, r.register_date, r.return_time, r.type, r.building_id, r.reasion, r.remark,u.name,u.stu_class,u.stu_no,room.room_sn
     from tab_register r,tab_user u,tab_room room
-    where  r.stu_id = u.user_id and u.room_id=room.room_id and r.building_id=#{buildingId}
+    where  r.stu_id = u.user_id and u.room_id=room.room_id
     <if test="type != null and type !=''">  
         and r.type = #{type}
     </if>
+    <if test="buildingId != null and buildingId !=''">  
+        and r.building_id = #{buildingId}
+    </if>
+    order by stu_grade,id desc
   </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

@@ -321,12 +321,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li>
                     
                     <li class="">
-                        <a href="goToCensusPageForAdmin.do" target="main">
-                            <i class="menu-icon fa fa-arrow-circle-right"></i>
-                           		卫生统计
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-th"></i>
+                            <span class="menu-text">统计信息</span>
+                            <b class="arrow fa fa-angle-down"></b>
                         </a>
                         <b class="arrow"></b>
-                    </li> 
+                        <ul class="submenu">
+                          <li class="">
+	                        <a href="goToCensusPageForAdmin.do" target="main">
+	                            <i class="menu-icon fa fa-arrow-circle-right"></i>
+	                           		卫生统计
+	                        </a>
+                        	<b class="arrow"></b>
+                    		</li> 
+                           
+                            <li class="">
+                                <a href="goToCensusRegister.do" target="main">
+                                    <i class="menu-icon fa fa-arrow-circle-right"></i>
+                                   		考勤统计
+                                </a>
+                                <b class="arrow"></b>
+                            </li>                                                       
+                        </ul>
+                    </li>
                 </ul>
             </li>
             </c:if>

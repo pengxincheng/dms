@@ -1,11 +1,18 @@
 package com.dms.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +162,46 @@ public class RegisterController {
 	public String goToAddRegisterFroQueQin() {
 		return "dormManager/register/queqin/addRegister";
 	}
-
+	/**
+	 *  考勤统计页面
+	 * @return
+	 */
+	@RequestMapping("goToCensusRegister")
+	public String goToCensusRegister() {
+		return "censusRegister";
+	}
+	
+	/**
+	 * 按年级统计缺勤，晚归统计
+	 * @param register
+	 * @return
+	 */
+	@RequestMapping("censusRegisterByGrade")
+	@ResponseBody
+	public JSONObject censusRegisterByGrade(Register register){
+	JSONObject jsonObject = new JSONObject();
+	
+	JSONArray jsonArray = new JSONArray();
+	
+	List<Register> registers = registerService.findAllRegisters(register);
+	
+	List<String> list = new ArrayList<String>();
+	for (Register r : registers) {
+		User stuUser = userService.getUserById(r.getStuId());
+		list.add(stuUser.getStuGrade());			
+	}
+	
+	Set<String> grades = new HashSet<String>(list);
+	for(String grade:grades){
+		Map<String, Object> nameValue = new HashMap<String, Object>();
+		nameValue.put("value",Collections.frequency(list, grade));
+		nameValue.put("name", grade);
+		jsonArray.add(nameValue);
+	}
+	jsonObject.put("grades", grades);
+	jsonObject.put("nameValue", jsonArray);
+	return jsonObject;
+	}
+	
 
 }
