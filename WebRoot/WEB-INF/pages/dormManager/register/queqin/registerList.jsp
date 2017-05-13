@@ -36,7 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!--THS CSS 插件-->
     <link rel="stylesheet" href="assets/css/ths.css"/>
-
+	<!--可搜索下拉列表  -->
+	<link rel="stylesheet" href="js/searchSelect/css/combo.select.css">
     <!-- 自己写的CSS，请放在这里 -->
     <style type="text/css">
 
@@ -67,22 +68,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
-                            <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="areaName">
-                               	     名称
+                             <div class="form-group">
+                            	<label class="col-sm-1 control-label no-padding-right" for="txtBirthday">
+                                   登记时间
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区名" id="areaName" name="areaName"/>
-                                       
-                                </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="input-group" id="divBirthday">
+                                        <input type="text" class="form-control" placeholder="起始时间" id="inTime" name="inTime" readonly="readonly"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white btn-default" id="btnBirthday">
+                                            <i class="ace-icon fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-3">
+                                    <div class="input-group" id="divBirthday1">
+                                        <input type="text" class="form-control" placeholder="终止时间" id="outTime" name="outTime" readonly="readonly"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white btn-default" id="btnBirthday">
+                                            <i class="ace-icon fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                    </div>
+                                 </div> 
+                            </div>
+                            <div class="form-group">
+                            	<label class="col-sm-1 control-label no-padding-right" for="stuId">
+                               	    姓名
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="stuId" id="stuId">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                              	
+                              	<label class="col-sm-1 control-label no-padding-right" for="stuId1">
+                               	    学号
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="stuId1" id="stuId1">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                              	
+                              	<div class="col-sm-3 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>
-                            </div>
-
+                            	</div>
                             </div>
                             
                            
@@ -162,8 +202,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="components/datatables/dataTables.fixedHeader.min.js"></script>
 <script src="components/datatables/dataTables.select.min.js"></script>
 <script src="components/datatables/dataTables.responsive.min.js"></script>
-
+<!--日期控件-->
+<script src="components/My97DatePicker/WdatePicker.js"></script>
 <!--ace script-->
+<script src="js/searchSelect/js/jquery.combo.select.js"></script>
 <script src="assets/js/src/ace.js"></script>
 
 <!-- 自己写的JS，请放在这里 -->
@@ -171,6 +213,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	initTable1();
 	jQuery(function ($) {
+	
+		$("#divBirthday").on(ace.click_event, function () {
+            WdatePicker({el: 'inTime'});
+        });
+        $("#divBirthday1").on(ace.click_event, function () {
+            WdatePicker({el: 'outTime'});
+        });
         //为工具条添加点击事件
         $(".page-toolbar>button").on(ace.click_event,function (e) {
             if($(this).data("ths-href"))
@@ -220,7 +269,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             else $row.removeClass(active_class);
         });
     });
-    
+     $(function() {
+		$('select').comboSelect();
+	});
 </script>
 </body>
 </html>

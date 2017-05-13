@@ -54,7 +54,7 @@ public class VisitEnregisterController {
 			enDate = DateUtils.formatEndTime(outTime);
 		}
 
-		List<VisitEnregister> visitEnregisters = visitEnregisterService.findAllVisitEnregisters(visitEnregister, startDate, enDate);
+		List<VisitEnregister> visitEnregisters = visitEnregisterService.findAllVisitEnregisters(visitEnregister,startDate, enDate);
 
 		JsonConfig jsonConfig = new JsonConfig();
 		// 将list转为jsonArray, 不转换Date对象

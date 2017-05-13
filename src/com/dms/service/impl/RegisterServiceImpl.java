@@ -1,6 +1,9 @@
 package com.dms.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +23,12 @@ public class RegisterServiceImpl implements RegisterService {
 	private RegisterMapper registerMapper;
 	
 	@Override
-	public List<Register> findAllRegisters(Register register) {
-		
-		return registerMapper.selectAllRegisters(register);
+	public List<Register> findAllRegisters(Register register,Date startDate,Date endDate) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("register", register);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		return registerMapper.selectAllRegisters(map);
 	}
 
 	@Override

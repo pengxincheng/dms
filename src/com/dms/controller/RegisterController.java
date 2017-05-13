@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dms.Util.DateUtils;
 import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.Register;
 import com.dms.entity.User;
@@ -48,13 +49,19 @@ public class RegisterController {
 	@RequestMapping("getAllRegisters")
 	@ResponseBody
 	public JSONArray getAllRegisters(Register register,
-			HttpServletRequest request) {
+			HttpServletRequest request, String inTime, String outTime) {
 
 		User u = (User) request.getSession().getAttribute("currentUser");
 
 		register.setBuildingId(Integer.parseInt(u.getBuildingId()));
+		Date startDate = null;
+		Date enDate = null;
+		if ("" != inTime && "" != outTime) {
+			startDate = DateUtils.formatStartTime(inTime);
+			enDate = DateUtils.formatEndTime(outTime);
+		}
 
-		List<Register> registers = registerService.findAllRegisters(register);
+		List<Register> registers = registerService.findAllRegisters(register,startDate, enDate);
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Date.class,
 				new JsonDateValueProcessor("yyyy-MM-dd HH:mm"));
@@ -183,7 +190,10 @@ public class RegisterController {
 	
 	JSONArray jsonArray = new JSONArray();
 	
-	List<Register> registers = registerService.findAllRegisters(register);
+	Date startDate = null;
+	Date enDate = null;
+	
+	List<Register> registers = registerService.findAllRegisters(register,startDate,enDate);
 	
 	List<String> list = new ArrayList<String>();
 	for (Register r : registers) {

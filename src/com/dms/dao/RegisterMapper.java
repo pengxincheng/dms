@@ -1,6 +1,8 @@
 package com.dms.dao;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.dms.entity.Register;
 
@@ -17,5 +19,5 @@ public interface RegisterMapper {
 
     int updateByPrimaryKey(Register record);
     
-    List<Register> selectAllRegisters(Register register);
+    List<Register> selectAllRegisters(Map<String, Object> map);
 }

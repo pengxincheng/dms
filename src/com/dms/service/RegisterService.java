@@ -1,5 +1,6 @@
 package com.dms.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.dms.entity.Register;
@@ -16,7 +17,7 @@ public interface RegisterService {
 	 * @param register
 	 * @return
 	 */
-	List<Register> findAllRegisters(Register register);
+	List<Register> findAllRegisters(Register register,Date startDate,Date endDate);
 	/**
 	 * 添加缺勤、晚归登记
 	 * @param register

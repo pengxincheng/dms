@@ -1,4 +1,16 @@
 function initTable() {
+	var s = $("#stuId").val();
+	var s1 = $("#stuId1").val();
+	var stuId = "";
+	if(s != "" && s1 != "" && s != s1){
+		alert("记录不存在");
+	}
+	if(s != ""){
+		stuId = s;
+	}
+	if(s1 != ""){
+		stuId = s1;
+	}
 	
 			$.ajax({
 				url : 'getAllRegisters.do',// 跳转到 action
@@ -6,6 +18,9 @@ function initTable() {
 				  data : { 
 					  		"name" : $("#name").val(),
 					  		"type":"晚归",
+					  		"stuId":stuId,
+					  		"inTime" : $("#inTime").val(),
+					  		"outTime" : $("#outTime").val()
 				  		},			 
 				traditional : true,
 				type : "post",
@@ -293,4 +308,24 @@ function initTable1() {
 	});
 }
 
+jQuery(function($){
+	var param={
+			roleId :"3"
+	};
+	 $.ajaxSetup({  
+		    async : false  
+		});         
+	$.get("getAllStusForManager.do",param,function(data){
+		var temp = "";
+		var temp1 = "";
+		 $.each(data,function(i,n){
+			 temp += "<option value='"+n.userId+"'>"+n.name+"</option>";
+			 temp1 += "<option value='"+n.userId+"'>"+n.stuNo+"</option>";
+		});
+		 
+		 $("#stuId").append(temp);
+		 $("#stuId1").append(temp1);
+	})
+	
+});
 

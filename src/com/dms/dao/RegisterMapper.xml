@@ -29,9 +29,15 @@
     <if test="type != null and type !=''">  
         and r.type = #{type}
     </if>
-    <if test="buildingId != null and buildingId !=''">  
-        and r.building_id = #{buildingId}
+    <if test="register.buildingId != null and register.buildingId !=''">  
+        and r.building_id = #{register.buildingId}
     </if>
+    <if test="register.stuId != null and register.stuId !=''">  
+        and r.stu_id = #{register.stuId}
+    </if>
+     <if test="startDate!=null and endDate!=null">
+        and r.register_date between #{startDate,jdbcType=TIMESTAMP} and #{endDate,jdbcType=TIMESTAMP} 
+	</if>  
     order by stu_grade,id desc
   </select>
   
