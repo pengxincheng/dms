@@ -40,8 +40,8 @@ public class PasswordUtil {
         return new String(newstr);
     }
 	
-	 public static void main(String args[]) {
+	 /*public static void main(String args[]) {
 	        
 	        System.out.println( PasswordUtil.EncoderByMd5("123"));
 	    }
-}
+*/}

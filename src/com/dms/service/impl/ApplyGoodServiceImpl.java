@@ -23,7 +23,7 @@ public class ApplyGoodServiceImpl implements ApplyGoodService {
 	@Override
 	public List<ApplyGood> findAllApplyGoods(ApplyGood applyGood) {
 		
-		return null;
+		return applyGoodMapper.selectAllApplyGoods(applyGood);
 	}
 
 	@Override
