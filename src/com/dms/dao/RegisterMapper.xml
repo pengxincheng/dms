@@ -22,12 +22,12 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
-  <select id="selectAllRegisters" resultMap="registerMap" parameterType="com.dms.entity.Register">
+  <select id="selectAllRegisters" resultMap="registerMap" parameterType="java.util.Map">
     select r.id, r.stu_id, r.register_date, r.return_time, r.type, r.building_id, r.reasion, r.remark,u.name,u.stu_class,u.stu_no,room.room_sn
     from tab_register r,tab_user u,tab_room room
     where  r.stu_id = u.user_id and u.room_id=room.room_id
-    <if test="type != null and type !=''">  
-        and r.type = #{type}
+    <if test="register.type != null and register.type !=''">  
+        and r.type = #{register.type}
     </if>
     <if test="register.buildingId != null and register.buildingId !=''">  
         and r.building_id = #{register.buildingId}

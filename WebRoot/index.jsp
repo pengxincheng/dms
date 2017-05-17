@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- #section:basics/navbar.layout.brand -->
         <a href="#" class="navbar-brand navbar-brand-line no-padding">
             <small>
-                <i class="width_34"><img src="../assets/images/logo.png"></i>
+                <i class="width_34"><img src="assets/images/haut.png"></i>
                 <span>学生宿舍管理系统</span>
             </small>
         </a>

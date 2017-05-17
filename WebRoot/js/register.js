@@ -188,6 +188,8 @@ function initTable1() {
 		  data : { 
 			  		"name" : $("#name").val(),
 			  		"type":"缺勤",
+			  		"inTime" : $("#inTime").val(),
+			  		"outTime" : $("#outTime").val()
 		  		},			 
 		traditional : true,
 		type : "post",
