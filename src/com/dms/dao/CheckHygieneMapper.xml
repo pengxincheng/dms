@@ -44,7 +44,7 @@
 	group by building_id
   </select>
   
-  <select id="selectAllCheckHygienes" resultMap="checkHygieneMap" parameterType="com.dms.entity.CheckHygiene">
+  <select id="selectAllCheckHygienes" resultMap="checkHygieneMap" parameterType="java.util.Map">
   	 select 
      	 c.id, c.chack_time, c.room_id, c.check_man, c.mark, c.describes, c.building_id,
 		 r.room_sn  
@@ -53,12 +53,18 @@
 	<!-- <if test="status != null and status !=''">  
         and status like CONCAT('%',#{status},'%')
     </if>  -->
-    <if test="buildingId != null and buildingId !=''">  
-        and c.building_id = #{buildingId}
+    <if test="checkHygiene.buildingId != null and checkHygiene.buildingId !=''">  
+        and c.building_id = #{checkHygiene.buildingId}
     </if> 
-    <if test="roomId != null and roomId !=''">  
-        and c.room_id = #{roomId}
+    <if test="checkHygiene.roomId != null and checkHygiene.roomId !=''">  
+        and c.room_id = #{checkHygiene.roomId}
     </if>
+    <if test="checkHygiene.mark != null and checkHygiene.mark !=''">  
+        and c.mark = #{checkHygiene.mark}
+    </if>
+     <if test="startDate!=null and endDate!=null">
+        and c.chack_time between #{startDate,jdbcType=TIMESTAMP} and #{endDate,jdbcType=TIMESTAMP} 
+	</if>  
     order by  c.chack_time desc
   </select>
   

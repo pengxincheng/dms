@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dms.Util.DateUtils;
 import com.dms.Util.JsonDateValueProcessor;
 import com.dms.entity.CheckHygiene;
 import com.dms.entity.Room;
@@ -49,11 +50,19 @@ public class CheckHygieneController {
 	 */
 	@RequestMapping("getAllCheckHygienes")
 	@ResponseBody
-	public JSONArray getAllCheckHygienes(CheckHygiene checkHygiene,HttpServletRequest request) {
+	public JSONArray getAllCheckHygienes(CheckHygiene checkHygiene,HttpServletRequest request,String inTime, String outTime) {
 		User user = (User) request.getSession().getAttribute("currentUser");
 		
 		checkHygiene.setBuildingId(Integer.parseInt(user.getBuildingId()));
-		List<CheckHygiene> checkHygienes = checkHygieneService.findAllCheckHygienes(checkHygiene);
+		
+		Date startDate = null;
+		Date enDate = null;
+		if ("" != inTime && "" != outTime) {
+			startDate = DateUtils.formatStartTime(inTime);
+			enDate = DateUtils.formatEndTime(outTime);
+		}
+		
+		List<CheckHygiene> checkHygienes = checkHygieneService.findAllCheckHygienes(checkHygiene,startDate,enDate);
 		JsonConfig jsonConfig = new JsonConfig();
 
 		jsonConfig.registerJsonValueProcessor(Date.class,new JsonDateValueProcessor("yyyy-MM-dd"));
@@ -247,8 +256,11 @@ public class CheckHygieneController {
 
 		User u = (User) request.getSession().getAttribute("currentUser");
 		checkHygiene.setRoomId(Integer.parseInt(u.getRoomId()));
-
-		List<CheckHygiene> list = checkHygieneService.findAllCheckHygienes(checkHygiene);
+		
+		Date startDate = null;
+		Date enDate = null;
+		
+		List<CheckHygiene> list = checkHygieneService.findAllCheckHygienes(checkHygiene,startDate,enDate);
 		int j = 1;
 		for (int i = list.size() - 1; i >= 0; i--) {
 			xAxis.add("第" + j + "周");

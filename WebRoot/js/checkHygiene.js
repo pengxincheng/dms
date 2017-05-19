@@ -4,7 +4,10 @@ function initTable() {
 				url : 'getAllCheckHygienes.do',// 跳转到 action
 				
 				  data : { 
-					  		"checkHygieneName" : $("#checkHygieneName").val() 			  		
+					  		"roomId" : $("#roomId").val(),
+					  		"mark":$("#mark").val(),
+					  		"inTime" : $("#inTime").val(),
+					  		"outTime" : $("#outTime").val()
 				  		},			 
 				traditional : true,
 				type : "post",
@@ -114,7 +117,7 @@ function initTable() {
 								});
 					}
 					else{
-						alert("暂无该宿舍区！");	
+						alert("暂无数据！");	
 					}
 				},			
 				error : function() {
@@ -129,4 +132,23 @@ function delCheckHygiene(id){
 		alert("操作成功！");
 	 }
 }
+
+jQuery(function($){
+	var param={
+			
+	};
+	 $.ajaxSetup({  
+		    async : false  
+		});         
+	$.get("getAllRoomsForManager.do",param,function(data){
+		var temp = "";
+		
+		 $.each(data,function(i,obj){
+			 temp += "<option value='"+obj.roomId+"'>"+obj.roomSn+"</option>";
+		});
+		 
+		 $("#roomId").append(temp);
+	})
+	
+});
 

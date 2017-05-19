@@ -33,7 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="assets/css/ace-ie.css"/>
     <![endif]-->
-
+	<!--可搜索下拉列表  -->
+	<link rel="stylesheet" href="js/searchSelect/css/combo.select.css">
     <!--THS CSS 插件-->
     <link rel="stylesheet" href="assets/css/ths.css"/>
 
@@ -68,14 +69,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="checkHygieneName">
-                               	     名称
+                            	<label class="col-sm-1 control-label no-padding-right" for="txtBirthday">
+                                   检查时间
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区名" id="checkHygieneName" name="checkHygieneName"/>
-                                       
-                                </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="input-group" id="divBirthday">
+                                        <input type="text" class="form-control" placeholder="起始时间" id="inTime" name="inTime" readonly="readonly"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white btn-default" id="btnBirthday">
+                                            <i class="ace-icon fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                    </div>
+                                 </div>
+                                 
+                                 <div class="col-sm-3">
+                                    <div class="input-group" id="divBirthday1">
+                                        <input type="text" class="form-control" placeholder="终止时间" id="outTime" name="outTime" readonly="readonly"/>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white btn-default" id="btnBirthday">
+                                            <i class="ace-icon fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                    </div>
+                                 </div> 
+                            </div>
+                            <div class="form-group">
+                            	<label class="col-sm-1 control-label no-padding-right" for="roomId">
+                               	    姓名
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="roomId" id="roomId">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                            
+                                <label class="col-sm-1 control-label no-padding-right" for="mark">得分</label>
+								<div class="col-sm-3">
+									<select class="form-control" id="mark" name="mark">
+                                        <option value="" selected="selected">-请选择-</option>
+                                        <option value="5">A</option>
+                                        <option value="4">B</option>
+                                        <option value="3">C</option>
+                                        <option value="2">D</option>
+                                        <option value="1">E</option>
+                                    </select>
+								</div>
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
@@ -116,7 +158,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                         <span class="lbl"></span>
                                                     </label>
                                                 </th>
-                                                <th class="align-center">日期</th>
+                                                <th class="align-center">检查时间</th>
                                                 <th class="align-center">检查人</th>
                                                 <th class="align-center">宿舍</th>
                                                 <th class="align-center">分数</th>
@@ -159,15 +201,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="components/datatables/dataTables.fixedHeader.min.js"></script>
 <script src="components/datatables/dataTables.select.min.js"></script>
 <script src="components/datatables/dataTables.responsive.min.js"></script>
-
+<!--日期控件-->
+<script src="components/My97DatePicker/WdatePicker.js"></script>
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
+<script src="js/searchSelect/js/jquery.combo.select.js"></script>
+<!-- 自己写的JS，请放在这里 -->
 
 <!-- 自己写的JS，请放在这里 -->
 <script src="js/checkHygiene.js"></script>
 <script type="text/javascript">
 	initTable();
 	jQuery(function ($) {
+	
+		$("#divBirthday").on(ace.click_event, function () {
+            WdatePicker({el: 'inTime'});
+        });
+        $("#divBirthday1").on(ace.click_event, function () {
+            WdatePicker({el: 'outTime'});
+        });
         //为工具条添加点击事件
         $(".page-toolbar>button").on(ace.click_event,function (e) {
             if($(this).data("ths-href"))
@@ -217,7 +269,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             else $row.removeClass(active_class);
         });
     });
-    
+     $(function() {
+		$('#roomId').comboSelect();
+	});
 </script>
 </body>
 </html>

@@ -18,7 +18,7 @@ public interface CheckHygieneMapper {
 
     int updateByPrimaryKey(CheckHygiene record);
     
-    List<CheckHygiene> selectAllCheckHygienes(CheckHygiene checkHygiene);
+    List<CheckHygiene> selectAllCheckHygienes(Map<String, Object> map);
     
     List<Map<String,Object>> selectForPie(CheckHygiene checkHygiene);
     

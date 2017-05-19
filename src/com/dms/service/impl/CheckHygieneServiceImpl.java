@@ -1,5 +1,7 @@
 package com.dms.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +23,12 @@ public class CheckHygieneServiceImpl implements CheckHygieneService {
 	private CheckHygieneMapper checkHygieneMapper;
 
 	@Override
-	public List<CheckHygiene> findAllCheckHygienes(CheckHygiene checkHygiene) {
-		return checkHygieneMapper.selectAllCheckHygienes(checkHygiene);
+	public List<CheckHygiene> findAllCheckHygienes(CheckHygiene checkHygiene,Date startDate,Date endDate) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("checkHygiene", checkHygiene);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		return checkHygieneMapper.selectAllCheckHygienes(map);
 	}
 
 	@Override

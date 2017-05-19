@@ -1,5 +1,6 @@
 package com.dms.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public interface CheckHygieneService {
 	 * @param checkHygiene
 	 * @return
 	 */
-	List<CheckHygiene> findAllCheckHygienes(CheckHygiene checkHygiene);
+	List<CheckHygiene> findAllCheckHygienes(CheckHygiene checkHygiene,Date startDate,Date endDate);
 
 	/**
 	 * 添加卫生检查
