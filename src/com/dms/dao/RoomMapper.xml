@@ -39,6 +39,9 @@
      <if test="isfiled != null and isfiled !=''">  
         and r.isFiled = #{isfiled}
     </if> 
+      <if test="areaId != null and areaId !=''">  
+        and r.area_id = #{areaId}
+    </if> 
     order by room_sn
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

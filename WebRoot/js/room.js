@@ -4,7 +4,8 @@ function initTable() {
 				url : 'getAllRooms.do',// 跳转到 action
 				
 				  data : { 
-					  		"roomSn" : $("#roomSn").val() 			  		
+					  		"roomSn" : $("#roomSn").val(),
+					  		"areaId":$("#areaId").val()
 				  		},			 
 				traditional : true,
 				type : "post",
@@ -193,7 +194,8 @@ function initTableForManager() {
 		url : 'getAllRoomsForManager.do',// 跳转到 action
 		
 		  data : { 
-			  		"roomSn" : $("#roomSn").val() 			  		
+			  		"roomSn" : $("#roomSn").val(),
+			  		"isfiled":$("#isFiled").val()
 		  		},			 
 		traditional : true,
 		type : "post",

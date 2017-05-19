@@ -75,9 +75,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <input type="text" class="form-control" placeholder="宿舍名" id="roomSn" name="roomSn"/>
                                        
                                 </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                
+                                <label class="col-sm-1 control-label no-padding-right" for="isFiled">
+                               	     名称
+                                </label>
+                                <div class="col-sm-3">
+									<select class="form-control" id="isFiled" name="isFiled">
+										<option value="" selected="selected">-请选择-</option>
+										<option value="0">已住满</option>
+										<option value="1">未住满</option>
+									</select>
+								</div>
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
-                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
+                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableForManager()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>
@@ -87,20 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             
                            
                             <hr class="no-margin">
-                            <div class="page-toolbar align-right list-toolbar">
-                                <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddRoom">
-                                    <i class="ace-icon fa fa-plus"></i>
-                                    添加
-                                </button>
-                                <button type="button" class="btn btn-xs btn-danger btn-xs-ths" id="btnDelete">
-                                    <i class="ace-icon fa fa-trash-o"></i>
-                                    删除
-                                </button>
-                                <button type="button" class="btn btn-xs btn-purple btn-xs-ths" id="btnExport">
-                                    <i class="ace-icon fa fa-file-excel-o"></i>
-                                    导出
-                                </button>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- div.table-responsive -->
