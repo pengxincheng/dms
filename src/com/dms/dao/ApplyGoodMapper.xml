@@ -32,8 +32,11 @@
     <if test="status != null and status !=''">  
         and status like CONCAT('%',#{status},'%')
     </if> 
+    <if test="room != null and room !=''">  
+        and room like CONCAT('%',#{room},'%')
+    </if> 
     <if test="applyer != null and applyer !=''">  
-        and applyer = #{applyer}
+        and applyer like CONCAT('%',#{applyer},'%')
     </if>
      <if test="auditMan != null and auditMan !=''">  
         and audit_man = #{auditMan}

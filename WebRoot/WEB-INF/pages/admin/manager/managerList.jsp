@@ -199,6 +199,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $i.removeClass("fa-sort-desc").addClass("fa-sort-asc");
             }
         })
+        
+        //And for the first simple table, which doesn't have TableTools or dataTables
+        //select/deselect all rows according to table header checkbox
+        var active_class = 'active';
+        $('#example > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+            var th_checked = this.checked;//checkbox inside "TH" table header
+
+            $(this).closest('table').find('tbody > tr').each(function(){
+                var row = this;
+                if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+                else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+            });
+        });
+
+        //select/deselect a row when the checkbox is checked/unchecked
+        $('#example').on('click', 'td input[type=checkbox]' , function(){
+            var $row = $(this).closest('tr');
+//            if($row.is('.detail-row ')) return;
+            if(this.checked) $row.addClass(active_class);
+            else $row.removeClass(active_class);
+        });
 
         
     });

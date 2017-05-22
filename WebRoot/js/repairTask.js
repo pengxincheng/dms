@@ -313,7 +313,8 @@ function initTableForManagerWaitDeal(){
 		url : 'getAllRepairTasks.do',
 		
 		  data : { 
-			  		"repairTaskName" : $("#repairTaskName").val(),
+			  		"reporter" : $("#reporter").val(),
+			  		"address":$("#address").val(),
 			  		"status":"待修理"
 		  		},			 
 		traditional : true,
@@ -432,3 +433,40 @@ function repair(id){
 		alert("操作成功！");
 	 }
 }
+
+jQuery(function($){
+	var param={
+			"status":"待修理"
+	};
+	 $.ajaxSetup({  
+		    async : false  
+		});         
+	$.get("getAllRepairTasks.do",param,function(data){
+		var temp = "";
+		var temp1 = "";
+		 $.each(data,function(i,n){
+			 temp += "<option value='"+n.reporter+"'>"+n.reporter+"</option>";
+			 temp1 += "<option value='"+n.address+"'>"+n.address+"</option>";
+		});
+		 
+		 $("#reporter").append(temp);
+		 $("#address").append(temp1);
+	});
+	
+	var param={
+			"status":"已修理"
+	};
+	    
+	$.get("getAllRepairTasks.do",param,function(data){
+		var temp = "";
+		var temp1 = "";
+		 $.each(data,function(i,n){
+			 temp += "<option value='"+n.reporter+"'>"+n.reporter+"</option>";
+			 temp1 += "<option value='"+n.address+"'>"+n.address+"</option>";
+		});
+		 
+		 $("#reporter1").append(temp);
+		 $("#address1").append(temp1);
+	})
+	
+});

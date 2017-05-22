@@ -228,7 +228,9 @@ function initTableAutdited() {
 		url : 'getAllApplyGoods.do',// 跳转到 action
 		
 		  data : { 
-			  		"status":"通过"
+			  		"status":"通过",
+			  		"applyer":$("#applyer1").val(),
+			  		"room":$("#room1").val()
 		  		},			 
 		traditional : true,
 		type : "post",
@@ -334,7 +336,9 @@ function initTableAutditedForManager() {
 		url : 'getAllApplyGoods.do',// 跳转到 action
 		
 		  data : { 
-			  		"status":"待审核"
+			  		"status":"待审核",
+			  		"applyer":$("#applyer").val(),
+			  		"room":$("#room").val()
 		  		},			 
 		traditional : true,
 		type : "post",

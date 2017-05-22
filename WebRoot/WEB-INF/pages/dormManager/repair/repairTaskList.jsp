@@ -36,6 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!--THS CSS 插件-->
     <link rel="stylesheet" href="assets/css/ths.css"/>
+    <!--可搜索下拉列表  -->
+	<link rel="stylesheet" href="js/searchSelect/css/combo.select.css">
 
     <!-- 自己写的CSS，请放在这里 -->
     <style type="text/css">
@@ -81,16 +83,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="areaName">
-                               	     名称
+                                <label class="col-sm-1 control-label no-padding-right" for="reporter">
+                               	   报修人
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区名" id="areaName" name="areaName"/>
-                                       
-                                </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="dowebok">
+										<select name="reporter" id="reporter">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                              	
+                              	<label class="col-sm-1 control-label no-padding-right" for="address">
+                               	    报修宿舍
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="address" id="address">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
-                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
+                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableForManagerWaitDeal()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>
@@ -136,14 +152,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form2" action="index.html" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="areaName">
-                               	     名称
+                               <label class="col-sm-1 control-label no-padding-right" for="reporter1">
+                               	   报修人
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区名" id="areaName" name="areaName"/>
-                                       
-                                </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="dowebok">
+										<select name="reporter1" id="reporter1">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                              	
+                              	<label class="col-sm-1 control-label no-padding-right" for="address1">
+                               	    报修宿舍
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="address1" id="address1">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
@@ -218,6 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
+<script src="js/searchSelect/js/jquery.combo.select.js"></script>
 
 <!-- 自己写的JS，请放在这里 -->
 <script src="js/repairTask.js"></script>
@@ -275,6 +306,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             else $row.removeClass(active_class);
         });
     });
+       $(function() {
+		$('select').comboSelect();
+	});
     
 </script>
 </body>

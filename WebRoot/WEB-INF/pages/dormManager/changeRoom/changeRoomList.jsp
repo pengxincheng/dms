@@ -36,6 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!--THS CSS 插件-->
     <link rel="stylesheet" href="assets/css/ths.css"/>
+    <!--可搜索下拉列表  -->
+	<link rel="stylesheet" href="js/searchSelect/css/combo.select.css">
 
     <!-- 自己写的CSS，请放在这里 -->
     <style type="text/css">
@@ -79,16 +81,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="areaName">
-                               	     名称
+                            	<label class="col-sm-1 control-label no-padding-right" for="stuId">
+                               	    申请人
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区名" id="areaName" name="areaName"/>
-                                       
-                                </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="dowebok">
+										<select name="stuId" id="stuId">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                              	
+                              	<label class="col-sm-1 control-label no-padding-right" for="stuId1">
+                               	    学号
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="stuId1" id="stuId1">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
-                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
+                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTableAutditedForManager()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>
@@ -138,14 +154,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form2" action="index.html" method="post">
                             <div class="form-group">
-                                <label class="col-sm-1 control-label no-padding-right" for="areaName">
-                               	     名称
+                                <label class="col-sm-1 control-label no-padding-right" for="stuId">
+                               	    申请人
                                 </label>
                                 <div class="col-sm-3">
-                                        <input type="text" class="form-control" placeholder="宿舍区名" id="areaName" name="areaName"/>
-                                       
-                                </div>
-                          		<div class="col-sm-5 col-lg-8 col-md-5 align-right">
+                                    <div class="dowebok">
+										<select name="stuId" id="stuId3">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                              	
+                              	<label class="col-sm-1 control-label no-padding-right" for="stuId1">
+                               	    学号
+                                </label>
+                                <div class="col-sm-3">
+                                    <div class="dowebok">
+										<select name="stuId1" id="stuId4">
+											<option value="">请选择</option>
+										</select>
+									</div>
+                              	</div>
+                          		<div class="col-sm-4">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
                                     <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
                                         <i class="ace-icon fa fa-search"></i>
@@ -274,7 +304,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
-
+<script src="js/searchSelect/js/jquery.combo.select.js"></script>
 <!-- 自己写的JS，请放在这里 -->
 <script src="js/changeRoom.js"></script>
 <script type="text/javascript">
@@ -313,7 +343,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         //And for the first simple table, which doesn't have TableTools or dataTables
         //select/deselect all rows according to table header checkbox
         var active_class = 'active';
-        $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+        $('#waitAuditTable > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
             var th_checked = this.checked;//checkbox inside "TH" table header
 
             $(this).closest('table').find('tbody > tr').each(function(){
@@ -324,14 +354,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 
         //select/deselect a row when the checkbox is checked/unchecked
-        $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+        $('#waitAuditTable').on('click', 'td input[type=checkbox]' , function(){
             var $row = $(this).closest('tr');
 //            if($row.is('.detail-row ')) return;
             if(this.checked) $row.addClass(active_class);
             else $row.removeClass(active_class);
         });
     });
-    
+     $(function() {
+		$('select').comboSelect();
+	});
 </script>
 </body>
 </html>

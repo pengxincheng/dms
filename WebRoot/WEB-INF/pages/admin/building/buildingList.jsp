@@ -208,7 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         //And for the first simple table, which doesn't have TableTools or dataTables
         //select/deselect all rows according to table header checkbox
         var active_class = 'active';
-        $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+        $('#example > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
             var th_checked = this.checked;//checkbox inside "TH" table header
 
             $(this).closest('table').find('tbody > tr').each(function(){
@@ -219,7 +219,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 
         //select/deselect a row when the checkbox is checked/unchecked
-        $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+        $('#example').on('click', 'td input[type=checkbox]' , function(){
             var $row = $(this).closest('tr');
 //            if($row.is('.detail-row ')) return;
             if(this.checked) $row.addClass(active_class);

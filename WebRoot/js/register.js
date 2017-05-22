@@ -4,6 +4,7 @@ function initTable() {
 	var stuId = "";
 	if(s != "" && s1 != "" && s != s1){
 		alert("记录不存在");
+		return;
 	}
 	if(s != ""){
 		stuId = s;
@@ -181,6 +182,19 @@ function checkStuIsExistByStuNo(){
 }
 
 function initTable1() {
+	var s = $("#stuId").val();
+	var s1 = $("#stuId1").val();
+	var stuId = "";
+	if(s != "" && s1 != "" && s != s1){
+		alert("记录不存在");
+		return;
+	}
+	if(s != ""){
+		stuId = s;
+	}
+	if(s1 != ""){
+		stuId = s1;
+	}
 	
 	$.ajax({
 		url : 'getAllRegisters.do',// 跳转到 action
@@ -188,6 +202,7 @@ function initTable1() {
 		  data : { 
 			  		"name" : $("#name").val(),
 			  		"type":"缺勤",
+			  		"stuId":stuId,
 			  		"inTime" : $("#inTime").val(),
 			  		"outTime" : $("#outTime").val()
 		  		},			 

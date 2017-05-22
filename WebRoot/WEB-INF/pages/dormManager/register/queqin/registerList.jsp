@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                               	
                               	<div class="col-sm-3 align-right">
                                     <div class="space-4 hidden-lg hidden-md hidden-sm"></div>
-                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable()">
+                                    <button type="button" class="btn btn-info btn-default-ths" id="btnSearch" onclick="initTable1()">
                                         <i class="ace-icon fa fa-search"></i>
                                         搜索
                                 	</button>

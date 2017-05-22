@@ -33,7 +33,10 @@
     where c.stu_id = u.user_id and u.room_id = r.room_id
 	<if test="status != null and status !=''">  
         and status like CONCAT('%',#{status},'%')
-    </if> 
+    </if>
+    <if test="stuId != null and stuId !=''">  
+        and stu_id =#{stuId}
+    </if>  
     order by id desc
   </select>
   

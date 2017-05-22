@@ -35,6 +35,9 @@
     <if test="dealMan != null and dealMan !=''">  
         and deal_man = #{dealMan}
     </if>
+    <if test="address != null and address !=''">  
+        and address = #{address}
+    </if>
     order by id desc
   </select>
   

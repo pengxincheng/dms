@@ -251,11 +251,25 @@ function initTableWaitAudit() {
 
 
 function initTableAutdited() {
+	var s = $("#stuId3").val();
+	var s1 = $("#stuId4").val();
+	var stuId = "";
+	if(s != "" && s1 != "" && s != s1){
+		alert("记录不存在");
+		return;
+	}
+	if(s != ""){
+		stuId = s;
+	}
+	if(s1 != ""){
+		stuId = s1;
+	}
 	$.ajax({
 		url : 'getAllChangeRooms.do',// 跳转到 action
 		
 		  data : { 
-			  		"status":"通过"
+			  		"status":"通过",
+			  		"stuId":stuId
 		  		},			 
 		traditional : true,
 		type : "post",
@@ -376,11 +390,25 @@ function initTableAutdited() {
 
 
 function initTableAutditedForManager() {
+	var s = $("#stuId").val();
+	var s1 = $("#stuId1").val();
+	var stuId = "";
+	if(s != "" && s1 != "" && s != s1){
+		alert("记录不存在");
+		return;
+	}
+	if(s != ""){
+		stuId = s;
+	}
+	if(s1 != ""){
+		stuId = s1;
+	}
 	$.ajax({
 		url : 'getAllChangeRooms.do',// 跳转到 action
 		
 		  data : { 
-			  		"status":"待审核"
+			  		"status":"待审核",
+			  		"stuId":stuId
 		  		},			 
 		traditional : true,
 		type : "post",
@@ -517,4 +545,26 @@ function audit(id){
 	
 }
 
+jQuery(function($){
+	var param={
+			roleId :"3"
+	};
+	 $.ajaxSetup({  
+		    async : false  
+		});         
+	$.get("getAllStusForManager.do",param,function(data){
+		var temp = "";
+		var temp1 = "";
+		 $.each(data,function(i,n){
+			 temp += "<option value='"+n.userId+"'>"+n.name+"</option>";
+			 temp1 += "<option value='"+n.userId+"'>"+n.stuNo+"</option>";
+		});
+		 
+		 $("#stuId").append(temp);
+		 $("#stuId1").append(temp1);
+		 $("#stuId3").append(temp);
+		 $("#stuId4").append(temp1);
+	})
+	
+});
 

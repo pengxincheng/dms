@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="row">
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form" id="form1" action="index.html" method="post">
-                            <div class="form-group">
+                           <!--  <div class="form-group">
                                 <label class="col-sm-1 control-label no-padding-right" for="areaName">
                                	     名称
                                 </label>
@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 	</button>
                             </div>
 
-                            </div>
+                            </div> -->
                             
                            
                             <hr class="no-margin">
