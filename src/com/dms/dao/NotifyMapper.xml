@@ -4,7 +4,7 @@
   <resultMap id="NotifyMap" type="com.dms.entity.Notify" >
     <id column="notify_id" property="notifyId" jdbcType="INTEGER" />
     <result column="notify_title" property="notifyTitle" jdbcType="VARCHAR" />
-    <result column="notify_content" property="notifyContent" jdbcType="VARCHAR" />
+    <result column="notify_content" property="notifyContent" />
     <result column="publisher_id" property="publisherId" jdbcType="INTEGER" />
     <result column="publish_time" property="publishTime" jdbcType="TIMESTAMP" />
     <result column="status" property="status" jdbcType="VARCHAR" />

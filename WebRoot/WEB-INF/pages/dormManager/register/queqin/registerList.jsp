@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--浏览器兼容性设置-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <title>Empty Page - Ace Admin</title>
+    <title>缺勤登记表</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-40">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>晚归登记列表</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>缺勤登记列表</li>
                 </ul><!-- /.breadcrumb -->
             </div>
         </div>
@@ -196,12 +196,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="components/bootstrap/dist/js/bootstrap.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="components/datatables/jquery.dataTables.min.js"></script>
+<script src="components/datatables/jquery.dataTables.js"></script>
 <script src="components/datatables/dataTables.bootstrap.min.js"></script>
 <script src="components/datatables/dataTables.fixedColumns.min.js"></script>
 <script src="components/datatables/dataTables.fixedHeader.min.js"></script>
 <script src="components/datatables/dataTables.select.min.js"></script>
 <script src="components/datatables/dataTables.responsive.min.js"></script>
+<script src="components/datatables/jszip.min.js"></script>
+<script src="components/datatables/buttons.html5.min.js"></script>
+<script src="components/datatables/dataTables.buttons.min.js"></script>
 <!--日期控件-->
 <script src="components/My97DatePicker/WdatePicker.js"></script>
 <!--ace script-->
@@ -212,7 +215,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/register.js"></script>
 <script type="text/javascript">
 	initTable1();
+	$("#btnExport").click(function(){
+			debugger;
+			$(".dt-button")[0].click(function(){
+			});
+		
+		});
 	jQuery(function ($) {
+	
+		$(".dt-buttons").hide();
 	
 		$("#divBirthday").on(ace.click_event, function () {
             WdatePicker({el: 'inTime'});

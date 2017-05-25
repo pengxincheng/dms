@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--浏览器兼容性设置-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <title>Empty Page - Ace Admin</title>
+    <title>来访登记表</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!--THS CSS 插件-->
     <link rel="stylesheet" href="assets/css/ths.css"/>
-
+    
     <!-- 自己写的CSS，请放在这里 -->
     <style type="text/css">
 
@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-40">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>宿舍区列表</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>来访登记</li>
                 </ul><!-- /.breadcrumb -->
             </div>
         </div>
@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <input type="text" class="form-control" placeholder="起始时间" id="inTime" name="inTime" readonly="readonly"/>
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-white btn-default" id="btnBirthday">
-                                            <i class="ace-icon fa fa-calendar"></i>
+                                             <i class="ace-icon fa fa-calendar"></i>
                                         </button>
                                     </span>
                                     </div>
@@ -190,12 +190,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="components/bootstrap/dist/js/bootstrap.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="components/datatables/jquery.dataTables.min.js"></script>
+<script src="components/datatables/jquery.dataTables.js"></script>
 <script src="components/datatables/dataTables.bootstrap.min.js"></script>
 <script src="components/datatables/dataTables.fixedColumns.min.js"></script>
 <script src="components/datatables/dataTables.fixedHeader.min.js"></script>
 <script src="components/datatables/dataTables.select.min.js"></script>
 <script src="components/datatables/dataTables.responsive.min.js"></script>
+<script src="components/datatables/jszip.min.js"></script>
+<script src="components/datatables/buttons.html5.min.js"></script>
+<script src="components/datatables/dataTables.buttons.min.js"></script>
+
 <!--日期控件-->
 <script src="components/My97DatePicker/WdatePicker.js"></script>
 
@@ -206,7 +210,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/visitEnregister.js"></script>
 <script type="text/javascript">
 	initTable();
+	
+	$("#btnExport").click(function(){
+		debugger;
+		$(".dt-button")[0].click(function(){
+			
+		});
+		
+	});
+	
 	jQuery(function ($) {
+
+		$(".dt-buttons").hide();
 	
 		$("#divBirthday").on(ace.click_event, function () {
             WdatePicker({el: 'inTime'});
@@ -263,6 +278,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             else $row.removeClass(active_class);
         });
     });
+   
+    
+    
     
 </script>
 </body>

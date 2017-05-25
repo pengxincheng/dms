@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                     <div class="space-6"></div>
 
-                                    <form action="login.do">
+                                    <form id="login" name="login">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
                                             <div class="clearfix">
                                                
-                                                <button  type="submit" class="width-35 pull-right btn btn-sm btn-primary btn-xs-ths line-height-150">
+                                                <button id="btnLogin" type="button" class="width-35 pull-right btn btn-sm btn-primary btn-xs-ths line-height-150">
                                                     <i class="ace-icon fa fa-key"></i>
                                                     <span class="bigger-110">登录</span>
                                                 </button>
@@ -99,9 +99,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </fieldset>
 
 
-                                        <div id="dError" class="alert alert-block alert-danger width-100">
+                                        <div id="dError"  style="display:none;" class="alert alert-block alert-danger width-100">
                                             <i class="ace-icon fa fa-times-circle red2"></i>
-                                            用户名或密码错误！
+                                            用户名或密码错误
                                         </div>
                                     </form>
 
@@ -145,7 +145,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 
         $("#btnLogin").on(ace.click_event,function (e) {
-            window.location.href="pages/index.html";
+        	var param =  $("#login").serialize()
+        	$.get("login.do",param,function(data){
+        		if(data.result){
+        			window.location.href="index.jsp";
+        		}
+        		else{
+        			$("#dError").show();	
+        		}
+        	});
+            
         });
 
         $("#txtUserName").on("focus",function(e){

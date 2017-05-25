@@ -16,7 +16,7 @@ function initTable() {
 						$('#example').DataTable(
 								{
 									destroy: true,   //是否允许破坏表
-									pageLength : 6,// 每页显示多少条记录
+									77 : 6,// 每页显示多少条记录
 									searching : false,
 									lengthChange : true,
 									data : data,

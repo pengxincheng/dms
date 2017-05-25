@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--浏览器兼容性设置-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <title>Empty Page - Ace Admin</title>
+    <title>学生列表</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 
@@ -117,20 +117,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             
                            
                             <hr class="no-margin">
-                          <!--   <div class="page-toolbar align-right list-toolbar">
-                                <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddStu">
+                            <div class="page-toolbar align-right list-toolbar">
+                             <!--   <button type="button" class="btn btn-xs btn-inverse btn-xs-ths" id="btnAdd" data-ths-href="goToAddStu">
                                     <i class="ace-icon fa fa-plus"></i>
                                     添加
                                 </button>
                                 <button type="button" class="btn btn-xs btn-danger btn-xs-ths" id="btnDelete">
                                     <i class="ace-icon fa fa-trash-o"></i>
                                     删除
-                                </button>
+                                </button> -->
                                 <button type="button" class="btn btn-xs btn-purple btn-xs-ths" id="btnExport">
                                     <i class="ace-icon fa fa-file-excel-o"></i>
                                     导出
                                 </button>
-                            </div> -->
+                            </div>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <!-- div.table-responsive -->
@@ -185,12 +185,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="components/bootstrap/dist/js/bootstrap.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="components/datatables/jquery.dataTables.min.js"></script>
+<script src="components/datatables/jquery.dataTables.js"></script>
 <script src="components/datatables/dataTables.bootstrap.min.js"></script>
 <script src="components/datatables/dataTables.fixedColumns.min.js"></script>
 <script src="components/datatables/dataTables.fixedHeader.min.js"></script>
 <script src="components/datatables/dataTables.select.min.js"></script>
 <script src="components/datatables/dataTables.responsive.min.js"></script>
+<script src="components/datatables/jszip.min.js"></script>
+<script src="components/datatables/buttons.html5.min.js"></script>
+<script src="components/datatables/dataTables.buttons.min.js"></script>
 
 <!--ace script-->
 <script src="assets/js/src/ace.js"></script>
@@ -199,7 +202,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/stu.js"></script>
 <script type="text/javascript">
 	initTableForManager();
+	$("#btnExport").click(function(){
+		debugger;
+		$(".dt-button")[0].click(function(){
+			
+		});
+		
+	});
 	jQuery(function ($) {
+	
+		$(".dt-buttons").hide();
         //为工具条添加点击事件
         $(".page-toolbar>button").on(ace.click_event,function (e) {
             if($(this).data("ths-href"))

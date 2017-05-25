@@ -57,8 +57,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="col-sm-4 hidden-xs">欢迎您，${sessionScope.currentUser.name}</div>
         <div class="col-xs-12 col-sm-8 ">
             <ul class=" pull-right" data-level="top">
-                <li><i class="ace-icon fa fa-file-o grey bigger-100" title="待办事项"></i><span class="badge badge-warning">99</span></li>
-                <li><i class="ace-icon fa fa-bullhorn grey bigger-110" title="通知"></i><span class="badge badge-success">2</span></li>
+                <!-- <li><i class="ace-icon fa fa-file-o grey bigger-100" title="待办事项"></i><span class="badge badge-warning">99</span></li>
+                <li><i class="ace-icon fa fa-bullhorn grey bigger-110" title="通知"></i><span class="badge badge-success">2</span></li> -->
                 <li><i class="ace-icon fa fa-user grey bigger-110" title="修改密码" onclick="changePassword()"></i></li>
                 <li><a class="ace-icon fa fa-power-off grey bigger-110" title="注销" href="logout.do"></a></li>
             </ul>
@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="findAllNotifies.do" target="main">
                             <i class="menu-icon fa fa-laptop"></i>
                             通知公告
-                            <span class="badge badge-warning">5</span>
+                            <!-- <span class="badge badge-warning">5</span> -->
                         </a>
                         <b class="arrow"></b>
                     </li>
@@ -120,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a href="goToRepairTasksList.do" target="main">
                             <i class="menu-icon fa fa-bar-chart"></i>
                             上报维修
-                            <span class="badge badge-success">2</span>
+                            <!-- <span class="badge badge-success">2</span> -->
                         </a>
                         <b class="arrow"></b>
                     </li>
@@ -364,7 +364,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div id="main-content-inner" class="main-content-inner">
             <iframe id="main-content-iframe" name="main" frameBorder="0"
                     style="width:100%;border: none;overflow-x: hidden; overflow-y:auto"
-                    scrolling="auto" src="portal.html"></iframe>
+                    scrolling="auto" src="findAllNotifies.do"></iframe>
 
         </div><!--/.main-content-inner-->
     </div><!-- /.main-content -->

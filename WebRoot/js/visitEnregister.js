@@ -13,6 +13,7 @@ function initTable() {
 				type : "post",
 				cache : false,
 				dataType : "json",
+				async:false,
 				success : function(data) {
 					if(data.length > 0){
 						$('#example tbody').html("");
@@ -26,7 +27,17 @@ function initTable() {
 									info : false,
 									lengthMenu : [ 6, 10, 15, 20 ],
 									pagingType : "full_numbers",
-									dom : "t<'ths-page'fl><'ths-pager'p>",
+									dom: 'Bfrtip',
+									buttons: [ {
+										
+										extend: 'excelHtml5',
+										customize: function ( xlsx ){
+											var sheet = xlsx.xl.worksheets['sheet1.xml'];
+
+											// jQuery selector to add a border
+											$('row c[r*="10"]', sheet).attr( 's', '25' );
+										}
+									} ],
 									columns : [
 											{
 

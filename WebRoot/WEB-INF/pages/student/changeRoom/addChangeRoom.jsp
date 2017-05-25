@@ -168,6 +168,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSubmit").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
+            
             if ($('#ChangeRoom').validationEngine('validate')) {
                 //submit
             }
@@ -175,6 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         $("#btnSave").on(ace.click_event, function () {
             //console.log("validate begin..");
             //console.log($('#addNotify').validationEngine('validate'));
+            $()
             if ($('#addChangeRoom').validationEngine('validate')) {
             	alert("操作成功");
                 $('#addChangeRoom').submit();

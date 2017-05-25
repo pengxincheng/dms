@@ -26,6 +26,7 @@ function initTable() {
 				traditional : true,
 				type : "post",
 				cache : false,
+				async:false,
 				dataType : "json",
 				success : function(data) {
 					if(data.length > 0){
@@ -40,7 +41,17 @@ function initTable() {
 									info : false,
 									lengthMenu : [ 6, 10, 15, 20 ],
 									pagingType : "full_numbers",
-									dom : "t<'ths-page'fl><'ths-pager'p>",
+									dom: 'Bfrtip',
+									buttons: [ {
+										
+										extend: 'excelHtml5',
+										customize: function ( xlsx ){
+											var sheet = xlsx.xl.worksheets['sheet1.xml'];
+
+											// jQuery selector to add a border
+											$('row c[r*="10"]', sheet).attr( 's', '25' );
+										}
+									} ],
 									columns : [
 											{
 
@@ -209,6 +220,7 @@ function initTable1() {
 		traditional : true,
 		type : "post",
 		cache : false,
+		async:false,
 		dataType : "json",
 		success : function(data) {
 			if(data.length > 0){
@@ -223,7 +235,17 @@ function initTable1() {
 							info : false,
 							lengthMenu : [ 6, 10, 15, 20 ],
 							pagingType : "full_numbers",
-							dom : "t<'ths-page'fl><'ths-pager'p>",
+							dom: 'Bfrtip',
+							buttons: [ {
+								
+								extend: 'excelHtml5',
+								customize: function ( xlsx ){
+									var sheet = xlsx.xl.worksheets['sheet1.xml'];
+
+									// jQuery selector to add a border
+									$('row c[r*="10"]', sheet).attr( 's', '25' );
+								}
+							} ],
 							columns : [
 									{
 

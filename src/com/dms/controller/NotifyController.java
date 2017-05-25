@@ -45,6 +45,7 @@ public class NotifyController {
 		notifies.addAll(notifyService.getTop6Tzgg());
 
 		model.addAttribute("notifies", notifies);
+
 		return "notifyList";
 
 	}
@@ -64,7 +65,7 @@ public class NotifyController {
 			startPage = 1;
 		}
 		if (null == pageSize) {
-			pageSize = 2;
+			pageSize = 10;
 		}
 		User user = (User) request.getSession().getAttribute("currentUser");
 		if (null == notify) {

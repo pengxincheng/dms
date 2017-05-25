@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="main-content-inner fixed-page-header fixed-82">
             <div id="breadcrumbs" class="breadcrumbs">
                 <ul class="breadcrumb">
-                    <li class="active"><i class="fa fa-arrow-right"></i>来访登记</li>
+                    <li class="active"><i class="fa fa-arrow-right"></i>缺勤登记</li>
                 </ul><!-- /.breadcrumb -->
 
             </div>
